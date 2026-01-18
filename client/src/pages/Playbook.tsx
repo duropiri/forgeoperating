@@ -1,36 +1,54 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CheckCircle2, AlertTriangle, Zap } from "lucide-react";
+import { CheckCircle2, Zap, Layers, ArrowDown, Database, MessageSquare, Star } from "lucide-react";
 
 export default function Playbook() {
   return (
     <div className="space-y-8 max-w-5xl mx-auto">
       <div className="border-b border-border pb-6">
         <h1 className="text-4xl font-display font-bold text-foreground mb-2">THE PLAYBOOK</h1>
-        <p className="text-muted-foreground font-mono">OPERATIONAL DOCTRINE // HIGH-TICKET SALES</p>
+        <p className="text-muted-foreground font-mono">OPERATIONAL DOCTRINE // SYSTEMS OVER SERVICES</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Main Content */}
         <div className="lg:col-span-2 space-y-8">
           
-          {/* The Mission */}
+          {/* The Core Philosophy */}
           <section>
             <h2 className="text-2xl font-display font-bold text-primary mb-4 flex items-center gap-2">
-              <Zap className="w-6 h-6" /> THE MISSION
+              <Layers className="w-6 h-6" /> THE SYSTEM STACK
             </h2>
             <Card className="bg-card/50 border-border">
               <CardContent className="p-6 space-y-4">
                 <p className="text-lg leading-relaxed">
-                  We find local businesses with a weak or damaged online presence and sell them a <span className="text-primary font-bold">complete digital overhaul</span>.
+                  We do not sell disjointed services. We sell a <span className="text-primary font-bold">linear system</span> where every component feeds the next. This creates a "sticky" ecosystem that businesses can't turn off.
                 </p>
-                <p className="text-muted-foreground">
-                  We are not selling websites. We are selling a transformation that directly impacts their bottom line. Our model is built on speed, skill, and a relentless focus on high-value clients.
-                </p>
-                <div className="p-4 bg-background/50 border border-primary/20 rounded-lg">
-                  <p className="font-mono text-sm text-center">
-                    GENERATE LEADS → COLD CALL → CLOSE HIGH-TICKET → FULFILL WITH AI
+                
+                {/* Visual Stack Diagram */}
+                <div className="mt-8 space-y-2 relative">
+                  <div className="absolute left-6 top-4 bottom-4 w-0.5 bg-gradient-to-b from-primary/50 to-transparent border-l-2 border-dashed border-primary/30" />
+                  
+                  <StackStep 
+                    icon={Database} 
+                    title="1. THE FOUNDATION" 
+                    desc="High-converting Website + Database Reactivation. We mine their past customers for immediate gold."
+                  />
+                  <StackStep 
+                    icon={MessageSquare} 
+                    title="2. THE CONVERSATION" 
+                    desc="AI Bot + Auto Call Text Back. Every lead gets an instant response, 24/7. No lead left behind."
+                  />
+                  <StackStep 
+                    icon={Star} 
+                    title="3. THE REPUTATION" 
+                    desc="Review Gating + SEO. We filter bad reviews and push good ones to Google, driving more traffic to Step 1."
+                  />
+                </div>
+
+                <div className="mt-6 p-4 bg-primary/5 border border-primary/20 rounded-lg">
+                  <p className="font-mono text-sm text-center text-primary">
+                    "ONE SCALES, ONE FAILS. DON'T PLAY TETRIS WITH SERVICES. STACK THEM."
                   </p>
                 </div>
               </CardContent>
@@ -42,21 +60,21 @@ export default function Playbook() {
             <h2 className="text-2xl font-display font-bold text-foreground mb-4">THE PRODUCT</h2>
             <div className="grid gap-4">
               <ProductCard 
-                title="AI-Generated Website" 
-                desc="Modern, mobile-friendly, conversion-focused. Built in days, not months."
-              />
-              <ProductCard 
-                title="Review Repair" 
-                desc="We take control of their reputation. Suppress negatives, generate positives."
+                title="Database Reactivation" 
+                desc="The 'Quick Win'. We text their list of past customers with an offer. They get bookings instantly."
                 highlight
               />
               <ProductCard 
-                title="Local SEO Domination" 
-                desc="Ranking at the top of Google Maps for key services."
+                title="AI Conversation Bot" 
+                desc="Qualifies leads and books appointments automatically. Replaces a front-desk receptionist."
               />
               <ProductCard 
-                title="Social Presence" 
-                desc="Professional branding and engaging content to build trust."
+                title="The 5-Star Funnel" 
+                desc="We intercept bad reviews internally and push 4-5 star reviews to Google."
+              />
+              <ProductCard 
+                title="Missed Call Text Back" 
+                desc="If they miss a call, our system texts the lead back immediately to save the deal."
               />
             </div>
           </section>
@@ -67,23 +85,23 @@ export default function Playbook() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <RuleCard 
                 number="01" 
-                title="No Public Pricing" 
-                desc="Never list prices. Every deal is custom. Anchor price to value."
+                title="Sell The System" 
+                desc="Don't sell 'SEO' or 'Ads'. Sell the machine that turns strangers into paying customers."
               />
               <RuleCard 
                 number="02" 
+                title="Stickiness is Key" 
+                desc="When we control their booking, payments, and reviews, we become as essential as their power bill."
+              />
+              <RuleCard 
+                number="03" 
                 title="One-Call Close" 
                 desc="Create urgency. We don't chase; we close on the first call."
               />
               <RuleCard 
-                number="03" 
-                title="Sell Outcomes" 
-                desc="Don't sell features. Sell '20 new customers a month'."
-              />
-              <RuleCard 
                 number="04" 
-                title="Target $25k" 
-                desc="We are here for high-ticket deals. Aim for $25,000 upfront."
+                title="No Public Pricing" 
+                desc="Every deal is custom. Anchor price to the value of the system, not the hours worked."
               />
             </div>
           </section>
@@ -132,6 +150,20 @@ export default function Playbook() {
             </CardContent>
           </Card>
         </div>
+      </div>
+    </div>
+  );
+}
+
+function StackStep({ icon: Icon, title, desc }: any) {
+  return (
+    <div className="relative z-10 flex items-start gap-4 p-4 bg-card border border-border rounded-lg hover:border-primary/50 transition-colors">
+      <div className="p-2 bg-background rounded-md border border-border shrink-0">
+        <Icon className="w-5 h-5 text-primary" />
+      </div>
+      <div>
+        <h3 className="font-bold text-foreground text-sm mb-1">{title}</h3>
+        <p className="text-sm text-muted-foreground leading-snug">{desc}</p>
       </div>
     </div>
   );

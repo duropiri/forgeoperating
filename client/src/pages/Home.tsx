@@ -7,7 +7,8 @@ import {
   BookOpen,
   ShieldAlert,
   Zap,
-  CheckCircle2
+  CheckCircle2,
+  Layers
 } from "lucide-react";
 
 export default function Home() {
@@ -39,25 +40,25 @@ export default function Home() {
           <Link href="/playbook">
             <CardHeader>
               <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center mb-4 group-hover:bg-blue-500/20 transition-colors">
-                <BookOpen className="w-6 h-6 text-blue-400" />
+                <Layers className="w-6 h-6 text-blue-400" />
               </div>
               <CardTitle className="font-display text-xl group-hover:text-blue-400 transition-colors">
-                01 // THE PLAYBOOK
+                01 // THE SYSTEM STACK
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-6 min-h-[3rem]">
-                Understand the "Digital Overhaul" model, value proposition, and rules of engagement.
+                Learn why we sell "Systems" not "Services". Master the linear value stack that scales.
               </p>
               <ul className="space-y-2 mb-6">
                 <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <CheckCircle2 className="w-4 h-4 text-blue-400" /> The Mission & Offer
+                  <CheckCircle2 className="w-4 h-4 text-blue-400" /> System vs. Service
                 </li>
                 <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <CheckCircle2 className="w-4 h-4 text-blue-400" /> One-Call Close Rules
+                  <CheckCircle2 className="w-4 h-4 text-blue-400" /> The "Sticky" Ecosystem
                 </li>
                 <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <CheckCircle2 className="w-4 h-4 text-blue-400" /> Pricing Strategy
+                  <CheckCircle2 className="w-4 h-4 text-blue-400" /> Value Stacking
                 </li>
               </ul>
               <div className="flex items-center text-sm font-bold text-blue-400 group-hover:translate-x-1 transition-transform">

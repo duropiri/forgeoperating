@@ -5,9 +5,9 @@ import {
   BookOpen, 
   PhoneCall, 
   ShieldAlert, 
-  Trophy,
   Menu,
-  X
+  X,
+  GraduationCap
 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./ui/button";
@@ -17,11 +17,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navItems = [
-    { href: "/", label: "Command Center", icon: LayoutDashboard },
+    { href: "/", label: "Training Hub", icon: LayoutDashboard },
     { href: "/playbook", label: "The Playbook", icon: BookOpen },
     { href: "/scripts", label: "Call Scripts", icon: PhoneCall },
     { href: "/objections", label: "Objection Killer", icon: ShieldAlert },
-    { href: "/leaderboard", label: "Wins & Metrics", icon: Trophy },
   ];
 
   return (
@@ -36,7 +35,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <h1 className="text-2xl font-display font-bold text-primary tracking-tighter">
               SALES<span className="text-foreground">OS</span>
             </h1>
-            <p className="text-xs text-muted-foreground font-mono mt-1">v2.0.4 // ONLINE</p>
+            <p className="text-xs text-muted-foreground font-mono mt-1">TRAINING PROTOCOL // V2.1</p>
           </div>
 
           <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
@@ -65,15 +64,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
           <div className="p-4 border-t border-sidebar-border">
             <div className="bg-sidebar-accent/50 rounded-md p-4 border border-sidebar-border">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-mono text-muted-foreground">DAILY TARGET</span>
-                <span className="text-xs font-mono text-primary font-bold">75%</span>
+              <div className="flex items-center gap-3 mb-2">
+                <div className="p-2 bg-primary/10 rounded-full">
+                  <GraduationCap className="w-4 h-4 text-primary" />
+                </div>
+                <span className="text-xs font-mono font-bold text-foreground">KNOWLEDGE BASE</span>
               </div>
-              <div className="h-1.5 bg-secondary rounded-full overflow-hidden">
-                <div className="h-full bg-primary w-3/4 shadow-[0_0_10px_rgba(255,215,0,0.5)]" />
-              </div>
-              <p className="text-[10px] text-muted-foreground mt-2 font-mono">
-                KEEP PUSHING. $25K IS WAITING.
+              <p className="text-[10px] text-muted-foreground mt-1 font-mono leading-relaxed">
+                MASTER THE SCRIPT. <br/>
+                OWN THE OBJECTION. <br/>
+                CLOSE THE DEAL.
               </p>
             </div>
           </div>

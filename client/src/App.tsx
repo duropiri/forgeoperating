@@ -11,7 +11,6 @@ import Home from "./pages/Home";
 import Playbook from "./pages/Playbook";
 import Scripts from "./pages/Scripts";
 import Objections from "./pages/Objections";
-import Leaderboard from "./pages/Leaderboard";
 
 function Router() {
   return (
@@ -21,7 +20,6 @@ function Router() {
         <Route path="/playbook" component={Playbook} />
         <Route path="/scripts" component={Scripts} />
         <Route path="/objections" component={Objections} />
-        <Route path="/leaderboard" component={Leaderboard} />
         <Route component={NotFound} />
       </Switch>
     </Layout>

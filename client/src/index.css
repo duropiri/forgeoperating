@@ -58,12 +58,9 @@
 }
 
 /* 
-  Design System: ForgeOS - Clean, Professional, Minimalist
-  Inspired by stonesystems.io - Simple systems that work
-  - Dark mode with subtle depth
-  - Orange accent (#FF6B35) for energy/action
-  - Clean whites and grays
-  - Generous whitespace
+  Design System: ForgeOS
+  - Dark mode for internal training hub
+  - Light cream/beige mode for public landing page (Stone Systems inspired)
 */
 
 :root {
@@ -98,7 +95,7 @@
   --input: oklch(0.16 0.00 0);
   --ring: oklch(0.65 0.20 35); /* Orange ring */
   
-  --radius: 0.5rem; /* Slightly rounded, modern feel */
+  --radius: 0.75rem; /* Slightly more rounded for friendly feel */
   
   --chart-1: oklch(0.65 0.20 35); /* Orange */
   --chart-2: oklch(0.65 0.18 145); /* Green */
@@ -144,6 +141,40 @@
   --sidebar-accent-foreground: oklch(0.95 0.00 0);
   --sidebar-border: oklch(0.16 0.00 0);
   --sidebar-ring: oklch(0.65 0.20 35);
+}
+
+/* Light theme for landing page - Stone Systems inspired cream/beige */
+.light-landing {
+  --background: oklch(0.97 0.01 85); /* Warm cream #F7F4EF */
+  --foreground: oklch(0.15 0.00 0); /* Near black #1A1A1A */
+  
+  --card: oklch(0.99 0.005 85); /* Slightly lighter cream */
+  --card-foreground: oklch(0.15 0.00 0);
+  
+  --popover: oklch(0.99 0.005 85);
+  --popover-foreground: oklch(0.15 0.00 0);
+  
+  --primary: oklch(0.55 0.15 165); /* Teal green #14B8A6 */
+  --primary-foreground: oklch(0.99 0.00 0); /* White */
+  
+  --secondary: oklch(0.94 0.01 85); /* Slightly darker cream */
+  --secondary-foreground: oklch(0.15 0.00 0);
+  
+  --muted: oklch(0.92 0.01 85);
+  --muted-foreground: oklch(0.45 0.00 0); /* Gray text */
+  
+  --accent: oklch(0.90 0.02 85);
+  --accent-foreground: oklch(0.55 0.15 165); /* Teal accent text */
+  
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.99 0.00 0);
+  
+  --success: oklch(0.55 0.15 165);
+  --success-foreground: oklch(0.99 0.00 0);
+  
+  --border: oklch(0.88 0.02 85); /* Subtle warm border */
+  --input: oklch(0.94 0.01 85);
+  --ring: oklch(0.55 0.15 165);
 }
 
 @layer base {
@@ -208,7 +239,7 @@
   
   .card-hover:hover {
     @apply -translate-y-1;
-    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.15);
   }
   
   /* Gradient text utility */
@@ -255,12 +286,41 @@
   to { opacity: 1; }
 }
 
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
 .animate-fade-up {
   animation: fade-up 0.5s ease-out forwards;
 }
 
 .animate-fade-in {
   animation: fade-in 0.3s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
 }
 
 /* Stagger animation delays */
@@ -270,3 +330,16 @@
 .stagger-4 { animation-delay: 0.4s; }
 .stagger-5 { animation-delay: 0.5s; }
 .stagger-6 { animation-delay: 0.6s; }
+
+/* Light landing page specific styles */
+.light-landing {
+  /* Softer shadows for light theme */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.03);
+}
+
+.light-landing .card-hover:hover {
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
+}

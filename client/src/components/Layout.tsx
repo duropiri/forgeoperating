@@ -73,7 +73,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="h-full flex flex-col">
           {/* Logo */}
           <div className="p-6 border-b border-sidebar-border">
-            <Link href="/">
+            <Link href="/dashboard">
               <div className="flex items-center gap-2 cursor-pointer">
                 <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
                   <span className="text-primary-foreground font-bold text-sm">F</span>
@@ -91,10 +91,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           {/* Navigation */}
           <nav className="flex-1 p-4 space-y-6 overflow-y-auto">
             {/* Home Link */}
-            <Link href="/">
+            <Link href="/dashboard">
               <div className={cn(
                 "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200",
-                location === "/" 
+                location === "/dashboard" 
                   ? "bg-primary/10 text-primary" 
                   : "text-muted-foreground hover:text-foreground hover:bg-secondary"
               )}>
@@ -143,7 +143,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
       {/* Mobile Header */}
       <div className="md:hidden flex items-center justify-between p-4 border-b border-border bg-background sticky top-0 z-40">
-        <Link href="/">
+        <Link href="/dashboard">
           <div className="flex items-center gap-2">
             <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center">
               <span className="text-primary-foreground font-bold text-xs">F</span>

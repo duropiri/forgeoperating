@@ -191,7 +191,7 @@ export default function Landing() {
               <a href="#faq" className="text-sm text-[#666] hover:text-[#1A1A1A] transition-colors">FAQ</a>
             </div>
             <div className="flex items-center gap-3">
-              <Link href="/">
+              <Link href="/dashboard">
                 <Button variant="ghost" size="sm" className="text-[#666] hover:text-[#1A1A1A] hover:bg-[#E8E4DD]">
                   Team Login
                 </Button>

@@ -23,28 +23,51 @@ import QAChecklist from "./pages/QAChecklist";
 function Router() {
   return (
     <Switch>
-      {/* Public Marketing Site */}
-      <Route path="/site" component={Landing} />
+      {/* Public Customer-Facing Landing Page at Root */}
+      <Route path="/" component={Landing} />
       
-      {/* Internal Training Hub (with Layout) */}
-      <Route>
+      {/* Internal Training Hub (with Layout) - accessed via Team Login */}
+      <Route path="/dashboard">
         <Layout>
-          <Switch>
-            {/* Sales Training Routes */}
-            <Route path="/" component={Home} />
-            <Route path="/playbook" component={Playbook} />
-            <Route path="/scripts" component={Scripts} />
-            <Route path="/objections" component={Objections} />
-            
-            {/* Fulfillment Ops Routes */}
-            <Route path="/ai-website-setup" component={AIWebsiteSetup} />
-            <Route path="/system-installation" component={SystemInstallation} />
-            <Route path="/qa-checklist" component={QAChecklist} />
-            
-            <Route component={NotFound} />
-          </Switch>
+          <Home />
         </Layout>
       </Route>
+      
+      {/* Sales Training Routes */}
+      <Route path="/playbook">
+        <Layout>
+          <Playbook />
+        </Layout>
+      </Route>
+      <Route path="/scripts">
+        <Layout>
+          <Scripts />
+        </Layout>
+      </Route>
+      <Route path="/objections">
+        <Layout>
+          <Objections />
+        </Layout>
+      </Route>
+      
+      {/* Fulfillment Ops Routes */}
+      <Route path="/ai-website-setup">
+        <Layout>
+          <AIWebsiteSetup />
+        </Layout>
+      </Route>
+      <Route path="/system-installation">
+        <Layout>
+          <SystemInstallation />
+        </Layout>
+      </Route>
+      <Route path="/qa-checklist">
+        <Layout>
+          <QAChecklist />
+        </Layout>
+      </Route>
+      
+      <Route component={NotFound} />
     </Switch>
   );
 }

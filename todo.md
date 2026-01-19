@@ -46,3 +46,9 @@
 - [x] Add FAQ accordion section
 - [x] Add premium animations and transitions
 - [x] Final testing and checkpoint
+
+## Routing Structure Update (Completed)
+- [x] Move Landing page to root (/)
+- [x] Move Training Hub to /dashboard
+- [x] Update Team Login link in Landing.tsx
+- [x] Test and checkpoint

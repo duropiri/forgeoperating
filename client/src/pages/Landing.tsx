@@ -21,9 +21,13 @@ import {
   ThumbsUp,
   RefreshCw,
   Target,
-  BadgeCheck
+  BadgeCheck,
+  Inbox,
+  Smartphone,
+  Search,
+  MousePointer
 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
 
 // Star rating component
@@ -64,8 +68,21 @@ const AnimatedNumber = ({ value, suffix = "" }: { value: number; suffix?: string
   return <span>{count.toLocaleString()}{suffix}</span>;
 };
 
-// Features data
-const features = [
+// All 9 features matching Stone Systems structure
+const allFeatures = [
+  { slug: "functional-website", title: "Functional Website", icon: Globe, description: "Get a lead-generating website in just days" },
+  { slug: "missed-call-text-back", title: "Missed Call Text Back", icon: Phone, description: "Automatically text back missed calls" },
+  { slug: "all-in-one-inbox", title: "All-In-One Inbox", icon: Inbox, description: "Get all your messages in one place" },
+  { slug: "business-phone", title: "Business Phone", icon: Smartphone, description: "Separate business and personal" },
+  { slug: "local-seo", title: "Local SEO", icon: Search, description: "Actually get found on Google" },
+  { slug: "review-funnel", title: "5-Star Magic Review Funnel", icon: Star, description: "Get more 5-star reviews and prevent bad ones" },
+  { slug: "marketing-campaigns", title: "One-Click Marketing Campaigns", icon: Mail, description: "Keep your customers thinking about you" },
+  { slug: "lead-follow-up", title: "Automated Lead Follow-Up", icon: MousePointer, description: "Automatically follow up with leads via text" },
+  { slug: "database-reactivation", title: "Database Reactivation", icon: RefreshCw, description: "Turn old customers into new revenue" }
+];
+
+// Features for hero cards (subset)
+const heroFeatures = [
   {
     icon: Bell,
     title: "Automatic Follow-Up Reminders",
@@ -83,40 +100,6 @@ const features = [
     title: "Stop worrying about bad reviews",
     description: "Unsure if you should ask for a review? We'll take the guesswork out by guiding your customer to leave a 5-star review!",
     color: "bg-blue-50 text-blue-600"
-  }
-];
-
-// Full system features
-const systemFeatures = [
-  {
-    icon: Globe,
-    title: "AI-Powered Website",
-    description: "High-converting sites built in 30 minutes. Your digital storefront that works 24/7.",
-    stat: "30 min setup"
-  },
-  {
-    icon: Bot,
-    title: "Conversation AI",
-    description: "Your tireless virtual receptionist. Qualifies leads and books appointments while you sleep.",
-    stat: "24/7 active"
-  },
-  {
-    icon: Phone,
-    title: "Missed Call Text Back",
-    description: "Every missed call gets an instant text. Never lose a lead to voicemail again.",
-    stat: "< 30 sec response"
-  },
-  {
-    icon: Star,
-    title: "5-Star Review Funnel",
-    description: "Our magic funnel guides happy customers to Google. Five stars, every time.",
-    stat: "+47 avg reviews"
-  },
-  {
-    icon: RefreshCw,
-    title: "Database Reactivation",
-    description: "Turn your old customer list into new revenue. Automated campaigns that bring them back.",
-    stat: "$2k+ recovered"
   }
 ];
 
@@ -169,8 +152,94 @@ const faqs = [
   }
 ];
 
+// Mega Dropdown component matching Stone Systems grid layout
+const FeaturesDropdown = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  return (
+    <div className="relative" ref={dropdownRef}>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center gap-1 text-sm text-[#666] hover:text-[#1A1A1A] transition-colors"
+      >
+        Systems & Features
+        <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+      </button>
+      
+      {isOpen && (
+        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[700px] bg-white rounded-2xl shadow-2xl border border-[#E8E4DD] py-6 px-6 z-50">
+          <div className="text-sm font-medium text-[#999] uppercase tracking-wider mb-4 px-2">
+            Systems & Features
+          </div>
+          <div className="border-t border-[#E8E4DD] pt-4">
+            <div className="grid grid-cols-3 gap-2">
+              {allFeatures.map((feature) => {
+                const Icon = feature.icon;
+                return (
+                  <Link key={feature.slug} href={`/features/${feature.slug}`}>
+                    <div 
+                      className="flex items-start gap-3 p-3 rounded-xl hover:bg-[#F7F4EF] transition-colors cursor-pointer group"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <div className="w-10 h-10 rounded-lg bg-[#F7F4EF] group-hover:bg-white flex items-center justify-center flex-shrink-0 transition-colors">
+                        <Icon className="w-5 h-5 text-[#666]" />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="font-medium text-sm text-[#1A1A1A] leading-tight">{feature.title}</p>
+                        <p className="text-xs text-[#666] mt-0.5 leading-tight">{feature.description}</p>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+// GHL Calendar Embed Component
+const GHLCalendarEmbed = () => (
+  <div className="bg-white rounded-2xl border border-[#E8E4DD] shadow-lg overflow-hidden">
+    <div className="p-6 border-b border-[#E8E4DD] bg-[#F7F4EF]">
+      <h3 className="font-semibold text-lg">Book Your Free Strategy Call</h3>
+      <p className="text-sm text-[#666]">Pick a time that works for you</p>
+    </div>
+    {/* GHL Calendar Embed Placeholder */}
+    <div className="p-8 min-h-[350px] flex items-center justify-center bg-gray-50">
+      <div className="text-center">
+        <Calendar className="w-16 h-16 text-teal-500 mx-auto mb-4" />
+        <p className="text-[#666] mb-2">GoHighLevel Calendar Embed</p>
+        <p className="text-xs text-[#999] max-w-xs mx-auto">Replace this placeholder with your GHL calendar embed code</p>
+      </div>
+    </div>
+  </div>
+);
+
 export default function Landing() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  // Set SEO meta tags
+  useEffect(() => {
+    document.title = "ForgeOS | AI Marketing System for Local Businesses";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Turn your local business into a customer-generating machine. AI-powered websites, chatbots, review automation, and more. Get more 5-star reviews and never miss a lead.');
+    }
+  }, []);
 
   return (
     <div className="min-h-screen light-landing bg-[#F7F4EF] text-[#1A1A1A]">
@@ -178,17 +247,20 @@ export default function Landing() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#F7F4EF]/90 backdrop-blur-md border-b border-[#E8E4DD]">
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="w-9 h-9 rounded-xl bg-teal-500 flex items-center justify-center shadow-sm">
-                <span className="text-white font-bold text-lg">F</span>
+            <Link href="/">
+              <div className="flex items-center gap-2 cursor-pointer">
+                <div className="w-9 h-9 rounded-xl bg-teal-500 flex items-center justify-center shadow-sm">
+                  <span className="text-white font-bold text-lg">F</span>
+                </div>
+                <span className="text-xl font-bold tracking-tight">Forge<span className="text-teal-500">OS</span></span>
               </div>
-              <span className="text-xl font-bold tracking-tight">Forge<span className="text-teal-500">OS</span></span>
-            </div>
+            </Link>
             <div className="hidden md:flex items-center gap-8">
-              <a href="#features" className="text-sm text-[#666] hover:text-[#1A1A1A] transition-colors">Features</a>
+              <FeaturesDropdown />
               <a href="#how-it-works" className="text-sm text-[#666] hover:text-[#1A1A1A] transition-colors">How It Works</a>
               <a href="#testimonials" className="text-sm text-[#666] hover:text-[#1A1A1A] transition-colors">Reviews</a>
               <a href="#faq" className="text-sm text-[#666] hover:text-[#1A1A1A] transition-colors">FAQ</a>
+              <Link href="/contact" className="text-sm text-[#666] hover:text-[#1A1A1A] transition-colors">Contact</Link>
             </div>
             <div className="flex items-center gap-3">
               <Link href="/dashboard">
@@ -216,7 +288,7 @@ export default function Landing() {
               <span className="text-sm font-medium text-teal-700">The Complete AI Marketing System</span>
             </div>
             
-            {/* Main Headline */}
+            {/* H1 - Main Headline */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 tracking-tight">
               5-Star Magic
               <span className="block text-teal-500">Review Funnel</span>
@@ -287,7 +359,7 @@ export default function Landing() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {features.map((feature, idx) => {
+            {heroFeatures.map((feature, idx) => {
               const Icon = feature.icon;
               return (
                 <Card key={idx} className="bg-white border-[#E8E4DD] shadow-sm hover:shadow-md transition-all duration-300 card-hover">
@@ -326,13 +398,13 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* The Full System */}
+      {/* The Full System - All 9 Features */}
       <section id="how-it-works" className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <p className="text-sm font-medium text-teal-600 uppercase tracking-wider mb-3">The Complete System</p>
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-              Five revenue engines.
+              Nine revenue engines.
               <span className="text-teal-500"> One system.</span>
             </h2>
             <p className="text-lg text-[#666] max-w-2xl mx-auto">
@@ -342,40 +414,27 @@ export default function Landing() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {systemFeatures.map((feature, idx) => {
+            {allFeatures.map((feature, idx) => {
               const Icon = feature.icon;
               return (
-                <Card key={idx} className="bg-white border-[#E8E4DD] shadow-sm hover:shadow-md transition-all duration-300 group">
-                  <CardContent className="p-6">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="w-12 h-12 rounded-xl bg-teal-50 flex items-center justify-center group-hover:bg-teal-100 transition-colors">
-                        <Icon className="w-6 h-6 text-teal-600" />
+                <Link key={idx} href={`/features/${feature.slug}`}>
+                  <Card className="bg-white border-[#E8E4DD] shadow-sm hover:shadow-md transition-all duration-300 group cursor-pointer h-full">
+                    <CardContent className="p-6">
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="w-12 h-12 rounded-xl bg-teal-50 flex items-center justify-center group-hover:bg-teal-100 transition-colors">
+                          <Icon className="w-6 h-6 text-teal-600" />
+                        </div>
                       </div>
-                      <span className="text-xs font-medium text-teal-600 bg-teal-50 px-2 py-1 rounded-full">
-                        {feature.stat}
-                      </span>
-                    </div>
-                    <h3 className="text-lg font-semibold mb-2 tracking-tight">{feature.title}</h3>
-                    <p className="text-sm text-[#666]">{feature.description}</p>
-                  </CardContent>
-                </Card>
+                      <h3 className="text-lg font-semibold mb-2 tracking-tight group-hover:text-teal-600 transition-colors">{feature.title}</h3>
+                      <p className="text-sm text-[#666]">{feature.description}</p>
+                      <div className="mt-4 flex items-center text-sm font-medium text-teal-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                        Learn more <ArrowRight className="w-4 h-4 ml-1" />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
               );
             })}
-            
-            {/* CTA Card */}
-            <Card className="bg-gradient-to-br from-teal-500 to-teal-600 border-0 shadow-lg">
-              <CardContent className="p-6 flex flex-col justify-center h-full text-white">
-                <h3 className="text-lg font-semibold mb-2">Ready to see it in action?</h3>
-                <p className="text-sm text-teal-100 mb-4">
-                  Book a 15-minute demo and we'll show you exactly how it works for your business.
-                </p>
-                <a href="#book">
-                  <Button className="w-full bg-white text-teal-600 hover:bg-teal-50">
-                    Book Free Demo
-                  </Button>
-                </a>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </section>
@@ -412,39 +471,46 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA Section with Calendar */}
       <section id="book" className="py-20 px-6">
-        <div className="max-w-3xl mx-auto">
-          <Card className="bg-white border-[#E8E4DD] shadow-xl overflow-hidden">
-            <CardContent className="p-8 md:p-12 text-center">
-              <div className="w-16 h-16 rounded-2xl bg-teal-50 flex items-center justify-center mx-auto mb-6">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            {/* Left: CTA Text */}
+            <div className="lg:sticky lg:top-32">
+              <div className="w-16 h-16 rounded-2xl bg-teal-50 flex items-center justify-center mb-6">
                 <Calendar className="w-8 h-8 text-teal-600" />
               </div>
-              <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
                 Ready to get more 5-star reviews?
               </h2>
-              <p className="text-[#666] mb-8 max-w-lg mx-auto">
+              <p className="text-lg text-[#666] mb-8 leading-relaxed">
                 Book a free 15-minute demo. We'll show you exactly how the system works 
                 and map out a custom implementation plan for your business.
               </p>
               
-              <Button size="lg" className="bg-teal-500 hover:bg-teal-600 text-white text-lg px-10 shadow-md">
-                <Calendar className="w-5 h-5 mr-2" /> Book Your Demo
-              </Button>
-              
-              <div className="flex flex-wrap items-center justify-center gap-6 mt-8 text-sm text-[#666]">
-                <span className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-teal-500" /> No commitment
-                </span>
-                <span className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-teal-500" /> 15 minutes
-                </span>
-                <span className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-teal-500" /> Custom plan
-                </span>
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-teal-500" />
+                  <span>No commitment required</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-teal-500" />
+                  <span>15-minute call</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-teal-500" />
+                  <span>Custom implementation plan</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-teal-500" />
+                  <span>See real results from similar businesses</span>
+                </div>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+
+            {/* Right: Calendar Embed */}
+            <GHLCalendarEmbed />
+          </div>
         </div>
       </section>
 
@@ -485,23 +551,72 @@ export default function Landing() {
       {/* Footer */}
       <footer className="py-12 px-6 border-t border-[#E8E4DD] bg-[#F7F4EF]">
         <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-teal-500 flex items-center justify-center">
-                <span className="text-white font-bold">F</span>
-              </div>
-              <span className="font-bold">Forge<span className="text-teal-500">OS</span></span>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            {/* Brand */}
+            <div className="md:col-span-1">
+              <Link href="/">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-8 h-8 rounded-lg bg-teal-500 flex items-center justify-center">
+                    <span className="text-white font-bold">F</span>
+                  </div>
+                  <span className="font-bold">Forge<span className="text-teal-500">OS</span></span>
+                </div>
+              </Link>
+              <p className="text-sm text-[#666]">
+                The complete AI marketing system for local businesses.
+              </p>
             </div>
             
-            <div className="flex items-center gap-6 text-sm text-[#666]">
-              <a href="#" className="hover:text-[#1A1A1A] transition-colors">Privacy</a>
-              <a href="#" className="hover:text-[#1A1A1A] transition-colors">Terms</a>
-              <a href="#" className="hover:text-[#1A1A1A] transition-colors">Contact</a>
+            {/* Features Column 1 */}
+            <div>
+              <h4 className="font-semibold text-sm mb-4">Systems</h4>
+              <ul className="space-y-2 text-sm text-[#666]">
+                {allFeatures.slice(0, 5).map((feature) => (
+                  <li key={feature.slug}>
+                    <Link href={`/features/${feature.slug}`} className="hover:text-[#1A1A1A] transition-colors">
+                      {feature.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
             
+            {/* Features Column 2 */}
+            <div>
+              <h4 className="font-semibold text-sm mb-4">More Features</h4>
+              <ul className="space-y-2 text-sm text-[#666]">
+                {allFeatures.slice(5).map((feature) => (
+                  <li key={feature.slug}>
+                    <Link href={`/features/${feature.slug}`} className="hover:text-[#1A1A1A] transition-colors">
+                      {feature.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            {/* Company */}
+            <div>
+              <h4 className="font-semibold text-sm mb-4">Company</h4>
+              <ul className="space-y-2 text-sm text-[#666]">
+                <li><a href="#testimonials" className="hover:text-[#1A1A1A] transition-colors">Reviews</a></li>
+                <li><a href="#faq" className="hover:text-[#1A1A1A] transition-colors">FAQ</a></li>
+                <li><Link href="/contact" className="hover:text-[#1A1A1A] transition-colors">Contact</Link></li>
+                <li><Link href="/privacy" className="hover:text-[#1A1A1A] transition-colors">Privacy Policy</Link></li>
+                <li><Link href="/terms" className="hover:text-[#1A1A1A] transition-colors">Terms of Service</Link></li>
+                <li><Link href="/dashboard" className="hover:text-[#1A1A1A] transition-colors">Team Login</Link></li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 border-t border-[#E8E4DD]">
             <p className="text-sm text-[#666]">
               © 2025 ForgeOS. All rights reserved.
             </p>
+            <div className="flex items-center gap-6 text-sm text-[#666]">
+              <Link href="/privacy" className="hover:text-[#1A1A1A] transition-colors">Privacy Policy</Link>
+              <Link href="/terms" className="hover:text-[#1A1A1A] transition-colors">Terms of Service</Link>
+            </div>
           </div>
         </div>
       </footer>

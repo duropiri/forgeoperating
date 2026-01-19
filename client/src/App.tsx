@@ -6,10 +6,14 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Layout from "./components/Layout";
 
-// Public Pages
+// Public Customer-Facing Pages
 import Landing from "./pages/Landing";
+import FeaturePage from "./pages/FeaturePage";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
+import Contact from "./pages/Contact";
 
-// Sales Training Pages
+// Internal Training Hub Pages
 import Home from "./pages/Home";
 import Playbook from "./pages/Playbook";
 import Scripts from "./pages/Scripts";
@@ -23,10 +27,22 @@ import QAChecklist from "./pages/QAChecklist";
 function Router() {
   return (
     <Switch>
-      {/* Public Customer-Facing Landing Page at Root */}
+      {/* ========== PUBLIC CUSTOMER-FACING ROUTES ========== */}
+      
+      {/* Landing Page at Root */}
       <Route path="/" component={Landing} />
       
-      {/* Internal Training Hub (with Layout) - accessed via Team Login */}
+      {/* Feature Pages - /features/:feature */}
+      <Route path="/features/:feature" component={FeaturePage} />
+      
+      {/* Static Pages */}
+      <Route path="/privacy" component={Privacy} />
+      <Route path="/terms" component={Terms} />
+      <Route path="/contact" component={Contact} />
+      
+      {/* ========== INTERNAL TRAINING HUB ROUTES ========== */}
+      
+      {/* Dashboard Home (accessed via Team Login) */}
       <Route path="/dashboard">
         <Layout>
           <Home />
@@ -67,6 +83,7 @@ function Router() {
         </Layout>
       </Route>
       
+      {/* 404 Fallback */}
       <Route component={NotFound} />
     </Switch>
   );

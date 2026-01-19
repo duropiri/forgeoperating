@@ -6,20 +6,32 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Layout from "./components/Layout";
 
-// Pages
+// Sales Training Pages
 import Home from "./pages/Home";
 import Playbook from "./pages/Playbook";
 import Scripts from "./pages/Scripts";
 import Objections from "./pages/Objections";
 
+// Fulfillment Ops Pages
+import AIWebsiteSetup from "./pages/AIWebsiteSetup";
+import SystemInstallation from "./pages/SystemInstallation";
+import QAChecklist from "./pages/QAChecklist";
+
 function Router() {
   return (
     <Layout>
       <Switch>
+        {/* Sales Training Routes */}
         <Route path="/" component={Home} />
         <Route path="/playbook" component={Playbook} />
         <Route path="/scripts" component={Scripts} />
         <Route path="/objections" component={Objections} />
+        
+        {/* Fulfillment Ops Routes */}
+        <Route path="/ai-website-setup" component={AIWebsiteSetup} />
+        <Route path="/system-installation" component={SystemInstallation} />
+        <Route path="/qa-checklist" component={QAChecklist} />
+        
         <Route component={NotFound} />
       </Switch>
     </Layout>

@@ -7,7 +7,10 @@ import {
   ShieldAlert, 
   Menu,
   X,
-  GraduationCap
+  GraduationCap,
+  Globe,
+  Settings,
+  ClipboardCheck
 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./ui/button";
@@ -16,11 +19,17 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const navItems = [
+  const salesNavItems = [
     { href: "/", label: "Training Hub", icon: LayoutDashboard },
     { href: "/playbook", label: "The Playbook", icon: BookOpen },
     { href: "/scripts", label: "Call Scripts", icon: PhoneCall },
     { href: "/objections", label: "Objection Killer", icon: ShieldAlert },
+  ];
+
+  const fulfillmentNavItems = [
+    { href: "/ai-website-setup", label: "AI Website Setup", icon: Globe },
+    { href: "/system-installation", label: "System Installation", icon: Settings },
+    { href: "/qa-checklist", label: "QA Checklist", icon: ClipboardCheck },
   ];
 
   return (
@@ -38,28 +47,62 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <p className="text-xs text-muted-foreground font-mono mt-1">TRAINING PROTOCOL // V2.1</p>
           </div>
 
-          <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              const isActive = location === item.href;
-              
-              return (
-                <Link key={item.href} href={item.href}>
-                  <div className={cn(
-                    "flex items-center gap-3 px-4 py-3 rounded-md transition-all duration-200 group cursor-pointer border border-transparent",
-                    isActive 
-                      ? "bg-sidebar-accent text-primary border-primary/20 shadow-[0_0_15px_rgba(255,215,0,0.1)]" 
-                      : "text-muted-foreground hover:text-foreground hover:bg-sidebar-accent/50"
-                  )}>
-                    <Icon className={cn("w-5 h-5", isActive ? "text-primary" : "text-muted-foreground group-hover:text-foreground")} />
-                    <span className="font-medium font-mono text-sm tracking-wide">{item.label}</span>
-                    {isActive && (
-                      <div className="ml-auto w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                    )}
-                  </div>
-                </Link>
-              );
-            })}
+          <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
+            {/* Sales Training Section */}
+            <div className="mb-4">
+              <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest px-4 mb-2">
+                Sales Training
+              </p>
+              {salesNavItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = location === item.href;
+                
+                return (
+                  <Link key={item.href} href={item.href}>
+                    <div className={cn(
+                      "flex items-center gap-3 px-4 py-2.5 rounded-md transition-all duration-200 group cursor-pointer border border-transparent",
+                      isActive 
+                        ? "bg-sidebar-accent text-primary border-primary/20 shadow-[0_0_15px_rgba(255,215,0,0.1)]" 
+                        : "text-muted-foreground hover:text-foreground hover:bg-sidebar-accent/50"
+                    )}>
+                      <Icon className={cn("w-4 h-4", isActive ? "text-primary" : "text-muted-foreground group-hover:text-foreground")} />
+                      <span className="font-medium font-mono text-xs tracking-wide">{item.label}</span>
+                      {isActive && (
+                        <div className="ml-auto w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                      )}
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+
+            {/* Fulfillment Ops Section */}
+            <div className="pt-4 border-t border-sidebar-border">
+              <p className="text-[10px] font-mono text-cyan-400 uppercase tracking-widest px-4 mb-2">
+                Fulfillment Ops
+              </p>
+              {fulfillmentNavItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = location === item.href;
+                
+                return (
+                  <Link key={item.href} href={item.href}>
+                    <div className={cn(
+                      "flex items-center gap-3 px-4 py-2.5 rounded-md transition-all duration-200 group cursor-pointer border border-transparent",
+                      isActive 
+                        ? "bg-cyan-500/10 text-cyan-400 border-cyan-500/20 shadow-[0_0_15px_rgba(0,255,255,0.1)]" 
+                        : "text-muted-foreground hover:text-foreground hover:bg-sidebar-accent/50"
+                    )}>
+                      <Icon className={cn("w-4 h-4", isActive ? "text-cyan-400" : "text-muted-foreground group-hover:text-foreground")} />
+                      <span className="font-medium font-mono text-xs tracking-wide">{item.label}</span>
+                      {isActive && (
+                        <div className="ml-auto w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                      )}
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
           </nav>
 
           <div className="p-4 border-t border-sidebar-border">

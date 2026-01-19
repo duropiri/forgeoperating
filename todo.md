@@ -84,3 +84,15 @@
 - [x] Fix text contrast issues in index.css
 - [x] Ensure consistent typography across all pages
 - [x] Fix any color/contrast accessibility issues
+
+## Next.js Migration (In Progress)
+- [x] Create Next.js project structure with App Router
+- [x] Configure Tailwind CSS 4 and global styles
+- [x] Migrate shared components (PublicNavbar, PublicFooter, Layout)
+- [x] Convert Landing page to app/page.tsx
+- [x] Convert feature pages to app/features/[slug]/page.tsx
+- [x] Convert static pages (Privacy, Terms, Contact)
+- [x] Convert training hub dashboard to app/dashboard/page.tsx
+- [ ] Migrate tRPC integration for Next.js
+- [ ] Migrate database and auth integration
+- [x] Test all routes and functionality

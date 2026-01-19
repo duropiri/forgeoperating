@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import PublicNavbar from "@/components/PublicNavbar";
+import PublicFooter from "@/components/PublicFooter";
 import { 
   Star,
   MessageSquare,
@@ -243,40 +245,7 @@ export default function Landing() {
 
   return (
     <div className="min-h-screen light-landing bg-[#F7F4EF] text-[#1A1A1A]">
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#F7F4EF]/90 backdrop-blur-md border-b border-[#E8E4DD]">
-        <div className="max-w-6xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <Link href="/">
-              <div className="flex items-center gap-2 cursor-pointer">
-                <div className="w-9 h-9 rounded-xl bg-teal-500 flex items-center justify-center shadow-sm">
-                  <span className="text-white font-bold text-lg">F</span>
-                </div>
-                <span className="text-xl font-bold tracking-tight">Forge<span className="text-teal-500">OS</span></span>
-              </div>
-            </Link>
-            <div className="hidden md:flex items-center gap-8">
-              <FeaturesDropdown />
-              <a href="#how-it-works" className="text-sm text-[#666] hover:text-[#1A1A1A] transition-colors">How It Works</a>
-              <a href="#testimonials" className="text-sm text-[#666] hover:text-[#1A1A1A] transition-colors">Reviews</a>
-              <a href="#faq" className="text-sm text-[#666] hover:text-[#1A1A1A] transition-colors">FAQ</a>
-              <Link href="/contact" className="text-sm text-[#666] hover:text-[#1A1A1A] transition-colors">Contact</Link>
-            </div>
-            <div className="flex items-center gap-3">
-              <Link href="/dashboard">
-                <Button variant="ghost" size="sm" className="text-[#666] hover:text-[#1A1A1A] hover:bg-[#E8E4DD]">
-                  Team Login
-                </Button>
-              </Link>
-              <a href="#book">
-                <Button size="sm" className="bg-teal-500 hover:bg-teal-600 text-white shadow-sm">
-                  Get Started
-                </Button>
-              </a>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <PublicNavbar />
 
       {/* Hero Section */}
       <section className="pt-28 pb-16 px-6">
@@ -548,78 +517,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 px-6 border-t border-[#E8E4DD] bg-[#F7F4EF]">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-            {/* Brand */}
-            <div className="md:col-span-1">
-              <Link href="/">
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="w-8 h-8 rounded-lg bg-teal-500 flex items-center justify-center">
-                    <span className="text-white font-bold">F</span>
-                  </div>
-                  <span className="font-bold">Forge<span className="text-teal-500">OS</span></span>
-                </div>
-              </Link>
-              <p className="text-sm text-[#666]">
-                The complete AI marketing system for local businesses.
-              </p>
-            </div>
-            
-            {/* Features Column 1 */}
-            <div>
-              <h4 className="font-semibold text-sm mb-4">Systems</h4>
-              <ul className="space-y-2 text-sm text-[#666]">
-                {allFeatures.slice(0, 5).map((feature) => (
-                  <li key={feature.slug}>
-                    <Link href={`/features/${feature.slug}`} className="hover:text-[#1A1A1A] transition-colors">
-                      {feature.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            
-            {/* Features Column 2 */}
-            <div>
-              <h4 className="font-semibold text-sm mb-4">More Features</h4>
-              <ul className="space-y-2 text-sm text-[#666]">
-                {allFeatures.slice(5).map((feature) => (
-                  <li key={feature.slug}>
-                    <Link href={`/features/${feature.slug}`} className="hover:text-[#1A1A1A] transition-colors">
-                      {feature.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            
-            {/* Company */}
-            <div>
-              <h4 className="font-semibold text-sm mb-4">Company</h4>
-              <ul className="space-y-2 text-sm text-[#666]">
-                <li><a href="#testimonials" className="hover:text-[#1A1A1A] transition-colors">Reviews</a></li>
-                <li><a href="#faq" className="hover:text-[#1A1A1A] transition-colors">FAQ</a></li>
-                <li><Link href="/contact" className="hover:text-[#1A1A1A] transition-colors">Contact</Link></li>
-                <li><Link href="/privacy" className="hover:text-[#1A1A1A] transition-colors">Privacy Policy</Link></li>
-                <li><Link href="/terms" className="hover:text-[#1A1A1A] transition-colors">Terms of Service</Link></li>
-                <li><Link href="/dashboard" className="hover:text-[#1A1A1A] transition-colors">Team Login</Link></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 border-t border-[#E8E4DD]">
-            <p className="text-sm text-[#666]">
-              © 2025 ForgeOS. All rights reserved.
-            </p>
-            <div className="flex items-center gap-6 text-sm text-[#666]">
-              <Link href="/privacy" className="hover:text-[#1A1A1A] transition-colors">Privacy Policy</Link>
-              <Link href="/terms" className="hover:text-[#1A1A1A] transition-colors">Terms of Service</Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <PublicFooter />
     </div>
   );
 }

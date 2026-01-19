@@ -5,6 +5,7 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Layout from "./components/Layout";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 // Public Customer-Facing Pages
 import Landing from "./pages/Landing";
@@ -40,47 +41,61 @@ function Router() {
       <Route path="/terms" component={Terms} />
       <Route path="/contact" component={Contact} />
       
-      {/* ========== INTERNAL TRAINING HUB ROUTES ========== */}
+      {/* ========== PROTECTED INTERNAL TRAINING HUB ROUTES ========== */}
       
       {/* Dashboard Home (accessed via Team Login) */}
       <Route path="/dashboard">
-        <Layout>
-          <Home />
-        </Layout>
+        <ProtectedRoute>
+          <Layout>
+            <Home />
+          </Layout>
+        </ProtectedRoute>
       </Route>
       
       {/* Sales Training Routes */}
       <Route path="/playbook">
-        <Layout>
-          <Playbook />
-        </Layout>
+        <ProtectedRoute>
+          <Layout>
+            <Playbook />
+          </Layout>
+        </ProtectedRoute>
       </Route>
       <Route path="/scripts">
-        <Layout>
-          <Scripts />
-        </Layout>
+        <ProtectedRoute>
+          <Layout>
+            <Scripts />
+          </Layout>
+        </ProtectedRoute>
       </Route>
       <Route path="/objections">
-        <Layout>
-          <Objections />
-        </Layout>
+        <ProtectedRoute>
+          <Layout>
+            <Objections />
+          </Layout>
+        </ProtectedRoute>
       </Route>
       
       {/* Fulfillment Ops Routes */}
       <Route path="/ai-website-setup">
-        <Layout>
-          <AIWebsiteSetup />
-        </Layout>
+        <ProtectedRoute>
+          <Layout>
+            <AIWebsiteSetup />
+          </Layout>
+        </ProtectedRoute>
       </Route>
       <Route path="/system-installation">
-        <Layout>
-          <SystemInstallation />
-        </Layout>
+        <ProtectedRoute>
+          <Layout>
+            <SystemInstallation />
+          </Layout>
+        </ProtectedRoute>
       </Route>
       <Route path="/qa-checklist">
-        <Layout>
-          <QAChecklist />
-        </Layout>
+        <ProtectedRoute>
+          <Layout>
+            <QAChecklist />
+          </Layout>
+        </ProtectedRoute>
       </Route>
       
       {/* 404 Fallback */}

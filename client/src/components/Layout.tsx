@@ -10,14 +10,23 @@ import {
   Globe,
   Wrench,
   ClipboardCheck,
-  ChevronRight
+  ChevronRight,
+  LogOut,
+  User
 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./ui/button";
+import { useAuth } from "@/_core/hooks/useAuth";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { user, logout, loading } = useAuth();
+
+  const handleLogout = async () => {
+    await logout();
+    window.location.href = "/";
+  };
 
   const salesNavItems = [
     { href: "/playbook", label: "The Playbook", icon: BookOpen, description: "Systems methodology" },
@@ -128,15 +137,47 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </div>
           </nav>
 
-          {/* Footer */}
-          <div className="p-4 border-t border-sidebar-border">
-            <div className="bg-secondary/50 rounded-lg p-4">
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                <span className="text-foreground font-medium">Simple systems that work.</span>
-                <br />
-                No BS, just results.
-              </p>
-            </div>
+          {/* User Section & Footer */}
+          <div className="p-4 border-t border-sidebar-border space-y-3">
+            {/* User Info */}
+            {user && (
+              <div className="flex items-center gap-3 px-3 py-2 bg-secondary/50 rounded-lg">
+                <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+                  {user.avatar ? (
+                    <img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-full object-cover" />
+                  ) : (
+                    <User className="w-4 h-4 text-primary" />
+                  )}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-foreground truncate">{user.name}</p>
+                  <p className="text-xs text-muted-foreground truncate">{user.email || 'Team Member'}</p>
+                </div>
+              </div>
+            )}
+            
+            {/* Logout Button */}
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="w-full justify-start text-muted-foreground hover:text-foreground hover:bg-secondary"
+              onClick={handleLogout}
+              disabled={loading}
+            >
+              <LogOut className="w-4 h-4 mr-2" />
+              Sign Out
+            </Button>
+
+            {/* Back to Main Site */}
+            <Link href="/">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="w-full text-muted-foreground border-sidebar-border hover:bg-secondary"
+              >
+                ← Back to Main Site
+              </Button>
+            </Link>
           </div>
         </div>
       </aside>
@@ -151,9 +192,20 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <span className="text-base font-bold">Forge<span className="text-primary">OS</span></span>
           </div>
         </Link>
-        <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-          {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </Button>
+        <div className="flex items-center gap-2">
+          {user && (
+            <div className="w-7 h-7 rounded-full bg-primary/20 flex items-center justify-center">
+              {user.avatar ? (
+                <img src={user.avatar} alt={user.name} className="w-7 h-7 rounded-full object-cover" />
+              ) : (
+                <User className="w-3.5 h-3.5 text-primary" />
+              )}
+            </div>
+          )}
+          <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </Button>
+        </div>
       </div>
 
       {/* Main Content */}

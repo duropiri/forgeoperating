@@ -1,164 +1,148 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
 import { 
-  ClipboardCheck, 
+  ArrowLeft,
+  CheckCircle2,
+  Circle,
   Globe,
   Smartphone,
   Zap,
   MessageSquare,
   Phone,
   Star,
-  Calendar,
-  CheckCircle2,
-  XCircle,
+  FileText,
   AlertTriangle,
   Send
 } from "lucide-react";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
-interface ChecklistItem {
+interface CheckItem {
   id: string;
   label: string;
-  critical: boolean;
+  critical?: boolean;
 }
 
-interface ChecklistSection {
+interface CheckCategory {
   id: string;
-  title: string;
-  icon: React.ComponentType<{ className?: string }>;
-  color: string;
-  items: ChecklistItem[];
+  name: string;
+  icon: React.ReactNode;
+  items: CheckItem[];
 }
+
+const categories: CheckCategory[] = [
+  {
+    id: "website",
+    name: "Website",
+    icon: <Globe className="w-5 h-5" />,
+    items: [
+      { id: "w1", label: "All pages load without errors" },
+      { id: "w2", label: "Logo displays correctly", critical: true },
+      { id: "w3", label: "Phone number is correct and clickable", critical: true },
+      { id: "w4", label: "Address is correct" },
+      { id: "w5", label: "Contact form submits successfully", critical: true },
+      { id: "w6", label: "Form submissions appear in CRM", critical: true },
+      { id: "w7", label: "Google Maps embed works" },
+      { id: "w8", label: "All navigation links work" },
+      { id: "w9", label: "No placeholder text visible" }
+    ]
+  },
+  {
+    id: "mobile",
+    name: "Mobile",
+    icon: <Smartphone className="w-5 h-5" />,
+    items: [
+      { id: "m1", label: "Site loads on mobile device", critical: true },
+      { id: "m2", label: "Text is readable without zooming" },
+      { id: "m3", label: "Buttons are tappable" },
+      { id: "m4", label: "Forms work on mobile", critical: true },
+      { id: "m5", label: "Click-to-call works", critical: true },
+      { id: "m6", label: "Chat widget doesn't block content" }
+    ]
+  },
+  {
+    id: "speed",
+    name: "Performance",
+    icon: <Zap className="w-5 h-5" />,
+    items: [
+      { id: "s1", label: "Page loads in under 3 seconds", critical: true },
+      { id: "s2", label: "Images are optimized" },
+      { id: "s3", label: "No broken images" },
+      { id: "s4", label: "SSL certificate active (green padlock)", critical: true }
+    ]
+  },
+  {
+    id: "chat",
+    name: "Chat Widget",
+    icon: <MessageSquare className="w-5 h-5" />,
+    items: [
+      { id: "c1", label: "Widget appears on all pages" },
+      { id: "c2", label: "Colors match brand" },
+      { id: "c3", label: "Greeting message displays" },
+      { id: "c4", label: "Messages route to CRM", critical: true },
+      { id: "c5", label: "AI bot responds correctly" }
+    ]
+  },
+  {
+    id: "phone",
+    name: "Phone System",
+    icon: <Phone className="w-5 h-5" />,
+    items: [
+      { id: "p1", label: "Tracking number forwards correctly", critical: true },
+      { id: "p2", label: "Missed call text back fires", critical: true },
+      { id: "p3", label: "Voicemail is set up" },
+      { id: "p4", label: "Call recordings enabled (if applicable)" }
+    ]
+  },
+  {
+    id: "reviews",
+    name: "Reviews",
+    icon: <Star className="w-5 h-5" />,
+    items: [
+      { id: "r1", label: "Review request workflow active" },
+      { id: "r2", label: "Google Review link works", critical: true },
+      { id: "r3", label: "Negative review gate works" },
+      { id: "r4", label: "Follow-up reminders scheduled" }
+    ]
+  },
+  {
+    id: "delivery",
+    name: "Client Delivery",
+    icon: <FileText className="w-5 h-5" />,
+    items: [
+      { id: "d1", label: "Loom walkthrough recorded", critical: true },
+      { id: "d2", label: "Login credentials documented" },
+      { id: "d3", label: "Support contact provided" },
+      { id: "d4", label: "Delivery email sent", critical: true }
+    ]
+  }
+];
 
 export default function QAChecklist() {
   const [checkedItems, setCheckedItems] = useState<Set<string>>(new Set());
 
-  const sections: ChecklistSection[] = [
-    {
-      id: "website",
-      title: "Website Quality",
-      icon: Globe,
-      color: "cyan",
-      items: [
-        { id: "w1", label: "All pages load without errors", critical: true },
-        { id: "w2", label: "Logo displays correctly", critical: true },
-        { id: "w3", label: "Phone number is correct and clickable", critical: true },
-        { id: "w4", label: "Address is correct", critical: true },
-        { id: "w5", label: "All navigation links work", critical: true },
-        { id: "w6", label: "Contact form submits successfully", critical: true },
-        { id: "w7", label: "No placeholder/lorem ipsum text visible", critical: true },
-        { id: "w8", label: "Images are high quality (not pixelated)", critical: false },
-        { id: "w9", label: "Footer contains all required info", critical: false },
-        { id: "w10", label: "SSL certificate active (https://)", critical: true }
-      ]
-    },
-    {
-      id: "mobile",
-      title: "Mobile Responsiveness",
-      icon: Smartphone,
-      color: "purple",
-      items: [
-        { id: "m1", label: "Site looks good on mobile (test on real phone)", critical: true },
-        { id: "m2", label: "Text is readable without zooming", critical: true },
-        { id: "m3", label: "Buttons are tappable (not too small)", critical: true },
-        { id: "m4", label: "Images don't overflow screen", critical: false },
-        { id: "m5", label: "Navigation menu works on mobile", critical: true },
-        { id: "m6", label: "Forms are usable on mobile", critical: true }
-      ]
-    },
-    {
-      id: "performance",
-      title: "Performance",
-      icon: Zap,
-      color: "primary",
-      items: [
-        { id: "p1", label: "Page loads in under 3 seconds", critical: true },
-        { id: "p2", label: "No broken images (404s)", critical: true },
-        { id: "p3", label: "No console errors in browser", critical: false },
-        { id: "p4", label: "Google PageSpeed score > 70", critical: false }
-      ]
-    },
-    {
-      id: "chat",
-      title: "Chat Widget",
-      icon: MessageSquare,
-      color: "green",
-      items: [
-        { id: "c1", label: "Widget appears on all pages", critical: true },
-        { id: "c2", label: "Widget colors match brand", critical: false },
-        { id: "c3", label: "Greeting message displays correctly", critical: true },
-        { id: "c4", label: "Bot responds to test message", critical: true },
-        { id: "c5", label: "Conversation appears in GHL inbox", critical: true }
-      ]
-    },
-    {
-      id: "phone",
-      title: "Phone System",
-      icon: Phone,
-      color: "blue",
-      items: [
-        { id: "ph1", label: "Business number rings correctly", critical: true },
-        { id: "ph2", label: "Missed call triggers text back", critical: true },
-        { id: "ph3", label: "Text back message is correct", critical: true },
-        { id: "ph4", label: "Call recordings enabled (if applicable)", critical: false }
-      ]
-    },
-    {
-      id: "calendar",
-      title: "Calendar & Booking",
-      icon: Calendar,
-      color: "orange",
-      items: [
-        { id: "cal1", label: "Calendar shows correct availability", critical: true },
-        { id: "cal2", label: "Test booking creates appointment", critical: true },
-        { id: "cal3", label: "Confirmation email/SMS sent", critical: true },
-        { id: "cal4", label: "Reminder automation is active", critical: true },
-        { id: "cal5", label: "Timezone is set correctly", critical: true }
-      ]
-    },
-    {
-      id: "reviews",
-      title: "Review System",
-      icon: Star,
-      color: "yellow",
-      items: [
-        { id: "r1", label: "Google Review link is correct", critical: true },
-        { id: "r2", label: "Review request automation is active", critical: true },
-        { id: "r3", label: "Test trigger sends review request", critical: true }
-      ]
-    }
-  ];
-
-  const toggleItem = (itemId: string) => {
+  const toggleItem = (id: string) => {
     const newChecked = new Set(checkedItems);
-    if (newChecked.has(itemId)) {
-      newChecked.delete(itemId);
+    if (newChecked.has(id)) {
+      newChecked.delete(id);
     } else {
-      newChecked.add(itemId);
+      newChecked.add(id);
     }
     setCheckedItems(newChecked);
   };
 
-  const totalItems = sections.reduce((acc, section) => acc + section.items.length, 0);
+  const totalItems = categories.reduce((acc, cat) => acc + cat.items.length, 0);
   const checkedCount = checkedItems.size;
-  const criticalItems = sections.flatMap(s => s.items.filter(i => i.critical));
-  const criticalChecked = criticalItems.filter(i => checkedItems.has(i.id)).length;
+  const criticalItems = categories.flatMap(cat => cat.items.filter(item => item.critical));
+  const criticalChecked = criticalItems.filter(item => checkedItems.has(item.id)).length;
   const allCriticalPassed = criticalChecked === criticalItems.length;
 
-  const colorClasses: Record<string, string> = {
-    cyan: "text-cyan-400 bg-cyan-500/10 border-cyan-500/20",
-    purple: "text-purple-400 bg-purple-500/10 border-purple-500/20",
-    primary: "text-primary bg-primary/10 border-primary/20",
-    green: "text-green-400 bg-green-500/10 border-green-500/20",
-    blue: "text-blue-400 bg-blue-500/10 border-blue-500/20",
-    orange: "text-orange-400 bg-orange-500/10 border-orange-500/20",
-    yellow: "text-yellow-400 bg-yellow-500/10 border-yellow-500/20"
-  };
+  const resetChecklist = () => setCheckedItems(new Set());
 
   const handleDelivery = () => {
     if (!allCriticalPassed) {
-      toast.error("Cannot deliver: Critical items not completed!");
+      toast.error("Complete all critical items before delivery");
       return;
     }
     toast.success("Ready for delivery! Send the client their Loom walkthrough.");
@@ -167,141 +151,170 @@ export default function QAChecklist() {
   return (
     <div className="space-y-8 max-w-5xl mx-auto">
       {/* Header */}
-      <div className="border-b border-border pb-6">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="p-2 bg-cyan-500/10 rounded-lg">
-            <ClipboardCheck className="w-6 h-6 text-cyan-400" />
+      <div className="space-y-4">
+        <Link href="/">
+          <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground -ml-2">
+            <ArrowLeft className="w-4 h-4 mr-2" /> Back to Dashboard
+          </Button>
+        </Link>
+        
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div>
+            <span className="text-xs font-medium text-rose-400 uppercase tracking-wider">Module 06</span>
+            <h1 className="text-3xl md:text-4xl font-bold mt-1">QA Checklist</h1>
+            <p className="text-muted-foreground mt-2">
+              Pre-launch verification to ensure flawless client delivery.
+            </p>
           </div>
-          <h1 className="text-3xl md:text-4xl font-display font-bold text-foreground tracking-tight">
-            QA <span className="text-cyan-400">CHECKLIST</span>
-          </h1>
+          
+          <Button variant="outline" size="sm" onClick={resetChecklist} className="border-border">
+            Reset Checklist
+          </Button>
         </div>
-        <p className="text-muted-foreground font-mono text-sm max-w-2xl">
-          FULFILLMENT SOP // VERIFY BEFORE CLIENT HANDOFF
-        </p>
       </div>
 
-      {/* Progress Banner */}
-      <Card className={`border-2 ${allCriticalPassed ? 'border-green-500/50 bg-green-500/5' : 'border-yellow-500/50 bg-yellow-500/5'}`}>
-        <CardContent className="py-4">
-          <div className="flex items-center justify-between flex-wrap gap-4">
-            <div className="flex items-center gap-6">
-              <div>
-                <p className="text-xs font-mono text-muted-foreground">TOTAL PROGRESS</p>
-                <p className="text-2xl font-bold text-foreground">{checkedCount}/{totalItems}</p>
-              </div>
-              <div className="h-10 w-px bg-border" />
-              <div>
-                <p className="text-xs font-mono text-muted-foreground">CRITICAL ITEMS</p>
-                <p className={`text-2xl font-bold ${allCriticalPassed ? 'text-green-400' : 'text-yellow-400'}`}>
-                  {criticalChecked}/{criticalItems.length}
-                </p>
-              </div>
+      {/* Progress Overview */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <Card className="bg-card border-border">
+          <CardContent className="p-5">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-sm text-muted-foreground">Overall Progress</span>
+              <span className="text-lg font-bold">{checkedCount}/{totalItems}</span>
             </div>
-            <Button 
-              onClick={handleDelivery}
-              disabled={!allCriticalPassed}
-              className={allCriticalPassed ? 'bg-green-500 hover:bg-green-600' : ''}
-            >
-              <Send className="w-4 h-4 mr-2" />
-              {allCriticalPassed ? 'Ready for Delivery' : 'Complete Critical Items'}
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+            <div className="h-2 bg-secondary rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-primary transition-all duration-300"
+                style={{ width: `${(checkedCount / totalItems) * 100}%` }}
+              />
+            </div>
+          </CardContent>
+        </Card>
 
-      {/* Legend */}
-      <div className="flex items-center gap-6 text-sm">
-        <div className="flex items-center gap-2">
-          <AlertTriangle className="w-4 h-4 text-red-400" />
-          <span className="text-muted-foreground">Critical (must pass)</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <CheckCircle2 className="w-4 h-4 text-muted-foreground" />
-          <span className="text-muted-foreground">Optional (nice to have)</span>
-        </div>
+        <Card className={`border ${allCriticalPassed ? "border-emerald-500/30 bg-emerald-500/5" : "border-rose-500/30 bg-rose-500/5"}`}>
+          <CardContent className="p-5">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-sm text-muted-foreground">Critical Items</span>
+              <span className={`text-lg font-bold ${allCriticalPassed ? "text-emerald-400" : "text-rose-400"}`}>
+                {criticalChecked}/{criticalItems.length}
+              </span>
+            </div>
+            <div className="h-2 bg-secondary rounded-full overflow-hidden">
+              <div 
+                className={`h-full transition-all duration-300 ${allCriticalPassed ? "bg-emerald-500" : "bg-rose-500"}`}
+                style={{ width: `${(criticalChecked / criticalItems.length) * 100}%` }}
+              />
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className={`border ${checkedCount === totalItems ? "border-emerald-500/30 bg-emerald-500/5" : "border-border"}`}>
+          <CardContent className="p-5 flex items-center justify-center">
+            {allCriticalPassed ? (
+              <Button onClick={handleDelivery} className="bg-emerald-500 hover:bg-emerald-600 text-white">
+                <Send className="w-4 h-4 mr-2" /> Ready for Delivery
+              </Button>
+            ) : (
+              <div className="text-center">
+                <AlertTriangle className="w-6 h-6 text-amber-400 mx-auto mb-2" />
+                <span className="text-sm text-muted-foreground">{totalItems - checkedCount} items remaining</span>
+              </div>
+            )}
+          </CardContent>
+        </Card>
       </div>
 
-      {/* Checklist Sections */}
+      {/* Checklist Categories */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {sections.map((section) => {
-          const Icon = section.icon;
-          const colors = colorClasses[section.color];
-          const sectionChecked = section.items.filter(i => checkedItems.has(i.id)).length;
+        {categories.map((category) => {
+          const categoryChecked = category.items.filter(item => checkedItems.has(item.id)).length;
+          const isComplete = categoryChecked === category.items.length;
 
           return (
-            <Card key={section.id} className="border-border bg-card/50">
-              <CardHeader className="pb-3">
-                <div className="flex items-center justify-between">
+            <Card key={category.id} className={`bg-card border ${isComplete ? "border-emerald-500/30" : "border-border"}`}>
+              <CardContent className="p-5">
+                <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
-                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${colors.split(' ').slice(1, 3).join(' ')}`}>
-                      <Icon className={`w-4 h-4 ${colors.split(' ')[0]}`} />
+                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${isComplete ? "bg-emerald-500/10 text-emerald-400" : "bg-secondary text-muted-foreground"}`}>
+                      {category.icon}
                     </div>
-                    <CardTitle className="font-display text-base">{section.title}</CardTitle>
+                    <div>
+                      <h3 className="font-semibold">{category.name}</h3>
+                      <p className="text-xs text-muted-foreground">{categoryChecked}/{category.items.length} complete</p>
+                    </div>
                   </div>
-                  <span className="text-xs font-mono text-muted-foreground">
-                    {sectionChecked}/{section.items.length}
-                  </span>
+                  {isComplete && <CheckCircle2 className="w-5 h-5 text-emerald-400" />}
                 </div>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                {section.items.map((item) => {
-                  const isChecked = checkedItems.has(item.id);
-                  return (
-                    <div 
+
+                <div className="space-y-2">
+                  {category.items.map((item) => (
+                    <button
                       key={item.id}
                       onClick={() => toggleItem(item.id)}
-                      className={`flex items-center gap-3 p-2 rounded-md cursor-pointer transition-all ${
-                        isChecked ? 'bg-green-500/10' : 'hover:bg-muted/50'
+                      className={`w-full flex items-center gap-3 p-2 rounded-lg transition-colors text-left ${
+                        checkedItems.has(item.id) 
+                          ? "bg-emerald-500/10" 
+                          : "hover:bg-secondary"
                       }`}
                     >
-                      {isChecked ? (
-                        <CheckCircle2 className="w-4 h-4 text-green-400 flex-shrink-0" />
+                      {checkedItems.has(item.id) ? (
+                        <CheckCircle2 className="w-5 h-5 text-emerald-400 flex-shrink-0" />
                       ) : (
-                        <XCircle className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+                        <Circle className="w-5 h-5 text-muted-foreground flex-shrink-0" />
                       )}
-                      <span className={`text-sm flex-1 ${isChecked ? 'text-muted-foreground line-through' : 'text-foreground'}`}>
+                      <span className={`text-sm ${checkedItems.has(item.id) ? "text-emerald-400 line-through" : ""}`}>
                         {item.label}
                       </span>
-                      {item.critical && !isChecked && (
-                        <AlertTriangle className="w-3 h-3 text-red-400 flex-shrink-0" />
+                      {item.critical && !checkedItems.has(item.id) && (
+                        <span className="ml-auto text-[10px] font-medium text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded">
+                          CRITICAL
+                        </span>
                       )}
-                    </div>
-                  );
-                })}
+                    </button>
+                  ))}
+                </div>
               </CardContent>
             </Card>
           );
         })}
       </div>
 
-      {/* Delivery Checklist */}
-      <Card className="border-border bg-card/30">
-        <CardHeader>
-          <CardTitle className="font-display text-lg flex items-center gap-2">
-            <Send className="w-5 h-5 text-cyan-400" />
-            DELIVERY PROTOCOL
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
+      {/* Delivery Protocol */}
+      <Card className="bg-card border-border">
+        <CardContent className="p-6">
+          <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-4">Delivery Protocol</h3>
           <ol className="space-y-3">
-            <li className="flex items-start gap-3 text-sm">
-              <span className="text-cyan-400 font-mono font-bold">1.</span>
-              <span className="text-foreground">Record a Loom walkthrough of the website and all features (3-5 min)</span>
-            </li>
-            <li className="flex items-start gap-3 text-sm">
-              <span className="text-cyan-400 font-mono font-bold">2.</span>
-              <span className="text-foreground">Send delivery email with Loom link, login credentials, and support contact</span>
-            </li>
-            <li className="flex items-start gap-3 text-sm">
-              <span className="text-cyan-400 font-mono font-bold">3.</span>
-              <span className="text-foreground">Schedule a 15-min onboarding call to walk them through the dashboard</span>
-            </li>
-            <li className="flex items-start gap-3 text-sm">
-              <span className="text-cyan-400 font-mono font-bold">4.</span>
-              <span className="text-foreground">Mark opportunity as "Delivered" in CRM and set follow-up for 7 days</span>
-            </li>
+            {[
+              "Record a Loom walkthrough of the website and all features (3-5 min)",
+              "Send delivery email with Loom link, login credentials, and support contact",
+              "Schedule a 15-min onboarding call to walk them through the dashboard",
+              "Mark opportunity as 'Delivered' in CRM and set follow-up for 7 days"
+            ].map((step, idx) => (
+              <li key={idx} className="flex items-start gap-3">
+                <span className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-xs font-medium text-primary flex-shrink-0">
+                  {idx + 1}
+                </span>
+                <span className="text-sm pt-0.5">{step}</span>
+              </li>
+            ))}
           </ol>
+        </CardContent>
+      </Card>
+
+      {/* Back to Training */}
+      <Card className="bg-gradient-to-r from-primary/10 to-primary/5 border-primary/20">
+        <CardContent className="p-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div>
+              <span className="text-xs font-medium text-primary uppercase tracking-wider">Training Complete</span>
+              <h3 className="text-lg font-semibold mt-1">Back to Dashboard</h3>
+              <p className="text-sm text-muted-foreground">Review all modules or start a new client setup.</p>
+            </div>
+            <Link href="/">
+              <Button className="bg-primary hover:bg-primary/90">
+                Return Home
+              </Button>
+            </Link>
+          </div>
         </CardContent>
       </Card>
     </div>

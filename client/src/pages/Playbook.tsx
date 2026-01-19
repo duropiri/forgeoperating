@@ -1,192 +1,250 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { CheckCircle2, Zap, Layers, ArrowDown, Database, MessageSquare, Star } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Link } from "wouter";
+import { 
+  ArrowLeft,
+  ArrowRight,
+  Globe,
+  MessageSquare,
+  Star,
+  Phone,
+  Mail,
+  CheckCircle2,
+  AlertCircle,
+  Lightbulb
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function Playbook() {
   return (
-    <div className="space-y-8 max-w-5xl mx-auto">
-      <div className="border-b border-border pb-6">
-        <h1 className="text-4xl font-display font-bold text-foreground mb-2">THE PLAYBOOK</h1>
-        <p className="text-muted-foreground font-mono">OPERATIONAL DOCTRINE // SYSTEMS OVER SERVICES</p>
+    <div className="space-y-12 max-w-4xl mx-auto">
+      {/* Header */}
+      <div className="space-y-4">
+        <Link href="/">
+          <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground -ml-2">
+            <ArrowLeft className="w-4 h-4 mr-2" /> Back to Dashboard
+          </Button>
+        </Link>
+        
+        <div>
+          <span className="text-xs font-medium text-primary uppercase tracking-wider">Module 01</span>
+          <h1 className="text-3xl md:text-4xl font-bold mt-1">The Playbook</h1>
+          <p className="text-muted-foreground mt-2 text-lg">
+            Master the systems-selling methodology that closes $25k+ deals.
+          </p>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Main Content */}
-        <div className="lg:col-span-2 space-y-8">
-          
-          {/* The Core Philosophy */}
-          <section>
-            <h2 className="text-2xl font-display font-bold text-primary mb-4 flex items-center gap-2">
-              <Layers className="w-6 h-6" /> THE SYSTEM STACK
-            </h2>
-            <Card className="bg-card/50 border-border">
-              <CardContent className="p-6 space-y-4">
-                <p className="text-lg leading-relaxed">
-                  We do not sell disjointed services. We sell a <span className="text-primary font-bold">linear system</span> where every component feeds the next. This creates a "sticky" ecosystem that businesses can't turn off.
-                </p>
-                
-                {/* Visual Stack Diagram */}
-                <div className="mt-8 space-y-2 relative">
-                  <div className="absolute left-6 top-4 bottom-4 w-0.5 bg-gradient-to-b from-primary/50 to-transparent border-l-2 border-dashed border-primary/30" />
-                  
-                  <StackStep 
-                    icon={Database} 
-                    title="1. THE FOUNDATION" 
-                    desc="High-converting Website + Database Reactivation. We mine their past customers for immediate gold."
-                  />
-                  <StackStep 
-                    icon={MessageSquare} 
-                    title="2. THE CONVERSATION" 
-                    desc="AI Bot + Auto Call Text Back. Every lead gets an instant response, 24/7. No lead left behind."
-                  />
-                  <StackStep 
-                    icon={Star} 
-                    title="3. THE REPUTATION" 
-                    desc="Review Gating + SEO. We filter bad reviews and push good ones to Google, driving more traffic to Step 1."
-                  />
-                </div>
+      {/* Core Philosophy */}
+      <section className="space-y-6">
+        <h2 className="text-xl font-semibold flex items-center gap-2">
+          <div className="w-1 h-5 bg-primary rounded-full" />
+          The Core Philosophy
+        </h2>
+        
+        <Card className="bg-card border-border">
+          <CardContent className="p-6 space-y-4">
+            <p className="text-lg leading-relaxed">
+              We don't sell disjointed services. We sell a <span className="text-primary font-semibold">linear system</span> where 
+              every component feeds the next. This creates a "sticky" ecosystem that businesses can't turn off.
+            </p>
+            
+            <div className="bg-primary/5 border border-primary/20 rounded-lg p-4 mt-4">
+              <p className="text-sm text-center font-medium">
+                "One scales, one fails. Don't play Tetris with services—stack them."
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
 
-                <div className="mt-6 p-4 bg-primary/5 border border-primary/20 rounded-lg">
-                  <p className="font-mono text-sm text-center text-primary">
-                    "ONE SCALES, ONE FAILS. DON'T PLAY TETRIS WITH SERVICES. STACK THEM."
-                  </p>
+      {/* The Value Stack */}
+      <section className="space-y-6">
+        <h2 className="text-xl font-semibold flex items-center gap-2">
+          <div className="w-1 h-5 bg-primary rounded-full" />
+          The Value Stack
+        </h2>
+        
+        <p className="text-muted-foreground">
+          Each layer builds on the previous one. The more layers installed, the stickier the client becomes.
+        </p>
+
+        <div className="space-y-4">
+          {[
+            {
+              step: "01",
+              icon: <Globe className="w-5 h-5" />,
+              title: "Website + Database Reactivation",
+              description: "The foundation. A high-converting website plus immediate revenue from their existing customer list.",
+              color: "primary"
+            },
+            {
+              step: "02",
+              icon: <MessageSquare className="w-5 h-5" />,
+              title: "AI Conversation Bot",
+              description: "Qualifies leads and books appointments 24/7. Replaces a front-desk receptionist.",
+              color: "emerald-400"
+            },
+            {
+              step: "03",
+              icon: <Phone className="w-5 h-5" />,
+              title: "Missed Call Text Back",
+              description: "If they miss a call, our system texts the lead back immediately. No lead left behind.",
+              color: "blue-400"
+            },
+            {
+              step: "04",
+              icon: <Star className="w-5 h-5" />,
+              title: "Review Management",
+              description: "Intercept bad reviews internally, push 5-star reviews to Google. Builds the reputation asset.",
+              color: "amber-400"
+            },
+            {
+              step: "05",
+              icon: <Mail className="w-5 h-5" />,
+              title: "Reactivation Campaigns",
+              description: "Automated campaigns to past customers. Referrals, seasonal offers, loyalty rewards.",
+              color: "violet-400"
+            }
+          ].map((item, idx) => (
+            <div 
+              key={idx}
+              className="flex gap-4 p-4 bg-card border border-border rounded-xl hover:border-primary/30 transition-colors"
+            >
+              <div className={`w-10 h-10 rounded-lg bg-${item.color}/10 flex items-center justify-center flex-shrink-0`}>
+                <span className={`text-${item.color}`}>{item.icon}</span>
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-xs font-mono text-muted-foreground">{item.step}</span>
+                  <h3 className="font-semibold">{item.title}</h3>
+                </div>
+                <p className="text-sm text-muted-foreground">{item.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Rules of Engagement */}
+      <section className="space-y-6">
+        <h2 className="text-xl font-semibold flex items-center gap-2">
+          <div className="w-1 h-5 bg-primary rounded-full" />
+          Rules of Engagement
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {[
+            {
+              icon: <CheckCircle2 className="w-5 h-5 text-emerald-400" />,
+              title: "Sell The System",
+              description: "Don't sell 'SEO' or 'Ads'. Sell the machine that turns strangers into paying customers."
+            },
+            {
+              icon: <CheckCircle2 className="w-5 h-5 text-emerald-400" />,
+              title: "Stickiness is Key",
+              description: "When we control their booking, payments, and reviews, we become as essential as their power bill."
+            },
+            {
+              icon: <CheckCircle2 className="w-5 h-5 text-emerald-400" />,
+              title: "One-Call Close",
+              description: "Create urgency. We don't chase; we close on the first call."
+            },
+            {
+              icon: <CheckCircle2 className="w-5 h-5 text-emerald-400" />,
+              title: "No Public Pricing",
+              description: "Every deal is custom. Anchor price to the value of the system, not hours worked."
+            }
+          ].map((rule, idx) => (
+            <Card key={idx} className="bg-card border-border">
+              <CardContent className="p-4">
+                <div className="flex items-start gap-3">
+                  {rule.icon}
+                  <div>
+                    <h3 className="font-semibold mb-1">{rule.title}</h3>
+                    <p className="text-sm text-muted-foreground">{rule.description}</p>
+                  </div>
                 </div>
               </CardContent>
             </Card>
-          </section>
-
-          {/* What We Sell */}
-          <section>
-            <h2 className="text-2xl font-display font-bold text-foreground mb-4">THE PRODUCT</h2>
-            <div className="grid gap-4">
-              <ProductCard 
-                title="Database Reactivation" 
-                desc="The 'Quick Win'. We text their list of past customers with an offer. They get bookings instantly."
-                highlight
-              />
-              <ProductCard 
-                title="AI Conversation Bot" 
-                desc="Qualifies leads and books appointments automatically. Replaces a front-desk receptionist."
-              />
-              <ProductCard 
-                title="The 5-Star Funnel" 
-                desc="We intercept bad reviews internally and push 4-5 star reviews to Google."
-              />
-              <ProductCard 
-                title="Missed Call Text Back" 
-                desc="If they miss a call, our system texts the lead back immediately to save the deal."
-              />
-            </div>
-          </section>
-
-          {/* The Rules */}
-          <section>
-            <h2 className="text-2xl font-display font-bold text-foreground mb-4">RULES OF ENGAGEMENT</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <RuleCard 
-                number="01" 
-                title="Sell The System" 
-                desc="Don't sell 'SEO' or 'Ads'. Sell the machine that turns strangers into paying customers."
-              />
-              <RuleCard 
-                number="02" 
-                title="Stickiness is Key" 
-                desc="When we control their booking, payments, and reviews, we become as essential as their power bill."
-              />
-              <RuleCard 
-                number="03" 
-                title="One-Call Close" 
-                desc="Create urgency. We don't chase; we close on the first call."
-              />
-              <RuleCard 
-                number="04" 
-                title="No Public Pricing" 
-                desc="Every deal is custom. Anchor price to the value of the system, not the hours worked."
-              />
-            </div>
-          </section>
-
+          ))}
         </div>
+      </section>
 
-        {/* Sidebar */}
-        <div className="space-y-6">
-          <Card className="border-primary/50 bg-primary/5 sticky top-6">
-            <CardHeader>
-              <CardTitle className="font-display text-primary">CORE METRICS</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex justify-between items-center border-b border-primary/20 pb-2">
-                <span className="font-mono text-sm">DEAL SIZE</span>
-                <span className="font-bold">$10k - $50k</span>
+      {/* Target Leads */}
+      <section className="space-y-6">
+        <h2 className="text-xl font-semibold flex items-center gap-2">
+          <div className="w-1 h-5 bg-primary rounded-full" />
+          Target Lead Types
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Card className="bg-card border-border border-l-4 border-l-rose-400">
+            <CardContent className="p-5">
+              <div className="flex items-center gap-2 mb-2">
+                <AlertCircle className="w-4 h-4 text-rose-400" />
+                <span className="text-xs font-medium text-rose-400 uppercase tracking-wider">High Pain</span>
               </div>
-              <div className="flex justify-between items-center border-b border-primary/20 pb-2">
-                <span className="font-mono text-sm">TARGET</span>
-                <span className="font-bold">$25,000</span>
-              </div>
-              <div className="flex justify-between items-center border-b border-primary/20 pb-2">
-                <span className="font-mono text-sm">LEAD SOURCE</span>
-                <span className="font-bold">GHL / SCRAPER</span>
-              </div>
+              <h3 className="font-semibold mb-2">Review Repair Leads</h3>
+              <p className="text-sm text-muted-foreground">
+                Businesses with &lt;3.5 stars on Google. They're bleeding money and know it. Pain is high and immediate.
+              </p>
             </CardContent>
           </Card>
 
-          <Card className="border-border bg-card/50">
-            <CardHeader>
-              <CardTitle className="font-display">LEAD TYPES</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div>
-                <Badge variant="outline" className="mb-2 border-red-500 text-red-400">REVIEW REPAIR</Badge>
-                <p className="text-sm text-muted-foreground">
-                  Businesses with &lt;3.5 stars. They are bleeding money. Pain is high and immediate.
-                </p>
+          <Card className="bg-card border-border border-l-4 border-l-blue-400">
+            <CardContent className="p-5">
+              <div className="flex items-center gap-2 mb-2">
+                <Lightbulb className="w-4 h-4 text-blue-400" />
+                <span className="text-xs font-medium text-blue-400 uppercase tracking-wider">Opportunity</span>
               </div>
-              <div className="pt-4 border-t border-border">
-                <Badge variant="outline" className="mb-2 border-blue-500 text-blue-400">GPT GENERATED</Badge>
-                <p className="text-sm text-muted-foreground">
-                  Niche targets (e.g., family diners) identified by AI as high-probability opportunities.
-                </p>
-              </div>
+              <h3 className="font-semibold mb-2">GPT-Generated Leads</h3>
+              <p className="text-sm text-muted-foreground">
+                Niche targets identified by AI as high-probability opportunities. Family diners, local services, etc.
+              </p>
             </CardContent>
           </Card>
         </div>
-      </div>
-    </div>
-  );
-}
+      </section>
 
-function StackStep({ icon: Icon, title, desc }: any) {
-  return (
-    <div className="relative z-10 flex items-start gap-4 p-4 bg-card border border-border rounded-lg hover:border-primary/50 transition-colors">
-      <div className="p-2 bg-background rounded-md border border-border shrink-0">
-        <Icon className="w-5 h-5 text-primary" />
-      </div>
-      <div>
-        <h3 className="font-bold text-foreground text-sm mb-1">{title}</h3>
-        <p className="text-sm text-muted-foreground leading-snug">{desc}</p>
-      </div>
-    </div>
-  );
-}
+      {/* Key Metrics */}
+      <section className="space-y-6">
+        <h2 className="text-xl font-semibold flex items-center gap-2">
+          <div className="w-1 h-5 bg-primary rounded-full" />
+          Key Metrics
+        </h2>
 
-function ProductCard({ title, desc, highlight }: any) {
-  return (
-    <div className={`p-4 rounded-lg border ${highlight ? 'border-primary/50 bg-primary/5' : 'border-border bg-card/30'} flex items-start gap-4`}>
-      <CheckCircle2 className={`w-5 h-5 mt-1 ${highlight ? 'text-primary' : 'text-muted-foreground'}`} />
-      <div>
-        <h3 className={`font-bold ${highlight ? 'text-primary' : 'text-foreground'}`}>{title}</h3>
-        <p className="text-sm text-muted-foreground">{desc}</p>
-      </div>
-    </div>
-  );
-}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {[
+            { label: "Target Deal", value: "$25,000" },
+            { label: "Deal Range", value: "$10k-$50k" },
+            { label: "Close Rate", value: "15-25%" },
+            { label: "Lead Source", value: "GHL/Scraper" }
+          ].map((metric, idx) => (
+            <div key={idx} className="bg-card border border-border rounded-xl p-4 text-center">
+              <div className="text-2xl font-bold text-foreground">{metric.value}</div>
+              <div className="text-xs text-muted-foreground mt-1">{metric.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
 
-function RuleCard({ number, title, desc }: any) {
-  return (
-    <div className="p-4 rounded-lg border border-border bg-card/30 hover:border-primary/30 transition-colors">
-      <span className="text-xs font-mono text-primary/50 mb-2 block">RULE // {number}</span>
-      <h3 className="font-bold text-foreground mb-1">{title}</h3>
-      <p className="text-sm text-muted-foreground">{desc}</p>
+      {/* Next Module CTA */}
+      <Card className="bg-gradient-to-r from-emerald-500/10 to-emerald-500/5 border-emerald-500/20">
+        <CardContent className="p-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div>
+              <span className="text-xs font-medium text-emerald-400 uppercase tracking-wider">Next Module</span>
+              <h3 className="text-lg font-semibold mt-1">Call Scripts</h3>
+              <p className="text-sm text-muted-foreground">Word-for-word scripts for every scenario.</p>
+            </div>
+            <Link href="/scripts">
+              <Button className="bg-emerald-500 hover:bg-emerald-600 text-white">
+                Continue <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </Link>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }

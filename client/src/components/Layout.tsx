@@ -1,16 +1,16 @@
 import { Link, useLocation } from "wouter";
 import { cn } from "@/lib/utils";
 import { 
-  LayoutDashboard, 
+  LayoutGrid, 
   BookOpen, 
   PhoneCall, 
-  ShieldAlert, 
+  Shield, 
   Menu,
   X,
-  GraduationCap,
   Globe,
-  Settings,
-  ClipboardCheck
+  Wrench,
+  ClipboardCheck,
+  ChevronRight
 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./ui/button";
@@ -20,103 +20,121 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const salesNavItems = [
-    { href: "/", label: "Training Hub", icon: LayoutDashboard },
-    { href: "/playbook", label: "The Playbook", icon: BookOpen },
-    { href: "/scripts", label: "Call Scripts", icon: PhoneCall },
-    { href: "/objections", label: "Objection Killer", icon: ShieldAlert },
+    { href: "/playbook", label: "The Playbook", icon: BookOpen, description: "Systems methodology" },
+    { href: "/scripts", label: "Call Scripts", icon: PhoneCall, description: "Word-for-word scripts" },
+    { href: "/objections", label: "Objections", icon: Shield, description: "Handle any pushback" },
   ];
 
   const fulfillmentNavItems = [
-    { href: "/ai-website-setup", label: "AI Website Setup", icon: Globe },
-    { href: "/system-installation", label: "System Installation", icon: Settings },
-    { href: "/qa-checklist", label: "QA Checklist", icon: ClipboardCheck },
+    { href: "/ai-website-setup", label: "Website Setup", icon: Globe, description: "Build sites in 30 min" },
+    { href: "/system-installation", label: "System Install", icon: Wrench, description: "Deploy the stack" },
+    { href: "/qa-checklist", label: "QA Checklist", icon: ClipboardCheck, description: "Pre-launch checks" },
   ];
 
+  const NavLink = ({ item, onClick }: { item: typeof salesNavItems[0], onClick?: () => void }) => {
+    const Icon = item.icon;
+    const isActive = location === item.href;
+    
+    return (
+      <Link href={item.href} onClick={onClick}>
+        <div className={cn(
+          "group flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200",
+          isActive 
+            ? "bg-primary/10 text-primary" 
+            : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+        )}>
+          <Icon className={cn(
+            "w-4 h-4 flex-shrink-0",
+            isActive ? "text-primary" : "text-muted-foreground group-hover:text-foreground"
+          )} />
+          <div className="flex-1 min-w-0">
+            <span className={cn(
+              "block text-sm font-medium",
+              isActive ? "text-primary" : ""
+            )}>{item.label}</span>
+            <span className="block text-xs text-muted-foreground truncate">{item.description}</span>
+          </div>
+          <ChevronRight className={cn(
+            "w-4 h-4 opacity-0 -translate-x-2 transition-all",
+            isActive ? "opacity-100 translate-x-0 text-primary" : "group-hover:opacity-50 group-hover:translate-x-0"
+          )} />
+        </div>
+      </Link>
+    );
+  };
+
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col md:flex-row overflow-hidden">
+    <div className="min-h-screen bg-background text-foreground flex flex-col md:flex-row">
       {/* Sidebar Navigation */}
       <aside className={cn(
-        "fixed inset-y-0 left-0 z-50 w-64 bg-sidebar border-r border-sidebar-border transform transition-transform duration-200 ease-in-out md:relative md:translate-x-0",
+        "fixed inset-y-0 left-0 z-50 w-72 bg-sidebar border-r border-sidebar-border transform transition-transform duration-300 ease-out md:relative md:translate-x-0",
         isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
       )}>
         <div className="h-full flex flex-col">
+          {/* Logo */}
           <div className="p-6 border-b border-sidebar-border">
-            <h1 className="text-2xl font-display font-bold text-primary tracking-tighter">
-              SALES<span className="text-foreground">OS</span>
-            </h1>
-            <p className="text-xs text-muted-foreground font-mono mt-1">TRAINING PROTOCOL // V2.1</p>
+            <Link href="/">
+              <div className="flex items-center gap-2 cursor-pointer">
+                <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
+                  <span className="text-primary-foreground font-bold text-sm">F</span>
+                </div>
+                <div>
+                  <h1 className="text-lg font-bold text-foreground tracking-tight">
+                    Forge<span className="text-primary">OS</span>
+                  </h1>
+                  <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Training Hub</p>
+                </div>
+              </div>
+            </Link>
           </div>
 
-          <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
+          {/* Navigation */}
+          <nav className="flex-1 p-4 space-y-6 overflow-y-auto">
+            {/* Home Link */}
+            <Link href="/">
+              <div className={cn(
+                "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200",
+                location === "/" 
+                  ? "bg-primary/10 text-primary" 
+                  : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+              )}>
+                <LayoutGrid className="w-4 h-4" />
+                <span className="text-sm font-medium">Dashboard</span>
+              </div>
+            </Link>
+
             {/* Sales Training Section */}
-            <div className="mb-4">
-              <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest px-4 mb-2">
+            <div>
+              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider px-3 mb-2">
                 Sales Training
               </p>
-              {salesNavItems.map((item) => {
-                const Icon = item.icon;
-                const isActive = location === item.href;
-                
-                return (
-                  <Link key={item.href} href={item.href}>
-                    <div className={cn(
-                      "flex items-center gap-3 px-4 py-2.5 rounded-md transition-all duration-200 group cursor-pointer border border-transparent",
-                      isActive 
-                        ? "bg-sidebar-accent text-primary border-primary/20 shadow-[0_0_15px_rgba(255,215,0,0.1)]" 
-                        : "text-muted-foreground hover:text-foreground hover:bg-sidebar-accent/50"
-                    )}>
-                      <Icon className={cn("w-4 h-4", isActive ? "text-primary" : "text-muted-foreground group-hover:text-foreground")} />
-                      <span className="font-medium font-mono text-xs tracking-wide">{item.label}</span>
-                      {isActive && (
-                        <div className="ml-auto w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                      )}
-                    </div>
-                  </Link>
-                );
-              })}
+              <div className="space-y-1">
+                {salesNavItems.map((item) => (
+                  <NavLink key={item.href} item={item} onClick={() => setIsMobileMenuOpen(false)} />
+                ))}
+              </div>
             </div>
 
             {/* Fulfillment Ops Section */}
-            <div className="pt-4 border-t border-sidebar-border">
-              <p className="text-[10px] font-mono text-cyan-400 uppercase tracking-widest px-4 mb-2">
+            <div>
+              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider px-3 mb-2">
                 Fulfillment Ops
               </p>
-              {fulfillmentNavItems.map((item) => {
-                const Icon = item.icon;
-                const isActive = location === item.href;
-                
-                return (
-                  <Link key={item.href} href={item.href}>
-                    <div className={cn(
-                      "flex items-center gap-3 px-4 py-2.5 rounded-md transition-all duration-200 group cursor-pointer border border-transparent",
-                      isActive 
-                        ? "bg-cyan-500/10 text-cyan-400 border-cyan-500/20 shadow-[0_0_15px_rgba(0,255,255,0.1)]" 
-                        : "text-muted-foreground hover:text-foreground hover:bg-sidebar-accent/50"
-                    )}>
-                      <Icon className={cn("w-4 h-4", isActive ? "text-cyan-400" : "text-muted-foreground group-hover:text-foreground")} />
-                      <span className="font-medium font-mono text-xs tracking-wide">{item.label}</span>
-                      {isActive && (
-                        <div className="ml-auto w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-                      )}
-                    </div>
-                  </Link>
-                );
-              })}
+              <div className="space-y-1">
+                {fulfillmentNavItems.map((item) => (
+                  <NavLink key={item.href} item={item} onClick={() => setIsMobileMenuOpen(false)} />
+                ))}
+              </div>
             </div>
           </nav>
 
+          {/* Footer */}
           <div className="p-4 border-t border-sidebar-border">
-            <div className="bg-sidebar-accent/50 rounded-md p-4 border border-sidebar-border">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="p-2 bg-primary/10 rounded-full">
-                  <GraduationCap className="w-4 h-4 text-primary" />
-                </div>
-                <span className="text-xs font-mono font-bold text-foreground">KNOWLEDGE BASE</span>
-              </div>
-              <p className="text-[10px] text-muted-foreground mt-1 font-mono leading-relaxed">
-                MASTER THE SCRIPT. <br/>
-                OWN THE OBJECTION. <br/>
-                CLOSE THE DEAL.
+            <div className="bg-secondary/50 rounded-lg p-4">
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                <span className="text-foreground font-medium">Simple systems that work.</span>
+                <br />
+                No BS, just results.
               </p>
             </div>
           </div>
@@ -125,18 +143,22 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
       {/* Mobile Header */}
       <div className="md:hidden flex items-center justify-between p-4 border-b border-border bg-background sticky top-0 z-40">
-        <h1 className="text-xl font-display font-bold text-primary">SALES<span className="text-foreground">OS</span></h1>
+        <Link href="/">
+          <div className="flex items-center gap-2">
+            <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center">
+              <span className="text-primary-foreground font-bold text-xs">F</span>
+            </div>
+            <span className="text-base font-bold">Forge<span className="text-primary">OS</span></span>
+          </div>
+        </Link>
         <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-          {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </Button>
       </div>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-y-auto relative">
-        {/* Background Grid Effect */}
-        <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-        
-        <div className="relative container py-8 md:py-12 animate-in fade-in duration-500">
+      <main className="flex-1 overflow-y-auto">
+        <div className="container py-8 md:py-12 animate-fade-in">
           {children}
         </div>
       </main>
@@ -144,7 +166,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {/* Overlay for mobile menu */}
       {isMobileMenuOpen && (
         <div 
-          className="fixed inset-0 bg-black/80 z-40 md:hidden backdrop-blur-sm"
+          className="fixed inset-0 bg-black/60 z-40 md:hidden backdrop-blur-sm"
           onClick={() => setIsMobileMenuOpen(false)}
         />
       )}

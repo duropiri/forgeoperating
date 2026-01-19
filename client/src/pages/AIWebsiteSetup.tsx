@@ -1,282 +1,304 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
 import { 
-  Globe, 
-  Sparkles, 
-  Palette, 
-  FileText,
-  CheckCircle2,
+  ArrowLeft,
   ArrowRight,
   Clock,
-  Zap,
-  Copy,
-  ExternalLink
+  Lightbulb,
+  AlertTriangle,
+  CheckCircle2,
+  Folder,
+  Sparkles,
+  Palette,
+  Link2,
+  Eye,
+  Copy
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { toast } from "sonner";
 
+interface Step {
+  id: number;
+  title: string;
+  duration: string;
+  description: string;
+  actions: string[];
+  tip?: string;
+  warning?: string;
+}
+
+const steps: Step[] = [
+  {
+    id: 1,
+    title: "Create Sub-Account",
+    duration: "2 min",
+    description: "Set up a dedicated sub-account for the client in GoHighLevel.",
+    actions: [
+      "Go to Agency View → Sub-Accounts",
+      "Click 'Create Sub-Account'",
+      "Enter client's business name exactly as they want it displayed",
+      "Use client's email for the account",
+      "Select your snapshot template (pre-configured with automations)",
+      "Click 'Save' and wait for account creation"
+    ],
+    tip: "Always use a snapshot with pre-built automations. This saves 2-3 hours of manual setup per client."
+  },
+  {
+    id: 2,
+    title: "AI Website Generation",
+    duration: "5 min",
+    description: "Use GHL's AI to generate the entire website from a prompt.",
+    actions: [
+      "Enter the sub-account → Sites → Websites",
+      "Click 'Create New Website' → 'AI Website Builder'",
+      "Enter the business type and location (e.g., 'Plumber in Houston, TX')",
+      "Add 3-5 services the business offers",
+      "Select a style preference (Modern, Classic, Bold)",
+      "Click 'Generate' and wait 60-90 seconds",
+      "Review the generated pages (Home, About, Services, Contact)"
+    ],
+    tip: "The AI pulls real competitor data. The more specific your prompt, the better the copy."
+  },
+  {
+    id: 3,
+    title: "Customize Branding",
+    duration: "10 min",
+    description: "Apply the client's logo, colors, and images.",
+    actions: [
+      "Upload client's logo (request PNG with transparent background)",
+      "Set primary color from client's existing branding",
+      "Replace stock images with client's real photos if available",
+      "Update phone number and address in header/footer",
+      "Add Google Maps embed for the contact page",
+      "Review mobile responsiveness using the preview toggle"
+    ],
+    warning: "If client has no logo, use Canva or AI to generate one. Charge extra for this service."
+  },
+  {
+    id: 4,
+    title: "Connect Domain",
+    duration: "5 min",
+    description: "Point the client's domain to the new website.",
+    actions: [
+      "Go to Sites → Domains → Add Domain",
+      "Enter the client's domain (e.g., clientbusiness.com)",
+      "Copy the provided CNAME and A records",
+      "Log into client's domain registrar (GoDaddy, Namecheap, etc.)",
+      "Update DNS records with the copied values",
+      "Wait 15-60 minutes for propagation",
+      "Verify SSL certificate is active (green padlock)"
+    ],
+    warning: "DNS propagation can take up to 48 hours. Set expectations with the client."
+  },
+  {
+    id: 5,
+    title: "Final QA & Launch",
+    duration: "5 min",
+    description: "Run through the checklist and publish the site.",
+    actions: [
+      "Test all navigation links",
+      "Submit a test form and verify it reaches the CRM",
+      "Check page load speed (should be under 3 seconds)",
+      "Verify mobile layout on actual phone",
+      "Confirm tracking pixels are installed (if applicable)",
+      "Click 'Publish' to make the site live",
+      "Send client the live URL with a congratulations message"
+    ],
+    tip: "Always send a Loom video walkthrough with the delivery. It increases perceived value massively."
+  }
+];
+
+const quickLinks = [
+  { name: "GHL Dashboard", url: "https://app.gohighlevel.com" },
+  { name: "DNS Checker", url: "https://dnschecker.org" },
+  { name: "PageSpeed Test", url: "https://pagespeed.web.dev" },
+  { name: "Loom Recorder", url: "https://loom.com" }
+];
+
 export default function AIWebsiteSetup() {
-  const [expandedStep, setExpandedStep] = useState<number | null>(1);
+  const [activeStep, setActiveStep] = useState(1);
+  const currentStep = steps.find(s => s.id === activeStep) || steps[0];
 
-  const steps = [
-    {
-      id: 1,
-      title: "Create Sub-Account",
-      duration: "2 min",
-      icon: FileText,
-      color: "cyan",
-      description: "Set up a new sub-account for the client in GoHighLevel.",
-      details: [
-        "Go to Agency View → Sub-Accounts",
-        "Click 'Create Sub-Account'",
-        "Enter client's business name exactly as they want it displayed",
-        "Use client's email for the account (they'll receive login credentials)",
-        "Select your snapshot template (pre-configured with automations)",
-        "Click 'Save' and wait for account creation"
-      ],
-      proTip: "Always use a snapshot with pre-built automations. This saves 2-3 hours of manual setup per client."
-    },
-    {
-      id: 2,
-      title: "AI Website Generation",
-      duration: "5 min",
-      icon: Sparkles,
-      color: "primary",
-      description: "Use GHL's AI to generate the entire website from a prompt.",
-      details: [
-        "Enter the sub-account → Sites → Websites",
-        "Click 'Create New Website' → 'AI Website Builder'",
-        "Enter the business type and location (e.g., 'Plumber in Houston, TX')",
-        "Add 3-5 services the business offers",
-        "Select a style preference (Modern, Classic, Bold)",
-        "Click 'Generate' and wait 60-90 seconds",
-        "Review the generated pages (Home, About, Services, Contact)"
-      ],
-      proTip: "The AI pulls real competitor data. The more specific your prompt, the better the copy."
-    },
-    {
-      id: 3,
-      title: "Customize Branding",
-      duration: "10 min",
-      icon: Palette,
-      color: "purple",
-      description: "Apply the client's logo, colors, and images.",
-      details: [
-        "Upload client's logo (request PNG with transparent background)",
-        "Set primary color from client's existing branding or suggest one",
-        "Replace stock images with client's real photos if available",
-        "Update phone number and address in the header/footer",
-        "Add Google Maps embed for the contact page",
-        "Review mobile responsiveness using the preview toggle"
-      ],
-      proTip: "If client has no logo, use Canva or the AI to generate one. Charge extra for this."
-    },
-    {
-      id: 4,
-      title: "Connect Domain",
-      duration: "5 min",
-      icon: Globe,
-      color: "green",
-      description: "Point the client's domain to the new website.",
-      details: [
-        "Go to Sites → Domains → Add Domain",
-        "Enter the client's domain (e.g., clientbusiness.com)",
-        "Copy the provided CNAME and A records",
-        "Log into client's domain registrar (GoDaddy, Namecheap, etc.)",
-        "Update DNS records with the copied values",
-        "Wait 15-60 minutes for propagation",
-        "Verify SSL certificate is active (green padlock)"
-      ],
-      proTip: "If client doesn't have a domain, purchase one through GHL for simplicity. Bill them for it."
-    },
-    {
-      id: 5,
-      title: "Final QA & Launch",
-      duration: "5 min",
-      icon: CheckCircle2,
-      color: "emerald",
-      description: "Run through the checklist and publish the site.",
-      details: [
-        "Test all navigation links",
-        "Submit a test form and verify it reaches the CRM",
-        "Check page load speed (should be under 3 seconds)",
-        "Verify mobile layout on actual phone",
-        "Confirm tracking pixels are installed (if applicable)",
-        "Click 'Publish' to make the site live",
-        "Send client the live URL with a congratulations message"
-      ],
-      proTip: "Always send a Loom video walkthrough with the delivery. It increases perceived value massively."
-    }
-  ];
-
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
-    toast.success("Copied to clipboard!");
+  const copyLink = (url: string) => {
+    navigator.clipboard.writeText(url);
+    toast.success("Link copied");
   };
 
   return (
     <div className="space-y-8 max-w-5xl mx-auto">
       {/* Header */}
-      <div className="border-b border-border pb-6">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="p-2 bg-cyan-500/10 rounded-lg">
-            <Globe className="w-6 h-6 text-cyan-400" />
+      <div className="space-y-4">
+        <Link href="/">
+          <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground -ml-2">
+            <ArrowLeft className="w-4 h-4 mr-2" /> Back to Dashboard
+          </Button>
+        </Link>
+        
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div>
+            <span className="text-xs font-medium text-violet-400 uppercase tracking-wider">Module 04</span>
+            <h1 className="text-3xl md:text-4xl font-bold mt-1">AI Website Setup</h1>
+            <p className="text-muted-foreground mt-2">
+              Build professional client websites in under 30 minutes.
+            </p>
           </div>
-          <h1 className="text-3xl md:text-4xl font-display font-bold text-foreground tracking-tight">
-            AI WEBSITE <span className="text-cyan-400">SETUP</span>
-          </h1>
+          
+          <div className="flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-lg">
+            <Clock className="w-4 h-4 text-violet-400" />
+            <span className="text-sm font-medium">Total: ~27 minutes</span>
+          </div>
         </div>
-        <p className="text-muted-foreground font-mono text-sm max-w-2xl">
-          FULFILLMENT SOP // BUILD CLIENT WEBSITES IN UNDER 30 MINUTES
-        </p>
       </div>
 
-      {/* Time Estimate Banner */}
-      <Card className="border-cyan-500/20 bg-cyan-500/5">
-        <CardContent className="py-4">
-          <div className="flex items-center justify-between flex-wrap gap-4">
-            <div className="flex items-center gap-3">
-              <Clock className="w-5 h-5 text-cyan-400" />
-              <span className="font-mono text-sm">
-                <span className="text-cyan-400 font-bold">TOTAL TIME:</span>{" "}
-                <span className="text-foreground">~27 minutes per site</span>
+      {/* Step Progress */}
+      <div className="flex items-center gap-2 overflow-x-auto pb-2">
+        {steps.map((step) => (
+          <button
+            key={step.id}
+            onClick={() => setActiveStep(step.id)}
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap ${
+              activeStep === step.id
+                ? "bg-violet-500 text-white"
+                : activeStep > step.id
+                ? "bg-emerald-500/10 text-emerald-400"
+                : "bg-secondary text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            {activeStep > step.id ? (
+              <CheckCircle2 className="w-4 h-4" />
+            ) : (
+              <span className="w-5 h-5 rounded-full bg-current/20 flex items-center justify-center text-xs">
+                {step.id}
               </span>
-            </div>
-            <div className="flex items-center gap-3">
-              <Zap className="w-5 h-5 text-primary" />
-              <span className="font-mono text-sm text-muted-foreground">
-                With practice: 15-20 minutes
-              </span>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+            )}
+            {step.title}
+          </button>
+        ))}
+      </div>
 
-      {/* Steps */}
-      <div className="space-y-4">
-        {steps.map((step) => {
-          const Icon = step.icon;
-          const isExpanded = expandedStep === step.id;
-          const colorClasses = {
-            cyan: "text-cyan-400 bg-cyan-500/10 border-cyan-500/20",
-            primary: "text-primary bg-primary/10 border-primary/20",
-            purple: "text-purple-400 bg-purple-500/10 border-purple-500/20",
-            green: "text-green-400 bg-green-500/10 border-green-500/20",
-            emerald: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20"
-          };
-          const colors = colorClasses[step.color as keyof typeof colorClasses];
-
-          return (
-            <Card 
-              key={step.id} 
-              className={`border-border bg-card/50 transition-all duration-300 cursor-pointer ${isExpanded ? `border-l-4 ${colors.split(' ')[2]}` : ''}`}
-              onClick={() => setExpandedStep(isExpanded ? null : step.id)}
-            >
-              <CardHeader className="pb-2">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${colors.split(' ').slice(1, 3).join(' ')}`}>
-                      <Icon className={`w-5 h-5 ${colors.split(' ')[0]}`} />
-                    </div>
-                    <div>
-                      <CardTitle className="font-display text-lg flex items-center gap-2">
-                        <span className="text-muted-foreground font-mono text-sm">0{step.id}</span>
-                        {step.title}
-                      </CardTitle>
-                      <p className="text-sm text-muted-foreground">{step.description}</p>
-                    </div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Main Content */}
+        <div className="lg:col-span-2 space-y-6">
+          <Card className="bg-card border-border">
+            <CardContent className="p-6 space-y-6">
+              {/* Step Header */}
+              <div className="flex items-start justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-violet-500/10 flex items-center justify-center">
+                    {currentStep.id === 1 && <Folder className="w-6 h-6 text-violet-400" />}
+                    {currentStep.id === 2 && <Sparkles className="w-6 h-6 text-violet-400" />}
+                    {currentStep.id === 3 && <Palette className="w-6 h-6 text-violet-400" />}
+                    {currentStep.id === 4 && <Link2 className="w-6 h-6 text-violet-400" />}
+                    {currentStep.id === 5 && <Eye className="w-6 h-6 text-violet-400" />}
                   </div>
-                  <div className="flex items-center gap-3">
-                    <span className="text-xs font-mono text-muted-foreground bg-muted/50 px-2 py-1 rounded">
-                      {step.duration}
-                    </span>
-                    <ArrowRight className={`w-5 h-5 text-muted-foreground transition-transform ${isExpanded ? 'rotate-90' : ''}`} />
+                  <div>
+                    <h2 className="text-xl font-semibold">Step {currentStep.id}: {currentStep.title}</h2>
+                    <p className="text-sm text-muted-foreground flex items-center gap-1 mt-1">
+                      <Clock className="w-3 h-3" /> {currentStep.duration}
+                    </p>
                   </div>
                 </div>
-              </CardHeader>
+              </div>
 
-              {isExpanded && (
-                <CardContent className="pt-4 border-t border-border mt-2">
-                  <div className="space-y-4">
-                    <ol className="space-y-2">
-                      {step.details.map((detail, idx) => (
-                        <li key={idx} className="flex items-start gap-3 text-sm">
-                          <span className="text-muted-foreground font-mono min-w-[24px]">{idx + 1}.</span>
-                          <span className="text-foreground">{detail}</span>
-                        </li>
-                      ))}
-                    </ol>
+              <p className="text-muted-foreground">{currentStep.description}</p>
 
-                    <div className="bg-primary/5 border border-primary/20 rounded-lg p-4 mt-4">
-                      <div className="flex items-start gap-3">
-                        <Zap className="w-4 h-4 text-primary mt-0.5" />
-                        <div>
-                          <p className="text-xs font-mono text-primary font-bold mb-1">PRO TIP</p>
-                          <p className="text-sm text-muted-foreground">{step.proTip}</p>
-                        </div>
-                      </div>
-                    </div>
+              {/* Actions */}
+              <div className="space-y-3">
+                <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Actions</h3>
+                <ol className="space-y-2">
+                  {currentStep.actions.map((action, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      <span className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center text-xs font-medium flex-shrink-0">
+                        {idx + 1}
+                      </span>
+                      <span className="text-sm pt-0.5">{action}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+
+              {/* Tip */}
+              {currentStep.tip && (
+                <div className="flex items-start gap-3 p-4 bg-primary/5 border border-primary/20 rounded-lg">
+                  <Lightbulb className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-sm font-medium text-primary mb-1">Pro Tip</p>
+                    <p className="text-sm text-muted-foreground">{currentStep.tip}</p>
                   </div>
-                </CardContent>
+                </div>
               )}
-            </Card>
-          );
-        })}
-      </div>
 
-      {/* Quick Reference */}
-      <Card className="border-border bg-card/30">
-        <CardHeader>
-          <CardTitle className="font-display text-lg flex items-center gap-2">
-            <ExternalLink className="w-5 h-5 text-cyan-400" />
-            QUICK REFERENCE LINKS
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="flex items-center justify-between p-3 bg-muted/30 rounded-lg">
-              <span className="text-sm font-mono">GHL AI Website Builder</span>
-              <Button 
-                variant="ghost" 
-                size="sm"
-                onClick={() => copyToClipboard("https://app.gohighlevel.com")}
-              >
-                <Copy className="w-4 h-4" />
-              </Button>
-            </div>
-            <div className="flex items-center justify-between p-3 bg-muted/30 rounded-lg">
-              <span className="text-sm font-mono">DNS Propagation Checker</span>
-              <Button 
-                variant="ghost" 
-                size="sm"
-                onClick={() => copyToClipboard("https://dnschecker.org")}
-              >
-                <Copy className="w-4 h-4" />
-              </Button>
-            </div>
-            <div className="flex items-center justify-between p-3 bg-muted/30 rounded-lg">
-              <span className="text-sm font-mono">Page Speed Test</span>
-              <Button 
-                variant="ghost" 
-                size="sm"
-                onClick={() => copyToClipboard("https://pagespeed.web.dev")}
-              >
-                <Copy className="w-4 h-4" />
-              </Button>
-            </div>
-            <div className="flex items-center justify-between p-3 bg-muted/30 rounded-lg">
-              <span className="text-sm font-mono">Loom Screen Recorder</span>
-              <Button 
-                variant="ghost" 
-                size="sm"
-                onClick={() => copyToClipboard("https://loom.com")}
-              >
-                <Copy className="w-4 h-4" />
-              </Button>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+              {/* Warning */}
+              {currentStep.warning && (
+                <div className="flex items-start gap-3 p-4 bg-amber-500/5 border border-amber-500/20 rounded-lg">
+                  <AlertTriangle className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-sm font-medium text-amber-400 mb-1">Warning</p>
+                    <p className="text-sm text-muted-foreground">{currentStep.warning}</p>
+                  </div>
+                </div>
+              )}
+
+              {/* Navigation */}
+              <div className="flex justify-between pt-4 border-t border-border">
+                <Button
+                  variant="outline"
+                  onClick={() => setActiveStep(Math.max(1, activeStep - 1))}
+                  disabled={activeStep === 1}
+                  className="border-border"
+                >
+                  <ArrowLeft className="w-4 h-4 mr-2" /> Previous
+                </Button>
+                <Button
+                  onClick={() => setActiveStep(Math.min(steps.length, activeStep + 1))}
+                  disabled={activeStep === steps.length}
+                  className="bg-violet-500 hover:bg-violet-600"
+                >
+                  Next Step <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Sidebar */}
+        <div className="space-y-6">
+          {/* Quick Links */}
+          <Card className="bg-card border-border">
+            <CardContent className="p-5">
+              <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-4">Quick Links</h3>
+              <div className="space-y-2">
+                {quickLinks.map((link, idx) => (
+                  <div key={idx} className="flex items-center justify-between p-2 bg-secondary/50 rounded-lg">
+                    <span className="text-sm">{link.name}</span>
+                    <button
+                      onClick={() => copyLink(link.url)}
+                      className="p-1.5 hover:bg-secondary rounded"
+                    >
+                      <Copy className="w-4 h-4 text-muted-foreground" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Next Module */}
+          <Card className="bg-gradient-to-br from-amber-500/10 to-amber-500/5 border-amber-500/20">
+            <CardContent className="p-5">
+              <span className="text-xs font-medium text-amber-400 uppercase tracking-wider">Next Module</span>
+              <h3 className="text-lg font-semibold mt-1">System Installation</h3>
+              <p className="text-sm text-muted-foreground mt-1 mb-4">Deploy the full value stack.</p>
+              <Link href="/system-installation">
+                <Button size="sm" className="w-full bg-amber-500 hover:bg-amber-600 text-white">
+                  Continue <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 }

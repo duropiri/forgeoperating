@@ -1,256 +1,308 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
 import { 
-  Settings, 
-  MessageSquare, 
-  Phone, 
+  ArrowLeft,
+  ArrowRight,
+  MessageSquare,
+  Phone,
   Star,
-  Calendar,
+  Mail,
   Bot,
   CheckCircle2,
-  ArrowRight,
-  Zap,
-  AlertTriangle
+  Clock,
+  Lightbulb
 } from "lucide-react";
 import { useState } from "react";
 
+interface System {
+  id: string;
+  icon: React.ReactNode;
+  name: string;
+  description: string;
+  value: string;
+  setupTime: string;
+  steps: string[];
+  tip: string;
+}
+
+const systems: System[] = [
+  {
+    id: "chat-widget",
+    icon: <MessageSquare className="w-6 h-6" />,
+    name: "Chat Widget",
+    description: "Live chat that captures leads 24/7 and routes them to the CRM.",
+    value: "Captures 15-20% more leads",
+    setupTime: "5 min",
+    steps: [
+      "Go to Sites → Chat Widget in the sub-account",
+      "Customize the widget color to match the brand",
+      "Set the greeting message (e.g., 'Hi! How can we help you today?')",
+      "Enable 'Capture Lead Info' to require name/phone before chat",
+      "Copy the embed code",
+      "Paste into the website's footer section",
+      "Test by sending a message and verifying it appears in Conversations"
+    ],
+    tip: "Set business hours so after-hours messages get an auto-response with a callback promise."
+  },
+  {
+    id: "ai-bot",
+    icon: <Bot className="w-6 h-6" />,
+    name: "AI Conversation Bot",
+    description: "Automated bot that qualifies leads and books appointments without human intervention.",
+    value: "Replaces $3k/mo receptionist",
+    setupTime: "15 min",
+    steps: [
+      "Go to Automation → Workflows → Create New",
+      "Select 'Lead Qualification' template or build from scratch",
+      "Set trigger: 'New Contact Created' or 'Form Submission'",
+      "Add AI step: Configure qualification questions",
+      "Set booking action: Connect to calendar for appointment scheduling",
+      "Add fallback: Route to human if AI can't handle the query",
+      "Test the full flow with a dummy lead"
+    ],
+    tip: "Train the AI with 10-15 example conversations from the client's industry for better responses."
+  },
+  {
+    id: "missed-call",
+    icon: <Phone className="w-6 h-6" />,
+    name: "Missed Call Text Back",
+    description: "Automatically texts leads when a call is missed. No lead left behind.",
+    value: "Saves 30% of missed leads",
+    setupTime: "5 min",
+    steps: [
+      "Go to Automation → Workflows",
+      "Create workflow with trigger: 'Call Status = Missed'",
+      "Add action: 'Send SMS'",
+      "Write message: 'Hey! Sorry we missed your call. How can we help you?'",
+      "Set delay: 1 minute after missed call",
+      "Enable workflow and test by calling the tracking number",
+      "Verify SMS is received and logged in CRM"
+    ],
+    tip: "Add a second follow-up SMS after 30 minutes if they don't respond to the first."
+  },
+  {
+    id: "review-funnel",
+    icon: <Star className="w-6 h-6" />,
+    name: "Review Automation",
+    description: "Automatically requests reviews and filters negative feedback internally.",
+    value: "Generates 5-10 reviews/month",
+    setupTime: "10 min",
+    steps: [
+      "Go to Automation → Workflows → Create 'Review Request'",
+      "Set trigger: 'Invoice Paid' or 'Appointment Completed'",
+      "Add delay: 2 hours after trigger",
+      "Send SMS: 'Thanks for choosing us! How was your experience? Reply 1-5'",
+      "If 4-5: Send Google Review link",
+      "If 1-3: Send internal feedback form (don't ask for public review)",
+      "Set up reminder sequence for non-responders"
+    ],
+    tip: "The 'gate' is key—never send unhappy customers to Google. Capture their feedback privately first."
+  },
+  {
+    id: "reactivation",
+    icon: <Mail className="w-6 h-6" />,
+    name: "Database Reactivation",
+    description: "Automated campaigns to past customers for repeat business and referrals.",
+    value: "Generates $5-10k in first month",
+    setupTime: "15 min",
+    steps: [
+      "Import client's existing customer list (CSV with name, phone, email)",
+      "Create campaign: 'Past Customer Reactivation'",
+      "Write SMS: 'Hey [Name]! It's been a while. We have a special offer for returning customers...'",
+      "Set up 3-message sequence over 7 days",
+      "Add email backup for non-SMS responders",
+      "Launch campaign and monitor response rate",
+      "Track bookings attributed to the campaign"
+    ],
+    tip: "This is the 'quick win' that proves ROI immediately. Run it in the first week after setup."
+  }
+];
+
 export default function SystemInstallation() {
-  const [expandedSystem, setExpandedSystem] = useState<number | null>(1);
+  const [activeSystem, setActiveSystem] = useState(systems[0]);
+  const [completedSystems, setCompletedSystems] = useState<Set<string>>(new Set());
 
-  const systems = [
-    {
-      id: 1,
-      title: "Conversation AI Bot",
-      icon: Bot,
-      color: "cyan",
-      purpose: "Qualifies leads 24/7 and books appointments automatically.",
-      stickiness: "HIGH — Client becomes dependent on automated lead qualification.",
-      steps: [
-        "Go to Automation → Conversations AI",
-        "Create new bot or use snapshot template",
-        "Configure greeting message with business name",
-        "Set qualification questions (budget, timeline, service needed)",
-        "Connect to calendar for automatic booking",
-        "Set fallback to notify team if bot can't handle query",
-        "Test with sample conversations before going live"
-      ],
-      warning: "Always test the bot flow yourself before enabling. A broken bot loses leads."
-    },
-    {
-      id: 2,
-      title: "Missed Call Text Back",
-      icon: Phone,
-      color: "primary",
-      purpose: "Instantly texts anyone who calls and doesn't get answered.",
-      stickiness: "CRITICAL — Captures leads that would otherwise be lost forever.",
-      steps: [
-        "Go to Automation → Workflows",
-        "Create trigger: 'Call Status = Missed'",
-        "Add action: Send SMS within 60 seconds",
-        "Message template: 'Hey! Sorry we missed your call. How can we help you today?'",
-        "Connect response to Conversation AI bot",
-        "Set business hours filter (optional)",
-        "Enable and test by calling the business number"
-      ],
-      warning: "Make sure the phone number has SMS enabled. Some numbers are voice-only."
-    },
-    {
-      id: 3,
-      title: "Review Request Automation",
-      icon: Star,
-      color: "yellow",
-      purpose: "Automatically asks happy customers for Google reviews.",
-      stickiness: "HIGH — Builds reputation asset that compounds over time.",
-      steps: [
-        "Go to Automation → Workflows",
-        "Create trigger: 'Opportunity Status = Won' or 'Invoice Paid'",
-        "Add delay: 24-48 hours after service completion",
-        "Send SMS: 'Thanks for choosing [Business]! Would you mind leaving us a quick review?'",
-        "Include direct Google Review link (get from Google Business Profile)",
-        "Add follow-up if no response after 3 days",
-        "Track review count in dashboard"
-      ],
-      warning: "Never incentivize reviews (against Google TOS). Just ask politely."
-    },
-    {
-      id: 4,
-      title: "Appointment Reminders",
-      icon: Calendar,
-      color: "green",
-      purpose: "Reduces no-shows by 80% with automated reminders.",
-      stickiness: "MEDIUM — Standard feature but essential for service businesses.",
-      steps: [
-        "Go to Calendars → Select calendar → Notifications",
-        "Enable SMS reminder: 24 hours before",
-        "Enable SMS reminder: 2 hours before",
-        "Include: Date, time, address, and reschedule link",
-        "Add confirmation request: 'Reply YES to confirm'",
-        "Set up no-show follow-up workflow",
-        "Test by booking a test appointment"
-      ],
-      warning: "Too many reminders annoy customers. 2-3 max is the sweet spot."
-    },
-    {
-      id: 5,
-      title: "Chat Widget Installation",
-      icon: MessageSquare,
-      color: "purple",
-      purpose: "Captures website visitors and routes them to the AI bot.",
-      stickiness: "HIGH — Every website visitor becomes a potential conversation.",
-      steps: [
-        "Go to Sites → Chat Widget",
-        "Customize colors to match client's brand",
-        "Set greeting: 'Hi! How can we help you today?'",
-        "Connect to Conversation AI bot",
-        "Copy the embed code",
-        "Paste into website footer (before </body> tag)",
-        "Test on live site across desktop and mobile"
-      ],
-      warning: "Widget must match website colors or it looks unprofessional."
+  const toggleComplete = (id: string) => {
+    const newCompleted = new Set(completedSystems);
+    if (newCompleted.has(id)) {
+      newCompleted.delete(id);
+    } else {
+      newCompleted.add(id);
     }
-  ];
-
-  const colorClasses: Record<string, string> = {
-    cyan: "text-cyan-400 bg-cyan-500/10 border-cyan-500/20",
-    primary: "text-primary bg-primary/10 border-primary/20",
-    yellow: "text-yellow-400 bg-yellow-500/10 border-yellow-500/20",
-    green: "text-green-400 bg-green-500/10 border-green-500/20",
-    purple: "text-purple-400 bg-purple-500/10 border-purple-500/20"
+    setCompletedSystems(newCompleted);
   };
 
   return (
     <div className="space-y-8 max-w-5xl mx-auto">
       {/* Header */}
-      <div className="border-b border-border pb-6">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="p-2 bg-cyan-500/10 rounded-lg">
-            <Settings className="w-6 h-6 text-cyan-400" />
-          </div>
-          <h1 className="text-3xl md:text-4xl font-display font-bold text-foreground tracking-tight">
-            SYSTEM <span className="text-cyan-400">INSTALLATION</span>
-          </h1>
-        </div>
-        <p className="text-muted-foreground font-mono text-sm max-w-2xl">
-          FULFILLMENT SOP // INSTALL THE VALUE STACK THAT CREATES STICKINESS
-        </p>
-      </div>
-
-      {/* Value Stack Diagram */}
-      <Card className="border-cyan-500/20 bg-gradient-to-r from-cyan-500/5 to-transparent">
-        <CardHeader>
-          <CardTitle className="font-display text-lg flex items-center gap-2">
-            <Zap className="w-5 h-5 text-cyan-400" />
-            THE VALUE STACK
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            {["Website", "Chat Bot", "Missed Call", "Reviews", "Reminders"].map((item, idx) => (
-              <div key={item} className="flex items-center gap-2">
-                <div className="w-24 h-12 bg-cyan-500/10 border border-cyan-500/20 rounded-lg flex items-center justify-center">
-                  <span className="text-xs font-mono text-cyan-400 font-bold">{item}</span>
-                </div>
-                {idx < 4 && (
-                  <ArrowRight className="w-4 h-4 text-muted-foreground hidden md:block" />
-                )}
-              </div>
-            ))}
-          </div>
-          <p className="text-sm text-muted-foreground mt-4 text-center font-mono">
-            Each layer feeds the next. The more you install, the stickier the client becomes.
-          </p>
-        </CardContent>
-      </Card>
-
-      {/* Systems */}
       <div className="space-y-4">
-        {systems.map((system) => {
-          const Icon = system.icon;
-          const isExpanded = expandedSystem === system.id;
-          const colors = colorClasses[system.color];
-
-          return (
-            <Card 
-              key={system.id} 
-              className={`border-border bg-card/50 transition-all duration-300 cursor-pointer ${isExpanded ? `border-l-4 ${colors.split(' ')[2]}` : ''}`}
-              onClick={() => setExpandedSystem(isExpanded ? null : system.id)}
-            >
-              <CardHeader className="pb-2">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${colors.split(' ').slice(1, 3).join(' ')}`}>
-                      <Icon className={`w-5 h-5 ${colors.split(' ')[0]}`} />
-                    </div>
-                    <div>
-                      <CardTitle className="font-display text-lg">{system.title}</CardTitle>
-                      <p className="text-sm text-muted-foreground">{system.purpose}</p>
-                    </div>
-                  </div>
-                  <ArrowRight className={`w-5 h-5 text-muted-foreground transition-transform ${isExpanded ? 'rotate-90' : ''}`} />
-                </div>
-              </CardHeader>
-
-              {isExpanded && (
-                <CardContent className="pt-4 border-t border-border mt-2">
-                  <div className="space-y-4">
-                    {/* Stickiness Indicator */}
-                    <div className="flex items-center gap-2 text-sm">
-                      <span className="font-mono text-muted-foreground">STICKINESS:</span>
-                      <span className={`font-bold ${colors.split(' ')[0]}`}>{system.stickiness}</span>
-                    </div>
-
-                    {/* Steps */}
-                    <ol className="space-y-2">
-                      {system.steps.map((step, idx) => (
-                        <li key={idx} className="flex items-start gap-3 text-sm">
-                          <CheckCircle2 className="w-4 h-4 text-muted-foreground mt-0.5 flex-shrink-0" />
-                          <span className="text-foreground">{step}</span>
-                        </li>
-                      ))}
-                    </ol>
-
-                    {/* Warning */}
-                    <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4 mt-4">
-                      <div className="flex items-start gap-3">
-                        <AlertTriangle className="w-4 h-4 text-red-400 mt-0.5" />
-                        <div>
-                          <p className="text-xs font-mono text-red-400 font-bold mb-1">WARNING</p>
-                          <p className="text-sm text-muted-foreground">{system.warning}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              )}
-            </Card>
-          );
-        })}
+        <Link href="/">
+          <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground -ml-2">
+            <ArrowLeft className="w-4 h-4 mr-2" /> Back to Dashboard
+          </Button>
+        </Link>
+        
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div>
+            <span className="text-xs font-medium text-amber-400 uppercase tracking-wider">Module 05</span>
+            <h1 className="text-3xl md:text-4xl font-bold mt-1">System Installation</h1>
+            <p className="text-muted-foreground mt-2">
+              Deploy the full value stack that creates client stickiness.
+            </p>
+          </div>
+          
+          <div className="flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-lg">
+            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+            <span className="text-sm font-medium">{completedSystems.size} of {systems.length} installed</span>
+          </div>
+        </div>
       </div>
 
-      {/* Installation Order */}
-      <Card className="border-border bg-card/30">
-        <CardHeader>
-          <CardTitle className="font-display text-lg">RECOMMENDED INSTALLATION ORDER</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-            {[
-              { num: 1, name: "Chat Widget", reason: "Captures traffic immediately" },
-              { num: 2, name: "Missed Call", reason: "Saves lost phone leads" },
-              { num: 3, name: "AI Bot", reason: "Qualifies and books" },
-              { num: 4, name: "Reminders", reason: "Reduces no-shows" },
-              { num: 5, name: "Reviews", reason: "Builds long-term asset" }
-            ].map((item) => (
-              <div key={item.num} className="text-center p-4 bg-muted/30 rounded-lg">
-                <div className="w-8 h-8 bg-cyan-500/10 rounded-full flex items-center justify-center mx-auto mb-2">
-                  <span className="text-cyan-400 font-bold font-mono">{item.num}</span>
-                </div>
-                <p className="text-sm font-bold text-foreground">{item.name}</p>
-                <p className="text-xs text-muted-foreground mt-1">{item.reason}</p>
-              </div>
+      {/* Value Stack Visualization */}
+      <Card className="bg-card border-border">
+        <CardContent className="p-6">
+          <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-4">The Value Stack</h3>
+          <div className="flex flex-wrap gap-3">
+            {systems.map((system) => (
+              <button
+                key={system.id}
+                onClick={() => setActiveSystem(system)}
+                className={`flex items-center gap-2 px-4 py-3 rounded-lg transition-all ${
+                  activeSystem.id === system.id
+                    ? "bg-amber-500 text-white"
+                    : completedSystems.has(system.id)
+                    ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/30"
+                    : "bg-secondary text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {completedSystems.has(system.id) && activeSystem.id !== system.id ? (
+                  <CheckCircle2 className="w-5 h-5" />
+                ) : (
+                  system.icon
+                )}
+                <span className="font-medium">{system.name}</span>
+              </button>
             ))}
           </div>
         </CardContent>
       </Card>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Main Content */}
+        <div className="lg:col-span-2">
+          <Card className="bg-card border-border">
+            <CardContent className="p-6 space-y-6">
+              {/* System Header */}
+              <div className="flex items-start justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400">
+                    {activeSystem.icon}
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-semibold">{activeSystem.name}</h2>
+                    <p className="text-sm text-muted-foreground flex items-center gap-2 mt-1">
+                      <Clock className="w-3 h-3" /> {activeSystem.setupTime}
+                      <span className="text-emerald-400">• {activeSystem.value}</span>
+                    </p>
+                  </div>
+                </div>
+                <Button
+                  variant={completedSystems.has(activeSystem.id) ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => toggleComplete(activeSystem.id)}
+                  className={completedSystems.has(activeSystem.id) ? "bg-emerald-500 hover:bg-emerald-600" : ""}
+                >
+                  {completedSystems.has(activeSystem.id) ? (
+                    <>
+                      <CheckCircle2 className="w-4 h-4 mr-2" /> Installed
+                    </>
+                  ) : (
+                    "Mark Complete"
+                  )}
+                </Button>
+              </div>
+
+              <p className="text-muted-foreground">{activeSystem.description}</p>
+
+              {/* Setup Steps */}
+              <div className="space-y-3">
+                <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Setup Steps</h3>
+                <ol className="space-y-2">
+                  {activeSystem.steps.map((step, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      <span className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center text-xs font-medium flex-shrink-0">
+                        {idx + 1}
+                      </span>
+                      <span className="text-sm pt-0.5">{step}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+
+              {/* Tip */}
+              <div className="flex items-start gap-3 p-4 bg-primary/5 border border-primary/20 rounded-lg">
+                <Lightbulb className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-sm font-medium text-primary mb-1">Pro Tip</p>
+                  <p className="text-sm text-muted-foreground">{activeSystem.tip}</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Sidebar */}
+        <div className="space-y-6">
+          {/* Progress */}
+          <Card className="bg-card border-border">
+            <CardContent className="p-5">
+              <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-4">Installation Progress</h3>
+              <div className="space-y-3">
+                {systems.map((system) => (
+                  <div key={system.id} className="flex items-center justify-between">
+                    <span className={`text-sm ${completedSystems.has(system.id) ? "text-emerald-400" : "text-muted-foreground"}`}>
+                      {system.name}
+                    </span>
+                    {completedSystems.has(system.id) ? (
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                    ) : (
+                      <div className="w-4 h-4 rounded-full border border-border" />
+                    )}
+                  </div>
+                ))}
+              </div>
+              
+              <div className="mt-4 pt-4 border-t border-border">
+                <div className="flex justify-between text-sm mb-2">
+                  <span className="text-muted-foreground">Progress</span>
+                  <span className="font-medium">{Math.round((completedSystems.size / systems.length) * 100)}%</span>
+                </div>
+                <div className="h-2 bg-secondary rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-emerald-500 transition-all duration-300"
+                    style={{ width: `${(completedSystems.size / systems.length) * 100}%` }}
+                  />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Next Module */}
+          <Card className="bg-gradient-to-br from-rose-500/10 to-rose-500/5 border-rose-500/20">
+            <CardContent className="p-5">
+              <span className="text-xs font-medium text-rose-400 uppercase tracking-wider">Next Module</span>
+              <h3 className="text-lg font-semibold mt-1">QA Checklist</h3>
+              <p className="text-sm text-muted-foreground mt-1 mb-4">Pre-launch verification.</p>
+              <Link href="/qa-checklist">
+                <Button size="sm" className="w-full bg-rose-500 hover:bg-rose-600 text-white">
+                  Continue <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 }

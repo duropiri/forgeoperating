@@ -1,290 +1,223 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { 
   ArrowRight, 
   Phone, 
   BookOpen,
-  ShieldAlert,
-  Zap,
-  CheckCircle2,
-  Layers,
+  Shield,
   Globe,
-  Settings,
-  ClipboardCheck
+  Wrench,
+  ClipboardCheck,
+  Zap,
+  TrendingUp,
+  Users,
+  Clock
 } from "lucide-react";
 
-export default function Home() {
+interface ModuleCardProps {
+  href: string;
+  icon: React.ReactNode;
+  number: string;
+  title: string;
+  description: string;
+  features: string[];
+  accentColor: string;
+  delay: number;
+}
+
+function ModuleCard({ href, icon, number, title, description, features, accentColor, delay }: ModuleCardProps) {
   return (
-    <div className="space-y-8 max-w-6xl mx-auto">
-      {/* Hero Section */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-border pb-8">
-        <div>
-          <h1 className="text-4xl md:text-5xl font-display font-bold text-foreground tracking-tight mb-2">
-            TRAINING <span className="text-primary">HUB</span>
-          </h1>
-          <p className="text-muted-foreground font-mono text-sm md:text-base max-w-2xl">
-            UNIFIED SOP // SALES & FULFILLMENT TRAINING CENTER
+    <Link href={href}>
+      <Card 
+        className={`group h-full bg-card border-border hover:border-${accentColor}/50 transition-all duration-300 cursor-pointer card-hover opacity-0 animate-fade-up`}
+        style={{ animationDelay: `${delay * 0.1}s`, animationFillMode: 'forwards' }}
+      >
+        <CardContent className="p-6 h-full flex flex-col">
+          <div className="flex items-start justify-between mb-4">
+            <div className={`w-12 h-12 rounded-xl bg-${accentColor}/10 flex items-center justify-center group-hover:bg-${accentColor}/20 transition-colors`}>
+              {icon}
+            </div>
+            <span className="text-xs font-mono text-muted-foreground">{number}</span>
+          </div>
+          
+          <h3 className={`text-lg font-semibold mb-2 group-hover:text-${accentColor} transition-colors`}>
+            {title}
+          </h3>
+          
+          <p className="text-sm text-muted-foreground mb-4 flex-grow">
+            {description}
           </p>
+          
+          <ul className="space-y-2 mb-4">
+            {features.map((feature, idx) => (
+              <li key={idx} className="flex items-center gap-2 text-xs text-muted-foreground">
+                <div className={`w-1 h-1 rounded-full bg-${accentColor}`} />
+                {feature}
+              </li>
+            ))}
+          </ul>
+          
+          <div className={`flex items-center gap-2 text-sm font-medium text-${accentColor} group-hover:gap-3 transition-all`}>
+            Start Module <ArrowRight className="w-4 h-4" />
+          </div>
+        </CardContent>
+      </Card>
+    </Link>
+  );
+}
+
+export default function Home() {
+  const salesModules = [
+    {
+      href: "/playbook",
+      icon: <BookOpen className="w-6 h-6 text-primary" />,
+      number: "01",
+      title: "The Playbook",
+      description: "Master the systems-selling methodology. Learn why we sell systems, not services.",
+      features: ["Systems vs Services", "Value Stack Framework", "Pricing Psychology"],
+      accentColor: "primary"
+    },
+    {
+      href: "/scripts",
+      icon: <Phone className="w-6 h-6 text-emerald-400" />,
+      number: "02",
+      title: "Call Scripts",
+      description: "Word-for-word scripts for every scenario. From cold call to close.",
+      features: ["Cold Call Openers", "Discovery Questions", "Closing Techniques"],
+      accentColor: "emerald-400"
+    },
+    {
+      href: "/objections",
+      icon: <Shield className="w-6 h-6 text-blue-400" />,
+      number: "03",
+      title: "Objection Handling",
+      description: "Never get stuck again. Instant responses for any pushback.",
+      features: ["Price Objections", "Trust Building", "Stall Tactics"],
+      accentColor: "blue-400"
+    }
+  ];
+
+  const fulfillmentModules = [
+    {
+      href: "/ai-website-setup",
+      icon: <Globe className="w-6 h-6 text-violet-400" />,
+      number: "04",
+      title: "Website Setup",
+      description: "Build professional client websites in under 30 minutes using AI.",
+      features: ["AI Site Generation", "Domain Setup", "Mobile Optimization"],
+      accentColor: "violet-400"
+    },
+    {
+      href: "/system-installation",
+      icon: <Wrench className="w-6 h-6 text-amber-400" />,
+      number: "05",
+      title: "System Installation",
+      description: "Deploy the full value stack that creates client stickiness.",
+      features: ["Chat Bot Setup", "Missed Call Text Back", "Review Automation"],
+      accentColor: "amber-400"
+    },
+    {
+      href: "/qa-checklist",
+      icon: <ClipboardCheck className="w-6 h-6 text-rose-400" />,
+      number: "06",
+      title: "QA Checklist",
+      description: "Pre-launch verification to ensure flawless client delivery.",
+      features: ["37 Quality Checks", "Mobile Testing", "Delivery Protocol"],
+      accentColor: "rose-400"
+    }
+  ];
+
+  return (
+    <div className="space-y-12 max-w-6xl mx-auto">
+      {/* Hero Section */}
+      <div className="space-y-6 opacity-0 animate-fade-up" style={{ animationFillMode: 'forwards' }}>
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">
+          <Zap className="w-4 h-4" />
+          Training Protocol v2.0
         </div>
-        <div className="flex gap-3">
+        
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+          Simple systems that
+          <br />
+          <span className="text-gradient">actually work.</span>
+        </h1>
+        
+        <p className="text-lg text-muted-foreground max-w-2xl">
+          Everything your team needs to sell and deliver AI marketing systems to local businesses. 
+          No fluff, no theory—just the exact playbook we use to close $25k+ deals.
+        </p>
+        
+        <div className="flex flex-wrap gap-4">
           <Link href="/playbook">
-            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold tracking-wide">
-              <BookOpen className="mr-2 w-4 h-4" /> START LEARNING
+            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium">
+              Start Learning <ArrowRight className="ml-2 w-4 h-4" />
+            </Button>
+          </Link>
+          <Link href="/scripts">
+            <Button size="lg" variant="outline" className="border-border hover:bg-secondary">
+              View Scripts
             </Button>
           </Link>
         </div>
       </div>
 
+      {/* Stats Row */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 opacity-0 animate-fade-up stagger-1" style={{ animationFillMode: 'forwards' }}>
+        {[
+          { icon: <TrendingUp className="w-5 h-5" />, value: "$25k+", label: "Avg Deal Size" },
+          { icon: <Users className="w-5 h-5" />, value: "6", label: "Training Modules" },
+          { icon: <Clock className="w-5 h-5" />, value: "30 min", label: "Site Build Time" },
+          { icon: <Zap className="w-5 h-5" />, value: "5", label: "Value Stack Layers" }
+        ].map((stat, idx) => (
+          <div key={idx} className="bg-card border border-border rounded-xl p-4 text-center">
+            <div className="flex justify-center mb-2 text-muted-foreground">{stat.icon}</div>
+            <div className="text-2xl font-bold text-foreground">{stat.value}</div>
+            <div className="text-xs text-muted-foreground">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+
       {/* Sales Training Section */}
-      <div>
-        <h2 className="text-lg font-display font-bold text-primary mb-4 flex items-center gap-2">
-          <div className="w-2 h-2 bg-primary rounded-full" />
-          SALES TRAINING
-        </h2>
+      <div className="space-y-6">
+        <div className="flex items-center gap-3">
+          <div className="w-1 h-6 bg-primary rounded-full" />
+          <h2 className="text-xl font-semibold">Sales Training</h2>
+        </div>
+        
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Module 1: The Playbook */}
-          <Card className="border-border bg-card/50 hover:border-primary/50 transition-all duration-300 group cursor-pointer h-full">
-            <Link href="/playbook">
-              <CardHeader>
-                <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center mb-4 group-hover:bg-blue-500/20 transition-colors">
-                  <Layers className="w-6 h-6 text-blue-400" />
-                </div>
-                <CardTitle className="font-display text-xl group-hover:text-blue-400 transition-colors">
-                  01 // THE SYSTEM STACK
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-6 min-h-[3rem]">
-                  Learn why we sell "Systems" not "Services". Master the linear value stack that scales.
-                </p>
-                <ul className="space-y-2 mb-6">
-                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <CheckCircle2 className="w-4 h-4 text-blue-400" /> System vs. Service
-                  </li>
-                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <CheckCircle2 className="w-4 h-4 text-blue-400" /> The "Sticky" Ecosystem
-                  </li>
-                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <CheckCircle2 className="w-4 h-4 text-blue-400" /> Value Stacking
-                  </li>
-                </ul>
-                <div className="flex items-center text-sm font-bold text-blue-400 group-hover:translate-x-1 transition-transform">
-                  OPEN MODULE <ArrowRight className="ml-2 w-4 h-4" />
-                </div>
-              </CardContent>
-            </Link>
-          </Card>
-
-          {/* Module 2: Call Scripts */}
-          <Card className="border-border bg-card/50 hover:border-primary/50 transition-all duration-300 group cursor-pointer h-full">
-            <Link href="/scripts">
-              <CardHeader>
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                  <Phone className="w-6 h-6 text-primary" />
-                </div>
-                <CardTitle className="font-display text-xl group-hover:text-primary transition-colors">
-                  02 // CALL SCRIPTS
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-6 min-h-[3rem]">
-                  Battle-tested scripts for every scenario. From opener to close, know exactly what to say.
-                </p>
-                <ul className="space-y-2 mb-6">
-                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <CheckCircle2 className="w-4 h-4 text-primary" /> Review Repair Script
-                  </li>
-                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <CheckCircle2 className="w-4 h-4 text-primary" /> GPT Lead Script
-                  </li>
-                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <CheckCircle2 className="w-4 h-4 text-primary" /> The "Assumptive Close"
-                  </li>
-                </ul>
-                <div className="flex items-center text-sm font-bold text-primary group-hover:translate-x-1 transition-transform">
-                  ACCESS SCRIPTS <ArrowRight className="ml-2 w-4 h-4" />
-                </div>
-              </CardContent>
-            </Link>
-          </Card>
-
-          {/* Module 3: Objection Killer */}
-          <Card className="border-border bg-card/50 hover:border-primary/50 transition-all duration-300 group cursor-pointer h-full">
-            <Link href="/objections">
-              <CardHeader>
-                <div className="w-12 h-12 rounded-lg bg-red-500/10 flex items-center justify-center mb-4 group-hover:bg-red-500/20 transition-colors">
-                  <ShieldAlert className="w-6 h-6 text-red-400" />
-                </div>
-                <CardTitle className="font-display text-xl group-hover:text-red-400 transition-colors">
-                  03 // OBJECTION KILLER
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-6 min-h-[3rem]">
-                  Never get stuck. Instant answers for "Too Expensive," "Not Interested," and more.
-                </p>
-                <ul className="space-y-2 mb-6">
-                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <CheckCircle2 className="w-4 h-4 text-red-400" /> Price Objections
-                  </li>
-                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <CheckCircle2 className="w-4 h-4 text-red-400" /> Trust & Authority
-                  </li>
-                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <CheckCircle2 className="w-4 h-4 text-red-400" /> Stalls & Delays
-                  </li>
-                </ul>
-                <div className="flex items-center text-sm font-bold text-red-400 group-hover:translate-x-1 transition-transform">
-                  MASTER OBJECTIONS <ArrowRight className="ml-2 w-4 h-4" />
-                </div>
-              </CardContent>
-            </Link>
-          </Card>
+          {salesModules.map((module, idx) => (
+            <ModuleCard key={module.href} {...module} delay={idx + 2} />
+          ))}
         </div>
       </div>
 
       {/* Fulfillment Ops Section */}
-      <div>
-        <h2 className="text-lg font-display font-bold text-cyan-400 mb-4 flex items-center gap-2">
-          <div className="w-2 h-2 bg-cyan-400 rounded-full" />
-          FULFILLMENT OPS
-        </h2>
+      <div className="space-y-6">
+        <div className="flex items-center gap-3">
+          <div className="w-1 h-6 bg-violet-400 rounded-full" />
+          <h2 className="text-xl font-semibold">Fulfillment Ops</h2>
+        </div>
+        
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Module 4: AI Website Setup */}
-          <Card className="border-border bg-card/50 hover:border-cyan-500/50 transition-all duration-300 group cursor-pointer h-full">
-            <Link href="/ai-website-setup">
-              <CardHeader>
-                <div className="w-12 h-12 rounded-lg bg-cyan-500/10 flex items-center justify-center mb-4 group-hover:bg-cyan-500/20 transition-colors">
-                  <Globe className="w-6 h-6 text-cyan-400" />
-                </div>
-                <CardTitle className="font-display text-xl group-hover:text-cyan-400 transition-colors">
-                  04 // AI WEBSITE SETUP
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-6 min-h-[3rem]">
-                  Build client websites in under 30 minutes using GHL's AI tools.
-                </p>
-                <ul className="space-y-2 mb-6">
-                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <CheckCircle2 className="w-4 h-4 text-cyan-400" /> Sub-Account Creation
-                  </li>
-                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <CheckCircle2 className="w-4 h-4 text-cyan-400" /> AI Site Generation
-                  </li>
-                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <CheckCircle2 className="w-4 h-4 text-cyan-400" /> Domain Connection
-                  </li>
-                </ul>
-                <div className="flex items-center text-sm font-bold text-cyan-400 group-hover:translate-x-1 transition-transform">
-                  START BUILDING <ArrowRight className="ml-2 w-4 h-4" />
-                </div>
-              </CardContent>
-            </Link>
-          </Card>
-
-          {/* Module 5: System Installation */}
-          <Card className="border-border bg-card/50 hover:border-cyan-500/50 transition-all duration-300 group cursor-pointer h-full">
-            <Link href="/system-installation">
-              <CardHeader>
-                <div className="w-12 h-12 rounded-lg bg-emerald-500/10 flex items-center justify-center mb-4 group-hover:bg-emerald-500/20 transition-colors">
-                  <Settings className="w-6 h-6 text-emerald-400" />
-                </div>
-                <CardTitle className="font-display text-xl group-hover:text-emerald-400 transition-colors">
-                  05 // SYSTEM INSTALLATION
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-6 min-h-[3rem]">
-                  Install the Value Stack that creates client stickiness and recurring revenue.
-                </p>
-                <ul className="space-y-2 mb-6">
-                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400" /> Conversation AI Bot
-                  </li>
-                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400" /> Missed Call Text Back
-                  </li>
-                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400" /> Review Automation
-                  </li>
-                </ul>
-                <div className="flex items-center text-sm font-bold text-emerald-400 group-hover:translate-x-1 transition-transform">
-                  INSTALL SYSTEMS <ArrowRight className="ml-2 w-4 h-4" />
-                </div>
-              </CardContent>
-            </Link>
-          </Card>
-
-          {/* Module 6: QA Checklist */}
-          <Card className="border-border bg-card/50 hover:border-cyan-500/50 transition-all duration-300 group cursor-pointer h-full">
-            <Link href="/qa-checklist">
-              <CardHeader>
-                <div className="w-12 h-12 rounded-lg bg-purple-500/10 flex items-center justify-center mb-4 group-hover:bg-purple-500/20 transition-colors">
-                  <ClipboardCheck className="w-6 h-6 text-purple-400" />
-                </div>
-                <CardTitle className="font-display text-xl group-hover:text-purple-400 transition-colors">
-                  06 // QA CHECKLIST
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-6 min-h-[3rem]">
-                  Verify everything works before client handoff. No broken sites.
-                </p>
-                <ul className="space-y-2 mb-6">
-                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <CheckCircle2 className="w-4 h-4 text-purple-400" /> Website Quality
-                  </li>
-                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <CheckCircle2 className="w-4 h-4 text-purple-400" /> Mobile Testing
-                  </li>
-                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <CheckCircle2 className="w-4 h-4 text-purple-400" /> Delivery Protocol
-                  </li>
-                </ul>
-                <div className="flex items-center text-sm font-bold text-purple-400 group-hover:translate-x-1 transition-transform">
-                  RUN QA CHECK <ArrowRight className="ml-2 w-4 h-4" />
-                </div>
-              </CardContent>
-            </Link>
-          </Card>
+          {fulfillmentModules.map((module, idx) => (
+            <ModuleCard key={module.href} {...module} delay={idx + 5} />
+          ))}
         </div>
       </div>
 
-      {/* Quick Tips Section */}
-      <Card className="border-border bg-card/30">
-        <CardHeader>
-          <CardTitle className="font-display text-lg flex items-center gap-2">
-            <Zap className="w-5 h-5 text-primary" />
-            PRO TIPS
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-2">
-            <h3 className="font-bold text-foreground">Speed to Lead</h3>
-            <p className="text-sm text-muted-foreground">
-              Call leads within 5 minutes of generation. The close rate drops by 400% after 10 minutes.
-            </p>
-          </div>
-          <div className="space-y-2">
-            <h3 className="font-bold text-foreground">Tone Matters</h3>
-            <p className="text-sm text-muted-foreground">
-              Speak with authority. You are an expert consultant, not a telemarketer. Downward inflection at the end of sentences.
-            </p>
-          </div>
-          <div className="space-y-2">
-            <h3 className="font-bold text-foreground">Don't Sell Features</h3>
-            <p className="text-sm text-muted-foreground">
-              Nobody cares about "SEO" or "HTML". They care about "More Customers" and "Beating Competitors".
-            </p>
-          </div>
-          <div className="space-y-2">
-            <h3 className="font-bold text-foreground">The "No" is the Start</h3>
-            <p className="text-sm text-muted-foreground">
-              The sale begins when the customer says "No". Use the Objection Killer to pivot and close.
-            </p>
-          </div>
+      {/* Bottom CTA */}
+      <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 opacity-0 animate-fade-up stagger-6" style={{ animationFillMode: 'forwards' }}>
+        <CardContent className="p-8 text-center">
+          <h3 className="text-2xl font-bold mb-2">Ready to close your first deal?</h3>
+          <p className="text-muted-foreground mb-6 max-w-lg mx-auto">
+            Start with The Playbook to understand the methodology, then move to Scripts for the exact words to use.
+          </p>
+          <Link href="/playbook">
+            <Button size="lg" className="bg-primary hover:bg-primary/90">
+              Begin Training <ArrowRight className="ml-2 w-4 h-4" />
+            </Button>
+          </Link>
         </CardContent>
       </Card>
     </div>

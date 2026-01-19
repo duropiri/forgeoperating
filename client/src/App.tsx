@@ -6,6 +6,9 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Layout from "./components/Layout";
 
+// Public Pages
+import Landing from "./pages/Landing";
+
 // Sales Training Pages
 import Home from "./pages/Home";
 import Playbook from "./pages/Playbook";
@@ -19,22 +22,30 @@ import QAChecklist from "./pages/QAChecklist";
 
 function Router() {
   return (
-    <Layout>
-      <Switch>
-        {/* Sales Training Routes */}
-        <Route path="/" component={Home} />
-        <Route path="/playbook" component={Playbook} />
-        <Route path="/scripts" component={Scripts} />
-        <Route path="/objections" component={Objections} />
-        
-        {/* Fulfillment Ops Routes */}
-        <Route path="/ai-website-setup" component={AIWebsiteSetup} />
-        <Route path="/system-installation" component={SystemInstallation} />
-        <Route path="/qa-checklist" component={QAChecklist} />
-        
-        <Route component={NotFound} />
-      </Switch>
-    </Layout>
+    <Switch>
+      {/* Public Marketing Site */}
+      <Route path="/site" component={Landing} />
+      
+      {/* Internal Training Hub (with Layout) */}
+      <Route>
+        <Layout>
+          <Switch>
+            {/* Sales Training Routes */}
+            <Route path="/" component={Home} />
+            <Route path="/playbook" component={Playbook} />
+            <Route path="/scripts" component={Scripts} />
+            <Route path="/objections" component={Objections} />
+            
+            {/* Fulfillment Ops Routes */}
+            <Route path="/ai-website-setup" component={AIWebsiteSetup} />
+            <Route path="/system-installation" component={SystemInstallation} />
+            <Route path="/qa-checklist" component={QAChecklist} />
+            
+            <Route component={NotFound} />
+          </Switch>
+        </Layout>
+      </Route>
+    </Switch>
   );
 }
 

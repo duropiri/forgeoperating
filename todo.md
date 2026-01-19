@@ -24,3 +24,16 @@
 - [x] Redesign QAChecklist.tsx with interactive checklist
 - [x] Add micro-interactions and polish
 - [x] Final testing and checkpoint
+
+## Customer-Facing Marketing Website (Completed)
+- [x] Create Landing.tsx page with public marketing layout
+- [x] Build hero section with compelling headline and CTA
+- [x] Build "The System" section explaining the value stack
+- [x] Build features/services grid with icons
+- [x] Build social proof section with testimonials
+- [x] Build case study / results section
+- [x] Build pricing section (or "Book a Call" CTA)
+- [x] Build FAQ section
+- [x] Build footer with contact info and links
+- [x] Update App.tsx routing for public vs internal pages
+- [x] Final testing and checkpoint

@@ -105,11 +105,12 @@ export default function PublicNavbar() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/">
-            <div className="flex items-center gap-2 cursor-pointer">
-              <div className="w-9 h-9 rounded-xl bg-teal-500 flex items-center justify-center shadow-sm">
-                <span className="text-white font-bold text-lg">F</span>
+            <div className="flex items-center gap-2.5 cursor-pointer">
+              <img src="/fog-icon.png" alt="Forge Operating Group" className="w-9 h-9 object-contain" />
+              <div className="flex flex-col leading-none">
+                <span className="text-lg font-bold tracking-tight text-[#1A1A1A]">Forge Operating</span>
+                <span className="text-xs font-semibold text-teal-500 tracking-wide">GROUP</span>
               </div>
-              <span className="text-xl font-bold tracking-tight text-[#1A1A1A]">Forge<span className="text-teal-500">OS</span></span>
             </div>
           </Link>
 

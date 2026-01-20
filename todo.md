@@ -90,3 +90,15 @@
 - [x] Protect /dashboard routes with authentication check (ProtectedRoute component)
 - [x] Update Layout component to show user state and logout
 - [x] Test authentication flow
+
+
+## Forge Operating Group (FOG) Rebrand
+- [x] Design and generate FOG logo
+- [x] Update Landing page branding (ForgeOS → FOG)
+- [x] Update target market copy (contractors, dentists, med spas, multi-location SMBs)
+- [x] Update all feature pages with FOG branding
+- [x] Update training hub Layout and sidebar
+- [x] Update PublicNavbar and PublicFooter
+- [x] Update HTML title and meta tags
+- [x] Update CONVERSATION_CONTEXT_HANDOFF.md with new branding
+- [x] Test and checkpoint

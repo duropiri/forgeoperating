@@ -5,7 +5,7 @@ import { Link } from "wouter";
 
 export default function Terms() {
   useEffect(() => {
-    document.title = "Terms of Service | ForgeOS";
+    document.title = "Terms of Service | Forge Operating Group";
   }, []);
 
   return (
@@ -23,14 +23,14 @@ export default function Terms() {
               <section>
                 <h2 className="text-2xl font-semibold mb-4 text-[#1A1A1A]">1. Acceptance of Terms</h2>
                 <p className="text-[#555] leading-relaxed">
-                  By accessing or using ForgeOS services, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.
+                  By accessing or using Forge Operating Group services, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.
                 </p>
               </section>
 
               <section>
                 <h2 className="text-2xl font-semibold mb-4 text-[#1A1A1A]">2. Description of Service</h2>
                 <p className="text-[#555] leading-relaxed">
-                  ForgeOS provides an AI-powered marketing automation platform for local businesses, including but not limited to website creation, review management, lead follow-up automation, and customer communication tools.
+                  Forge Operating Group provides an AI-powered marketing automation platform for local businesses, including but not limited to website creation, review management, lead follow-up automation, and customer communication tools.
                 </p>
               </section>
 
@@ -71,14 +71,14 @@ export default function Terms() {
               <section>
                 <h2 className="text-2xl font-semibold mb-4 text-[#1A1A1A]">7. Intellectual Property</h2>
                 <p className="text-[#555] leading-relaxed">
-                  All content, features, and functionality of ForgeOS are owned by us and are protected by copyright, trademark, and other intellectual property laws. You retain ownership of your data and content uploaded to our platform.
+                  All content, features, and functionality of Forge Operating Group are owned by us and are protected by copyright, trademark, and other intellectual property laws. You retain ownership of your data and content uploaded to our platform.
                 </p>
               </section>
 
               <section>
                 <h2 className="text-2xl font-semibold mb-4 text-[#1A1A1A]">8. Limitation of Liability</h2>
                 <p className="text-[#555] leading-relaxed">
-                  ForgeOS shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of or inability to use our services. Our total liability shall not exceed the amount paid by you in the 12 months preceding the claim.
+                  Forge Operating Group shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of or inability to use our services. Our total liability shall not exceed the amount paid by you in the 12 months preceding the claim.
                 </p>
               </section>
 
@@ -99,7 +99,7 @@ export default function Terms() {
               <section>
                 <h2 className="text-2xl font-semibold mb-4 text-[#1A1A1A]">11. Contact</h2>
                 <p className="text-[#555] leading-relaxed">
-                  For questions about these Terms of Service, please contact us at legal@forgeos.com or through our <Link href="/contact" className="text-teal-600 hover:text-teal-700 font-medium">contact page</Link>.
+                  For questions about these Terms of Service, please contact us at legal@forgeoperatinggroup.com or through our <Link href="/contact" className="text-teal-600 hover:text-teal-700 font-medium">contact page</Link>.
                 </p>
               </section>
             </div>

@@ -99,7 +99,7 @@ const scripts: Script[] = [
       {
         title: "Pattern Interrupt",
         timing: "0-10 seconds",
-        content: "Hey [Name], this is [Your Name] with ForgeOS. I know you weren't expecting my call, but I'll be quick—I promise.",
+        content: "Hey [Name], this is [Your Name] with Forge Operating Group. I know you weren't expecting my call, but I'll be quick—I promise.",
         tip: "Acknowledge the interruption. It builds trust."
       },
       {

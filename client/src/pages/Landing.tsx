@@ -236,10 +236,10 @@ export default function Landing() {
 
   // Set SEO meta tags
   useEffect(() => {
-    document.title = "ForgeOS | AI Marketing System for Local Businesses";
+    document.title = "Forge Operating Group | AI Marketing Systems for Contractors, Dentists & Med Spas";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', 'Turn your local business into a customer-generating machine. AI-powered websites, chatbots, review automation, and more. Get more 5-star reviews and never miss a lead.');
+      metaDescription.setAttribute('content', 'AI-powered marketing systems for serious operators. Contractors, dentists, med spas, and multi-location businesses trust Forge Operating Group to generate customers on autopilot. $25k systems that pay for themselves.');
     }
   }, []);
 

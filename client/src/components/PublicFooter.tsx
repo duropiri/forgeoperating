@@ -21,15 +21,16 @@ export default function PublicFooter() {
           {/* Brand */}
           <div className="md:col-span-1">
             <Link href="/">
-              <div className="flex items-center gap-2 mb-4 cursor-pointer">
-                <div className="w-8 h-8 rounded-lg bg-teal-500 flex items-center justify-center">
-                  <span className="text-white font-bold">F</span>
+              <div className="flex items-center gap-2.5 mb-4 cursor-pointer">
+                <img src="/fog-icon.png" alt="Forge Operating Group" className="w-8 h-8 object-contain" />
+                <div className="flex flex-col leading-none">
+                  <span className="font-bold text-[#1A1A1A]">Forge Operating</span>
+                  <span className="text-xs font-semibold text-teal-500 tracking-wide">GROUP</span>
                 </div>
-                <span className="font-bold text-[#1A1A1A]">Forge<span className="text-teal-500">OS</span></span>
               </div>
             </Link>
             <p className="text-sm text-[#666] leading-relaxed">
-              The complete AI marketing system for local businesses.
+              AI-powered marketing systems for serious operators. Contractors, dentists, med spas, and multi-location businesses.
             </p>
           </div>
           
@@ -77,7 +78,7 @@ export default function PublicFooter() {
         
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 border-t border-[#E5E2DB]">
           <p className="text-sm text-[#666]">
-            © 2025 ForgeOS. All rights reserved.
+            © 2025 Forge Operating Group. All rights reserved.
           </p>
           <div className="flex items-center gap-6 text-sm text-[#666]">
             <Link href="/privacy" className="hover:text-[#1A1A1A] transition-colors">Privacy Policy</Link>

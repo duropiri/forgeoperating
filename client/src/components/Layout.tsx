@@ -83,15 +83,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           {/* Logo */}
           <div className="p-6 border-b border-sidebar-border">
             <Link href="/dashboard">
-              <div className="flex items-center gap-2 cursor-pointer">
-                <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-                  <span className="text-primary-foreground font-bold text-sm">F</span>
-                </div>
+              <div className="flex items-center gap-2.5 cursor-pointer">
+                <img src="/fog-icon.png" alt="Forge Operating Group" className="w-8 h-8 object-contain" />
                 <div>
-                  <h1 className="text-lg font-bold text-foreground tracking-tight">
-                    Forge<span className="text-primary">OS</span>
+                  <h1 className="text-base font-bold text-foreground tracking-tight leading-tight">
+                    Forge Operating
                   </h1>
-                  <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Training Hub</p>
+                  <p className="text-[10px] text-primary font-semibold uppercase tracking-wider">Group • Training Hub</p>
                 </div>
               </div>
             </Link>
@@ -186,10 +184,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <div className="md:hidden flex items-center justify-between p-4 border-b border-border bg-background sticky top-0 z-40">
         <Link href="/dashboard">
           <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-xs">F</span>
+            <img src="/fog-icon.png" alt="FOG" className="w-7 h-7 object-contain" />
+            <div className="flex flex-col leading-none">
+              <span className="text-sm font-bold">Forge Operating</span>
+              <span className="text-[9px] text-primary font-semibold">GROUP</span>
             </div>
-            <span className="text-base font-bold">Forge<span className="text-primary">OS</span></span>
           </div>
         </Link>
         <div className="flex items-center gap-2">

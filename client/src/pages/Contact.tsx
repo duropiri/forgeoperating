@@ -34,7 +34,7 @@ const GHLFormEmbed = () => (
 
 export default function Contact() {
   useEffect(() => {
-    document.title = "Contact Us | ForgeOS";
+    document.title = "Contact Us | Forge Operating Group";
   }, []);
 
   return (
@@ -48,7 +48,7 @@ export default function Contact() {
             Get in Touch
           </h1>
           <p className="text-lg text-[#666] max-w-2xl mx-auto">
-            Have questions about ForgeOS? We're here to help. Reach out and our team will get back to you within 24 hours.
+            Have questions about Forge Operating Group? We're here to help. Reach out and our team will get back to you within 24 hours.
           </p>
         </div>
       </section>
@@ -68,7 +68,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1 text-[#1A1A1A]">Email</h3>
-                    <p className="text-[#555]">hello@forgeos.com</p>
+                    <p className="text-[#555]">hello@forgeoperatinggroup.com</p>
                     <p className="text-sm text-[#888]">We respond within 24 hours</p>
                   </div>
                 </div>

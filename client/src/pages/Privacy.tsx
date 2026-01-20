@@ -5,7 +5,7 @@ import { Link } from "wouter";
 
 export default function Privacy() {
   useEffect(() => {
-    document.title = "Privacy Policy | ForgeOS";
+    document.title = "Privacy Policy | Forge Operating Group";
   }, []);
 
   return (
@@ -23,7 +23,7 @@ export default function Privacy() {
               <section>
                 <h2 className="text-2xl font-semibold mb-4 text-[#1A1A1A]">1. Introduction</h2>
                 <p className="text-[#555] leading-relaxed">
-                  ForgeOS ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our AI marketing platform and related services.
+                  Forge Operating Group ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our AI marketing platform and related services.
                 </p>
               </section>
 
@@ -89,7 +89,7 @@ export default function Privacy() {
               <section>
                 <h2 className="text-2xl font-semibold mb-4 text-[#1A1A1A]">8. Contact Us</h2>
                 <p className="text-[#555] leading-relaxed">
-                  If you have any questions about this Privacy Policy, please contact us at privacy@forgeos.com or through our <Link href="/contact" className="text-teal-600 hover:text-teal-700 font-medium">contact page</Link>.
+                  If you have any questions about this Privacy Policy, please contact us at privacy@forgeoperatinggroup.com or through our <Link href="/contact" className="text-teal-600 hover:text-teal-700 font-medium">contact page</Link>.
                 </p>
               </section>
             </div>

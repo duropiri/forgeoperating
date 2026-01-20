@@ -308,7 +308,7 @@ export default function FeaturePage() {
   // Set SEO meta tags
   useEffect(() => {
     if (feature) {
-      document.title = `${feature.title} | ForgeOS - Get More Google Reviews`;
+      document.title = `${feature.title} | Forge Operating Group - AI Marketing Systems`;
       const metaDescription = document.querySelector('meta[name="description"]');
       if (metaDescription) {
         metaDescription.setAttribute('content', `${feature.tagline}. ${feature.description}`);

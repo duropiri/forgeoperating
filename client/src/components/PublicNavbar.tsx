@@ -29,6 +29,59 @@ const allFeatures = [
   { slug: "database-reactivation", title: "Database Reactivation", icon: RefreshCw, description: "Turn old customers into new revenue" }
 ];
 
+// Smooth scroll to anchor with offset for fixed navbar
+const scrollToAnchor = (anchorId: string) => {
+  const element = document.getElementById(anchorId);
+  if (element) {
+    const navbarHeight = 80; // Account for fixed navbar
+    const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({
+      top: elementPosition - navbarHeight,
+      behavior: 'smooth'
+    });
+  }
+};
+
+// Anchor link component that handles both same-page and cross-page navigation
+const AnchorLink = ({ 
+  href, 
+  children, 
+  className = "",
+  onClick 
+}: { 
+  href: string; 
+  children: React.ReactNode; 
+  className?: string;
+  onClick?: () => void;
+}) => {
+  const [location, setLocation] = useLocation();
+  
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    onClick?.();
+    
+    // Extract anchor from href (e.g., "/#faq" -> "faq")
+    const anchor = href.replace('/#', '');
+    
+    // If we're on the landing page, just scroll
+    if (location === '/' || location === '') {
+      scrollToAnchor(anchor);
+    } else {
+      // Navigate to landing page first, then scroll after a brief delay
+      setLocation('/');
+      setTimeout(() => {
+        scrollToAnchor(anchor);
+      }, 100);
+    }
+  };
+  
+  return (
+    <a href={href} onClick={handleClick} className={className}>
+      {children}
+    </a>
+  );
+};
+
 // Mega Dropdown component matching Stone Systems grid layout
 const FeaturesDropdown = ({ onNavigate }: { onNavigate?: () => void }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -117,15 +170,15 @@ export default function PublicNavbar() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             <FeaturesDropdown />
-            <Link href="/#how-it-works">
+            <AnchorLink href="/#how-it-works">
               <span className="text-sm text-[#555] hover:text-[#1A1A1A] transition-colors font-medium cursor-pointer">How It Works</span>
-            </Link>
-            <Link href="/#testimonials">
+            </AnchorLink>
+            <AnchorLink href="/#testimonials">
               <span className="text-sm text-[#555] hover:text-[#1A1A1A] transition-colors font-medium cursor-pointer">Reviews</span>
-            </Link>
-            <Link href="/#faq">
+            </AnchorLink>
+            <AnchorLink href="/#faq">
               <span className="text-sm text-[#555] hover:text-[#1A1A1A] transition-colors font-medium cursor-pointer">FAQ</span>
-            </Link>
+            </AnchorLink>
             <Link href="/contact">
               <span className="text-sm text-[#555] hover:text-[#1A1A1A] transition-colors font-medium cursor-pointer">Contact</span>
             </Link>
@@ -138,11 +191,11 @@ export default function PublicNavbar() {
                 Team Login
               </Button>
             </Link>
-            <Link href="/#book">
+            <AnchorLink href="/#book">
               <Button size="sm" className="bg-teal-500 hover:bg-teal-600 text-white shadow-sm font-medium">
                 Get Started
               </Button>
-            </Link>
+            </AnchorLink>
           </div>
 
           {/* Mobile Menu Button */}
@@ -158,15 +211,15 @@ export default function PublicNavbar() {
         {mobileMenuOpen && (
           <div className="md:hidden mt-4 pb-4 border-t border-[#E5E2DB] pt-4">
             <div className="flex flex-col gap-4">
-              <Link href="/#how-it-works" onClick={closeMobileMenu}>
+              <AnchorLink href="/#how-it-works" onClick={closeMobileMenu}>
                 <span className="text-sm text-[#555] hover:text-[#1A1A1A] font-medium">How It Works</span>
-              </Link>
-              <Link href="/#testimonials" onClick={closeMobileMenu}>
+              </AnchorLink>
+              <AnchorLink href="/#testimonials" onClick={closeMobileMenu}>
                 <span className="text-sm text-[#555] hover:text-[#1A1A1A] font-medium">Reviews</span>
-              </Link>
-              <Link href="/#faq" onClick={closeMobileMenu}>
+              </AnchorLink>
+              <AnchorLink href="/#faq" onClick={closeMobileMenu}>
                 <span className="text-sm text-[#555] hover:text-[#1A1A1A] font-medium">FAQ</span>
-              </Link>
+              </AnchorLink>
               <Link href="/contact" onClick={closeMobileMenu}>
                 <span className="text-sm text-[#555] hover:text-[#1A1A1A] font-medium">Contact</span>
               </Link>
@@ -188,11 +241,11 @@ export default function PublicNavbar() {
                     Team Login
                   </Button>
                 </Link>
-                <Link href="/#book" onClick={closeMobileMenu}>
+                <AnchorLink href="/#book" onClick={closeMobileMenu}>
                   <Button size="sm" className="w-full bg-teal-500 hover:bg-teal-600 text-white">
                     Get Started
                   </Button>
-                </Link>
+                </AnchorLink>
               </div>
             </div>
           </div>

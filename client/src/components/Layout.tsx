@@ -141,11 +141,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             {user && (
               <div className="flex items-center gap-3 px-3 py-2 bg-secondary/50 rounded-lg">
                 <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
-                  {user.avatar ? (
-                    <img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-full object-cover" />
-                  ) : (
-                    <User className="w-4 h-4 text-primary" />
-                  )}
+                  <User className="w-4 h-4 text-primary" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-foreground truncate">{user.name}</p>
@@ -194,11 +190,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="flex items-center gap-2">
           {user && (
             <div className="w-7 h-7 rounded-full bg-primary/20 flex items-center justify-center">
-              {user.avatar ? (
-                <img src={user.avatar} alt={user.name} className="w-7 h-7 rounded-full object-cover" />
-              ) : (
-                <User className="w-3.5 h-3.5 text-primary" />
-              )}
+              <User className="w-3.5 h-3.5 text-primary" />
             </div>
           )}
           <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>

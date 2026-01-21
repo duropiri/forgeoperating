@@ -108,3 +108,8 @@
 - [x] Fix navbar anchor links (How It Works, Reviews, FAQ, Contact)
 - [x] Ensure smooth scroll behavior
 - [x] Test all navigation anchors
+
+
+## Logo Redesign
+- [x] Create minimalist F icon with anvil/forge design
+- [x] Update fog-icon.png in public folder

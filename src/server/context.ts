@@ -1,8 +1,14 @@
 import { cookies } from "next/headers";
-import type { User } from "../../drizzle/schema";
 import { COOKIE_NAME } from "@shared/const";
 import { jwtVerify } from "jose";
 import { ENV } from "@/lib/env";
+
+// Simple user type for password auth
+export type User = {
+  id: number;
+  name: string;
+  email: string | null;
+};
 
 export type TrpcContext = {
   user: User | null;
@@ -53,21 +59,14 @@ export async function createContext(): Promise<TrpcContext> {
       const session = await verifySession(sessionCookie);
 
       if (session) {
-        // Create a simple user object for password-authenticated sessions
         user = {
           id: 1,
-          openId: session.openId,
           name: session.name,
           email: null,
-          loginMethod: "password",
-          role: "user",
-          createdAt: new Date(),
-          lastSignedIn: new Date(),
-        } as User;
+        };
       }
     }
   } catch (error) {
-    // Authentication is optional for public procedures.
     user = null;
   }
 

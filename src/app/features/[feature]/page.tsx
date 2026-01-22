@@ -275,11 +275,10 @@ const GHLCalendarEmbed = () => (
       <p className="text-sm text-[#666]">Pick a time that works for you</p>
     </div>
     {/* GHL Calendar Embed */}
-    <div className="p-4 min-h-[600px]">
+    <div className="p-4">
       <iframe
         src="https://api.leadconnectorhq.com/widget/booking/hBKZNkdYJIOKUevPGaxf"
-        style={{ width: '100%', height: '600px', border: 'none', overflow: 'hidden' }}
-        scrolling="no"
+        style={{ width: '100%', height: '800px', border: 'none' }}
         id="msgsndr-calendar-feature"
         title="Book a Demo"
       />

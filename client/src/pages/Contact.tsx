@@ -18,16 +18,15 @@ const GHLFormEmbed = () => (
       <h3 className="font-semibold text-lg text-[#1A1A1A]">Send Us a Message</h3>
       <p className="text-sm text-[#666]">We'll get back to you within 24 hours</p>
     </div>
-    {/* GHL Form Embed Placeholder */}
-    <div className="p-8 min-h-[400px] flex items-center justify-center bg-[#FAFAF8]">
-      <div className="text-center">
-        <MessageSquare className="w-16 h-16 text-teal-500 mx-auto mb-4" />
-        <p className="text-[#555] mb-2 font-medium">GoHighLevel Form Embed</p>
-        <p className="text-xs text-[#888] max-w-xs mx-auto mb-4">Replace this placeholder with your GHL contact form embed code</p>
-        <code className="block p-3 bg-[#F0EDE8] rounded text-xs text-left overflow-x-auto text-[#555]">
-          {`<!-- GHL Form Embed -->\n<iframe src="YOUR_GHL_FORM_URL" \n  width="100%" height="500" \n  frameborder="0"></iframe>`}
-        </code>
-      </div>
+    {/* GHL Calendar Embed */}
+    <div className="p-4 min-h-[600px]">
+      <iframe 
+        src="https://api.leadconnectorhq.com/widget/booking/hBKZNkdYJIOKUevPGaxf" 
+        style={{ width: '100%', height: '600px', border: 'none', overflow: 'hidden' }} 
+        scrolling="no" 
+        id="msgsndr-calendar-contact"
+        title="Book a Demo"
+      />
     </div>
   </div>
 );

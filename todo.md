@@ -113,3 +113,9 @@
 ## Logo Redesign
 - [x] Create minimalist F icon with anvil/forge design
 - [x] Update fog-icon.png in public folder
+
+
+## GHL Calendar Embed
+- [x] Find all calendar/booking embed locations
+- [x] Update with GoHighLevel booking widget
+- [x] Test calendar functionality

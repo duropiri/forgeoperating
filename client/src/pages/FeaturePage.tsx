@@ -271,13 +271,15 @@ const GHLCalendarEmbed = () => (
       <h3 className="font-semibold text-lg text-[#1A1A1A]">Book Your Free Strategy Call</h3>
       <p className="text-sm text-[#666]">Pick a time that works for you</p>
     </div>
-    {/* GHL Calendar Embed Placeholder */}
-    <div className="p-8 min-h-[300px] flex items-center justify-center bg-[#FAFAF8]">
-      <div className="text-center">
-        <Calendar className="w-12 h-12 text-teal-500 mx-auto mb-4" />
-        <p className="text-[#666] mb-2 font-medium">GoHighLevel Calendar Embed</p>
-        <p className="text-xs text-[#888] max-w-xs mx-auto">Replace this placeholder with your GHL calendar embed code</p>
-      </div>
+    {/* GHL Calendar Embed */}
+    <div className="p-4 min-h-[600px]">
+      <iframe 
+        src="https://api.leadconnectorhq.com/widget/booking/hBKZNkdYJIOKUevPGaxf" 
+        style={{ width: '100%', height: '600px', border: 'none', overflow: 'hidden' }} 
+        scrolling="no" 
+        id="msgsndr-calendar-feature"
+        title="Book a Demo"
+      />
     </div>
   </div>
 );

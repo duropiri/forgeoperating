@@ -1,0 +1,288 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import Image from "next/image";
+import { cn } from "@/lib/utils";
+import {
+  LayoutGrid,
+  BookOpen,
+  PhoneCall,
+  Shield,
+  Menu,
+  X,
+  Globe,
+  Wrench,
+  ClipboardCheck,
+  ChevronRight,
+  LogOut,
+} from "lucide-react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { useAuth } from "@/lib/auth/hooks";
+
+export default function Layout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { logout, loading } = useAuth();
+
+  const handleLogout = async () => {
+    await logout();
+    window.location.href = "/";
+  };
+
+  const salesNavItems = [
+    {
+      href: "/playbook",
+      label: "The Playbook",
+      icon: BookOpen,
+      description: "Systems methodology",
+    },
+    {
+      href: "/scripts",
+      label: "Call Scripts",
+      icon: PhoneCall,
+      description: "Word-for-word scripts",
+    },
+    {
+      href: "/objections",
+      label: "Objections",
+      icon: Shield,
+      description: "Handle any pushback",
+    },
+  ];
+
+  const fulfillmentNavItems = [
+    {
+      href: "/ai-website-setup",
+      label: "Website Setup",
+      icon: Globe,
+      description: "Build sites in 30 min",
+    },
+    {
+      href: "/system-installation",
+      label: "System Install",
+      icon: Wrench,
+      description: "Deploy the stack",
+    },
+    {
+      href: "/qa-checklist",
+      label: "QA Checklist",
+      icon: ClipboardCheck,
+      description: "Pre-launch checks",
+    },
+  ];
+
+  const NavLink = ({
+    item,
+    onClick,
+  }: {
+    item: (typeof salesNavItems)[0];
+    onClick?: () => void;
+  }) => {
+    const Icon = item.icon;
+    const isActive = pathname === item.href;
+
+    return (
+      <Link href={item.href} onClick={onClick}>
+        <div
+          className={cn(
+            "group flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200",
+            isActive
+              ? "bg-primary/10 text-primary"
+              : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+          )}
+        >
+          <Icon
+            className={cn(
+              "w-4 h-4 flex-shrink-0",
+              isActive
+                ? "text-primary"
+                : "text-muted-foreground group-hover:text-foreground"
+            )}
+          />
+          <div className="flex-1 min-w-0">
+            <span
+              className={cn(
+                "block text-sm font-medium",
+                isActive ? "text-primary" : ""
+              )}
+            >
+              {item.label}
+            </span>
+            <span className="block text-xs text-muted-foreground truncate">
+              {item.description}
+            </span>
+          </div>
+          <ChevronRight
+            className={cn(
+              "w-4 h-4 opacity-0 -translate-x-2 transition-all",
+              isActive
+                ? "opacity-100 translate-x-0 text-primary"
+                : "group-hover:opacity-50 group-hover:translate-x-0"
+            )}
+          />
+        </div>
+      </Link>
+    );
+  };
+
+  return (
+    <div className="bg-background text-foreground md:flex md:flex-row">
+      {/* Sidebar Navigation */}
+      <aside
+        className={cn(
+          "fixed inset-y-0 left-0 z-50 w-72 bg-sidebar border-r border-sidebar-border transform transition-transform duration-300 ease-out",
+          "md:sticky md:top-0 md:h-screen md:translate-x-0 md:flex-shrink-0",
+          isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+        )}
+      >
+        <div className="h-full flex flex-col">
+          {/* Logo */}
+          <div className="p-6 border-b border-sidebar-border">
+            <Link href="/dashboard">
+              <div className="flex items-center gap-2.5 cursor-pointer">
+                <Image
+                  src="/fog-icon.png"
+                  alt="Forge Operating Group"
+                  width={32}
+                  height={32}
+                  className="object-contain"
+                />
+                <div>
+                  <h1 className="text-base font-bold text-foreground tracking-tight leading-tight">
+                    Forge Operating
+                  </h1>
+                  <p className="text-[10px] text-primary font-semibold uppercase tracking-wider">
+                    Group • Training Hub
+                  </p>
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          {/* Navigation */}
+          <nav className="flex-1 p-4 space-y-6 overflow-y-auto">
+            {/* Home Link */}
+            <Link href="/dashboard">
+              <div
+                className={cn(
+                  "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200",
+                  pathname === "/dashboard"
+                    ? "bg-primary/10 text-primary"
+                    : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+                )}
+              >
+                <LayoutGrid className="w-4 h-4" />
+                <span className="text-sm font-medium">Dashboard</span>
+              </div>
+            </Link>
+
+            {/* Sales Training Section */}
+            <div>
+              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider px-3 mb-2">
+                Sales Training
+              </p>
+              <div className="space-y-1">
+                {salesNavItems.map((item) => (
+                  <NavLink
+                    key={item.href}
+                    item={item}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Fulfillment Ops Section */}
+            <div>
+              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider px-3 mb-2">
+                Fulfillment Ops
+              </p>
+              <div className="space-y-1">
+                {fulfillmentNavItems.map((item) => (
+                  <NavLink
+                    key={item.href}
+                    item={item}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  />
+                ))}
+              </div>
+            </div>
+          </nav>
+
+          {/* Footer */}
+          <div className="p-4 border-t border-sidebar-border space-y-3">
+            {/* Logout Button */}
+            <Button
+              variant="ghost"
+              size="sm"
+              className="w-full justify-start text-muted-foreground hover:text-foreground hover:bg-secondary"
+              onClick={handleLogout}
+              disabled={loading}
+            >
+              <LogOut className="w-4 h-4 mr-2" />
+              Sign Out
+            </Button>
+
+            {/* Back to Main Site */}
+            <Link href="/">
+              <Button
+                variant="outline"
+                size="sm"
+                className="w-full text-muted-foreground border-sidebar-border hover:bg-secondary"
+              >
+                ← Back to Main Site
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </aside>
+
+      {/* Mobile Header */}
+      <div className="md:hidden flex items-center justify-between p-4 border-b border-border bg-background sticky top-0 z-40">
+        <Link href="/dashboard">
+          <div className="flex items-center gap-2">
+            <Image
+              src="/fog-icon.png"
+              alt="FOG"
+              width={28}
+              height={28}
+              className="object-contain"
+            />
+            <div className="flex flex-col leading-none">
+              <span className="text-sm font-bold">Forge Operating</span>
+              <span className="text-[9px] text-primary font-semibold">
+                GROUP
+              </span>
+            </div>
+          </div>
+        </Link>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          {isMobileMenuOpen ? (
+            <X className="w-5 h-5" />
+          ) : (
+            <Menu className="w-5 h-5" />
+          )}
+        </Button>
+      </div>
+
+      {/* Main Content */}
+      <main className="flex-1 min-h-screen">
+        <div className="container py-8 md:py-12 animate-fade-in">{children}</div>
+      </main>
+
+      {/* Overlay for mobile menu */}
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/60 z-40 md:hidden backdrop-blur-sm"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+    </div>
+  );
+}

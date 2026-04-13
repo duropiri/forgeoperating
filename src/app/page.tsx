@@ -24,9 +24,10 @@ import {
   Smartphone,
   Search,
   MousePointer,
+  MapPin,
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   FadeIn,
   StaggerContainer,
@@ -36,10 +37,7 @@ import {
   Magnetic,
   Floating,
   GlowPulse,
-  HoverCard,
-  TextReveal,
   MorphingBg,
-  Parallax,
 } from "@/components/animations";
 
 // Star rating component
@@ -174,27 +172,27 @@ const allFeatures = [
   },
 ];
 
-// Features for hero cards (subset)
+// Features for review gap cards (subset)
 const heroFeatures = [
   {
     icon: Bell,
     title: "Automatic Follow-Up Reminders",
     description:
-      '"Sure I\'ll leave you a review", but the truth is people forget. We\'ll \'gently\' remind them for a few weeks until they remember.',
+      "People say they'll leave a review and then forget. Every time. We'll gently remind them for weeks until they remember.",
     color: "bg-teal-50 text-teal-600",
   },
   {
     icon: ThumbsUp,
-    title: "Ask For Reviews In One Click",
+    title: "One-Click Review Requests",
     description:
-      "As promised, we keep it simple. If you're confused, we're fired and extremely embarrassed.",
+      "Send a review request in one click. If you're confused, we're fired.",
     color: "bg-amber-50 text-amber-600",
   },
   {
     icon: Shield,
-    title: "Stop worrying about bad reviews",
+    title: "Bad Review Prevention",
     description:
-      "Unsure if you should ask for a review? We'll take the guesswork out by guiding your customer to leave a 5-star review!",
+      "Unhappy customer? The system catches them before they hit Google and routes them to you privately.",
     color: "bg-blue-50 text-blue-600",
   },
 ];
@@ -227,32 +225,137 @@ const testimonials = [
   },
 ];
 
-// FAQ data
+// FAQ data — mapped from Offer Brief objections
 const faqs = [
   {
-    question: "How is this different from other marketing agencies?",
+    question: "I've been burned by agencies before",
     answer:
-      "We don't sell 'marketing services'. We install a complete system that works 24/7. No monthly retainers for 'strategy calls'. Just a machine that generates customers on autopilot.",
+      "We're not an agency. We install infrastructure in your business. There's no retainer for 'strategy calls.' Just a system that works 24/7. Plus: 20 reviews in 60 days or we work free. No contracts.",
   },
   {
-    question: "How long until I see results?",
+    question: "I'm not tech-savvy",
     answer:
-      "Most clients see their first new leads within 48 hours. The review system typically generates 5-10 new reviews in the first month. Full ROI is usually achieved within 60-90 days.",
+      "You don't need to be. We handle 100% of the setup, configuration, and management. If you can answer your phone, you can use this. Actually \u2014 the AI answers your phone for you, so you don't even need to do that.",
   },
   {
-    question: "Do I need to be tech-savvy?",
+    question: "Can't I just do this myself with GoHighLevel?",
     answer:
-      "Not at all. We handle 100% of the setup. If you can send a text message, you can use this. Plus, our AI handles most customer interactions automatically.",
+      "You could buy GHL for $97/month. Then spend 60+ hours learning to configure it, deal with hidden fees, and troubleshoot broken email deliverability on your own. Or we install a fully configured, proven system in 72 hours. Your call.",
   },
   {
-    question: "What if I already have a website?",
+    question: "What happens if I cancel?",
     answer:
-      "Great! We can integrate our systems with your existing site, or build you a new high-converting one. Either way, the automation layer works the same.",
+      "You keep the website. Unlike competitors who lock you into proprietary systems, your web presence stays yours. The AI automations turn off when you stop paying, but you walk away with your digital assets.",
+  },
+  {
+    question: "How do I know it'll work for my business?",
+    answer:
+      "We guarantee 20 reviews in 60 days or we work free. 500+ businesses across plumbing, HVAC, dental, and med spa verticals have used this system. Book a demo and we'll show you results from businesses like yours.",
   },
   {
     question: "Is there a contract?",
     answer:
-      "No long-term contracts. Month-to-month because we're confident you'll stay once you see the results. Most clients have been with us for 2+ years.",
+      "No. Month-to-month. Every major competitor locks you into 6-24 month contracts. We don't. Stay because it works, not because you're trapped.",
+  },
+  {
+    question: "Will customers know it's AI?",
+    answer:
+      "No. Modern AI is conversationally fluent \u2014 customers just know that someone answered on the first ring and handled their request professionally. That's all they care about.",
+  },
+];
+
+// Comparison table data — Section 4
+const comparisonData = {
+  features: [
+    "Contract Required",
+    "Done-For-You Setup",
+    "AI Receptionist",
+    "Results Guarantee",
+    "Keep Your Data",
+  ],
+  companies: [
+    {
+      name: "Forge",
+      highlight: true,
+      values: [
+        "None",
+        "Yes, 72 hours",
+        "Yes",
+        "20 reviews / 60 days",
+        "Yes",
+      ],
+    },
+    {
+      name: "Scorpion",
+      highlight: false,
+      values: ["12-24 months", "Yes, weeks/months", "No", "No", "No"],
+    },
+    {
+      name: "Podium",
+      highlight: false,
+      values: ["Varies", "Partial", "No", "No", "Varies"],
+    },
+    {
+      name: "GHL (DIY)",
+      highlight: false,
+      values: ["None", "No (DIY)", "Config yourself", "No", "Yes"],
+    },
+    {
+      name: "Thryv",
+      highlight: false,
+      values: ["6+ months", "Partial", "No", "No", "Unknown"],
+    },
+  ],
+};
+
+// AI Employee capabilities — Section 6
+const aiCapabilities = [
+  {
+    icon: Phone,
+    title: "Answers every call",
+    description: "First ring. Every time. Even at 2 AM.",
+  },
+  {
+    icon: Smartphone,
+    title: "Texts back missed calls",
+    description: "In seconds, not hours. Before they call your competitor.",
+  },
+  {
+    icon: Calendar,
+    title: "Books appointments",
+    description: "Automatically. No back-and-forth. No phone tag.",
+  },
+  {
+    icon: Star,
+    title: "Collects reviews",
+    description: "After every job, without you asking. 5 stars on autopilot.",
+  },
+  {
+    icon: RefreshCw,
+    title: "Follows up with leads",
+    description: "For weeks. Automatically. Until they book or say no.",
+  },
+];
+
+// Guarantee pillars — Section 7
+const guaranteePillars = [
+  {
+    icon: Shield,
+    title: "Guaranteed Results",
+    description:
+      "20 new 5-star reviews in your first 60 days, or we continue working for free until you hit it.",
+  },
+  {
+    icon: BadgeCheck,
+    title: "No Contracts",
+    description:
+      "Month-to-month. Stay because it works, not because you're trapped. Cancel anytime.",
+  },
+  {
+    icon: MapPin,
+    title: "One Per Zip Code",
+    description:
+      "We only work with one business per zip code to protect your competitive advantage. Check if your area is available.",
   },
 ];
 
@@ -435,27 +538,18 @@ const AnimatedFaqItem = ({ faq, idx, isOpen, onClick }: { faq: typeof faqs[0]; i
 
 export default function Landing() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const { scrollYProgress } = useScroll();
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-  const heroScale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
 
   return (
     <div className="min-h-screen light-landing bg-[#F7F4EF] text-[#1A1A1A] overflow-hidden">
       {/* Animated Background Gradient */}
       <MorphingBg className="fixed" />
-      
+
       <PublicNavbar />
 
-      {/* Hero Section */}
-      <motion.section
-        className="pt-28 pb-16 px-6 relative"
-        style={{ opacity: heroOpacity }}
-      >
+      {/* Section 1: Hero — The Hook */}
+      <section className="pt-28 pb-16 px-6 relative">
         <div className="max-w-6xl mx-auto">
-          <motion.div
-            className="text-center max-w-3xl mx-auto"
-            style={{ scale: heroScale }}
-          >
+          <div className="text-center max-w-3xl mx-auto">
             {/* Badge */}
             <FadeIn delay={0.1}>
               <motion.div
@@ -469,7 +563,7 @@ export default function Landing() {
                   <Sparkles className="w-4 h-4 text-teal-500" />
                 </motion.div>
                 <span className="text-sm font-medium text-teal-700">
-                  The Complete AI Marketing System
+                  The AI Employee Your Business Has Been Missing
                 </span>
               </motion.div>
             </FadeIn>
@@ -477,7 +571,9 @@ export default function Landing() {
             {/* H1 - Main Headline */}
             <BlurIn delay={0.2}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 tracking-tight">
-                5-Star Magic
+                Your Competitor Answered.
+                <br />
+                You Didn&apos;t.
                 <motion.span
                   className="block text-teal-500"
                   animate={{
@@ -489,7 +585,7 @@ export default function Landing() {
                   }}
                   transition={{ duration: 3, repeat: Infinity }}
                 >
-                  Review Funnel
+                  Guess Who Got The Job?
                 </motion.span>
               </h1>
             </BlurIn>
@@ -512,8 +608,11 @@ export default function Landing() {
             {/* Subheadline */}
             <FadeIn delay={0.5}>
               <p className="text-lg md:text-xl text-[#666] max-w-2xl mx-auto mb-8 leading-relaxed">
-                "Sure I&apos;ll leave you a review", but the truth is people forget. We&apos;ll
-                &apos;gently&apos; remind them for a few weeks until they remember.
+                85% of callers who hit voicemail hang up and call someone else.
+                That&apos;s $120,000 a year walking out the door. The Forge Growth
+                System installs an AI employee in your business that answers every
+                call, texts back every missed call, and generates 5-star reviews on
+                autopilot &mdash; in 72 hours.
               </p>
             </FadeIn>
 
@@ -542,7 +641,7 @@ export default function Landing() {
                         variant="outline"
                         className="text-lg px-8 border-[#D4D0C8] text-[#1A1A1A] hover:bg-[#E8E4DD] bg-white"
                       >
-                        See How It Works
+                        How It Works
                       </Button>
                     </motion.div>
                   </a>
@@ -580,14 +679,18 @@ export default function Landing() {
                   <BadgeCheck className="w-4 h-4 text-teal-500" />
                   <span>No contracts</span>
                 </motion.div>
+                <motion.div className="flex items-center gap-1" whileHover={{ scale: 1.05 }}>
+                  <Shield className="w-4 h-4 text-teal-500" />
+                  <span>Guaranteed results</span>
+                </motion.div>
               </div>
             </FadeIn>
-          </motion.div>
+          </div>
         </div>
-      </motion.section>
+      </section>
 
-      {/* Feature Cards - Stone Systems Style */}
-      <section id="features" className="py-16 px-6 relative">
+      {/* Section 2: The Problem — Speed Wins (Belief #1) */}
+      <section className="py-16 px-6 relative">
         <div className="max-w-6xl mx-auto">
           <FadeIn>
             <div className="text-center mb-12">
@@ -597,53 +700,185 @@ export default function Landing() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
               >
-                Why It Works
+                The Real Problem
               </motion.p>
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-                You can&apos;t make everyone happy, but our
-                <span className="text-teal-500"> magic funnel</span> sure can.
+                You&apos;re Not Losing Customers Because Your Work Is Bad.
+                <span className="block text-teal-500">
+                  You&apos;re Losing Them Because Your Phone Went To Voicemail.
+                </span>
               </h2>
             </div>
           </FadeIn>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            {[
+              { value: 85, suffix: "%", label: "of callers who hit voicemail hang up and call your competitor" },
+              { value: 62, suffix: "%", label: "of calls go unanswered when you're on a job site" },
+              { prefix: "$", value: 120, suffix: "K", label: "lost per year to missed calls alone" },
+            ].map((stat, idx) => (
+              <FadeIn key={idx} delay={idx * 0.15}>
+                <Card className="bg-white border-[#E8E4DD] shadow-sm text-center h-full">
+                  <CardContent className="p-8">
+                    <p className="text-4xl md:text-5xl font-bold text-teal-500 mb-3">
+                      {stat.prefix || ""}
+                      <AnimatedNumber value={stat.value} suffix={stat.suffix} />
+                    </p>
+                    <p className="text-[#666] leading-relaxed">{stat.label}</p>
+                  </CardContent>
+                </Card>
+              </FadeIn>
+            ))}
+          </div>
+
+          <FadeIn delay={0.5}>
+            <p className="text-center text-lg text-[#666] italic">
+              &ldquo;By the time you call back, they already booked someone else.&rdquo;
+            </p>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* Section 3: The Review Gap — Hook Deepened */}
+      <section id="features" className="py-16 px-6 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <FadeIn>
+            <div className="text-center mb-12">
+              <motion.p
+                className="text-sm font-medium text-teal-600 uppercase tracking-wider mb-3"
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                The Review Problem
+              </motion.p>
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
+                Your Competitor&apos;s Secret Weapon Isn&apos;t Better Work.
+                <span className="text-teal-500"> It&apos;s Better Systems.</span>
+              </h2>
+            </div>
+          </FadeIn>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             {heroFeatures.map((feature, idx) => (
               <AnimatedFeatureCard key={idx} feature={feature} idx={idx} />
             ))}
           </div>
+
+          <FadeIn delay={0.5}>
+            <p className="text-center text-lg text-[#666] max-w-2xl mx-auto">
+              Businesses with 100+ reviews get 25% more calls. With the right
+              system, that&apos;s 4 reviews per week &mdash; 200+ in a year.
+            </p>
+          </FadeIn>
         </div>
       </section>
 
-      {/* Stats Bar */}
-      <section className="py-12 px-6 bg-white border-y border-[#E8E4DD] relative overflow-hidden">
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-teal-500/5 via-transparent to-teal-500/5"
-          animate={{ x: ["-100%", "100%"] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-        />
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {[
-              { value: 500, suffix: "+", label: "Businesses Powered" },
-              { value: 47, suffix: "", label: "Avg New Reviews/Client" },
-              { value: 312, suffix: "%", label: "Average ROI" },
-              { value: 24, suffix: "/7", label: "AI Working For You" },
-            ].map((stat, idx) => (
-              <FadeIn key={idx} delay={idx * 0.1}>
-                <motion.div whileHover={{ scale: 1.05 }}>
-                  <p className="text-3xl md:text-4xl font-bold text-teal-500">
-                    <AnimatedNumber value={stat.value} suffix={stat.suffix} />
-                  </p>
-                  <p className="text-sm text-[#666] mt-1">{stat.label}</p>
-                </motion.div>
-              </FadeIn>
-            ))}
-          </div>
+      {/* Section 4: Not Agency — Differentiation (Belief #3) */}
+      <section className="py-20 px-6">
+        <div className="max-w-6xl mx-auto">
+          <FadeIn>
+            <div className="text-center mb-12">
+              <p className="text-sm font-medium text-teal-600 uppercase tracking-wider mb-3">
+                This Isn&apos;t An Agency
+              </p>
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+                We Don&apos;t Do Marketing FOR You.
+                <span className="text-teal-500"> We Install A Machine IN You.</span>
+              </h2>
+              <p className="text-lg text-[#666] max-w-2xl mx-auto">
+                Your last agency overpromised and underdelivered. Here&apos;s how
+                we&apos;re structurally different.
+              </p>
+            </div>
+          </FadeIn>
+
+          {/* Desktop comparison table */}
+          <FadeIn delay={0.2}>
+            <div className="hidden md:block overflow-x-auto">
+              <Card className="bg-white border-[#E8E4DD] shadow-sm overflow-hidden">
+                <CardContent className="p-0">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b border-[#E8E4DD]">
+                        <th className="text-left p-4 font-medium text-[#666]" />
+                        {comparisonData.companies.map((company) => (
+                          <th
+                            key={company.name}
+                            className={`p-4 font-semibold text-center ${
+                              company.highlight
+                                ? "bg-teal-50 text-teal-700 text-base"
+                                : "text-[#666]"
+                            }`}
+                          >
+                            {company.name}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {comparisonData.features.map((feature, fIdx) => (
+                        <tr
+                          key={feature}
+                          className={fIdx < comparisonData.features.length - 1 ? "border-b border-[#E8E4DD]" : ""}
+                        >
+                          <td className="p-4 font-medium">{feature}</td>
+                          {comparisonData.companies.map((company) => {
+                            const val = company.values[fIdx];
+                            const isPositive =
+                              val === "Yes" ||
+                              val.startsWith("Yes,") ||
+                              val === "None" ||
+                              val.startsWith("20 reviews");
+                            const isNegative = val === "No" || val === "Unknown";
+                            return (
+                              <td
+                                key={company.name}
+                                className={`p-4 text-center ${
+                                  company.highlight ? "bg-teal-50" : ""
+                                } ${isPositive ? "text-teal-600 font-medium" : ""} ${
+                                  isNegative ? "text-red-400" : ""
+                                }`}
+                              >
+                                {val}
+                              </td>
+                            );
+                          })}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </CardContent>
+              </Card>
+            </div>
+          </FadeIn>
+
+          {/* Mobile: FOG-only highlights */}
+          <FadeIn delay={0.2}>
+            <div className="md:hidden space-y-4">
+              {comparisonData.features.map((feature, idx) => (
+                <Card key={idx} className="bg-white border-[#E8E4DD] shadow-sm">
+                  <CardContent className="p-4 flex items-center justify-between">
+                    <span className="font-medium text-sm">{feature}</span>
+                    <span className="text-sm font-medium text-teal-600">
+                      {comparisonData.companies[0].values[idx]}
+                    </span>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </FadeIn>
+
+          <FadeIn delay={0.4}>
+            <p className="text-center text-lg text-[#666] mt-8 italic">
+              &ldquo;Agencies disappear. Infrastructure doesn&apos;t.&rdquo;
+            </p>
+          </FadeIn>
         </div>
       </section>
 
-      {/* The Full System - All 9 Features */}
-      <section id="how-it-works" className="py-20 px-6">
+      {/* Section 5: Zero Effort — The Full System (Belief #6) */}
+      <section id="how-it-works" className="py-20 px-6 bg-white">
         <div className="max-w-6xl mx-auto">
           <FadeIn>
             <div className="text-center mb-16">
@@ -651,12 +886,11 @@ export default function Landing() {
                 The Complete System
               </p>
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-                Nine revenue engines.
-                <span className="text-teal-500"> One system.</span>
+                You Say Yes. We Build Everything.
+                <span className="text-teal-500"> Your Phone Starts Ringing.</span>
               </h2>
               <p className="text-lg text-[#666] max-w-2xl mx-auto">
-                The review funnel is just the start. Here&apos;s everything that works
-                together to turn your business into a customer-generating machine.
+                Installed in 72 hours. Zero learning curve. Zero hours per week to manage.
               </p>
             </div>
           </FadeIn>
@@ -666,11 +900,126 @@ export default function Landing() {
               <AnimatedAllFeaturesCard key={idx} feature={feature} idx={idx} />
             ))}
           </div>
+
+          <FadeIn delay={0.5}>
+            <p className="text-center text-lg text-[#666] mt-12 max-w-2xl mx-auto italic">
+              &ldquo;You didn&apos;t start this business to do marketing. So stop.
+              Let the system handle it.&rdquo;
+            </p>
+          </FadeIn>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section id="testimonials" className="py-20 px-6 bg-white">
+      {/* Section 6: AI Employee — The Mechanism (Belief #2) */}
+      <section className="py-20 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            {/* Left: Headline + closing (sticky on desktop) */}
+            <motion.div
+              className="lg:sticky lg:top-32"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
+              viewport={{ once: true }}
+            >
+              <p className="text-sm font-medium text-teal-600 uppercase tracking-wider mb-3">
+                Meet Your New Employee
+              </p>
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
+                An Employee That Never Sleeps, Never Calls In Sick, And Generates
+                5-Star Reviews While You&apos;re On The Job.
+              </h2>
+              <p className="text-lg text-[#666] leading-relaxed hidden lg:block">
+                Customers don&apos;t know it&apos;s AI. They just know someone
+                answered on the first ring.
+              </p>
+            </motion.div>
+
+            {/* Right: Staggered capability list */}
+            <StaggerContainer staggerDelay={0.15}>
+              {aiCapabilities.map((cap, idx) => {
+                const Icon = cap.icon;
+                return (
+                  <StaggerItem key={idx}>
+                    <motion.div
+                      className="flex items-start gap-4 mb-6"
+                      whileHover={{ x: 5 }}
+                    >
+                      <motion.div
+                        className="w-12 h-12 rounded-xl bg-teal-50 flex items-center justify-center flex-shrink-0"
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        transition={{ type: "spring", stiffness: 400 }}
+                      >
+                        <Icon className="w-6 h-6 text-teal-600" />
+                      </motion.div>
+                      <div>
+                        <h3 className="font-semibold tracking-tight mb-1">
+                          {cap.title}
+                        </h3>
+                        <p className="text-[#666] text-sm">{cap.description}</p>
+                      </div>
+                    </motion.div>
+                  </StaggerItem>
+                );
+              })}
+            </StaggerContainer>
+
+            {/* Mobile closing line */}
+            <FadeIn className="lg:hidden">
+              <p className="text-lg text-[#666] leading-relaxed italic">
+                Customers don&apos;t know it&apos;s AI. They just know someone
+                answered on the first ring.
+              </p>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 7: Zero Risk — Guarantee (Belief #5) */}
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <FadeIn>
+            <div className="text-center mb-12">
+              <p className="text-sm font-medium text-teal-600 uppercase tracking-wider mb-3">
+                The Guarantee
+              </p>
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
+                20 Reviews In 60 Days Or We Work Free.
+              </h2>
+            </div>
+          </FadeIn>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {guaranteePillars.map((pillar, idx) => {
+              const Icon = pillar.icon;
+              return (
+                <FadeIn key={idx} delay={idx * 0.15}>
+                  <motion.div whileHover={{ y: -5 }}>
+                    <Card className="bg-[#F7F4EF] border-[#E8E4DD] shadow-sm hover:shadow-md transition-all duration-300 h-full">
+                      <CardContent className="p-8 text-center">
+                        <ScaleIn delay={0.2 + idx * 0.1}>
+                          <div className="w-14 h-14 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center mx-auto mb-6">
+                            <Icon className="w-7 h-7" />
+                          </div>
+                        </ScaleIn>
+                        <h3 className="text-xl font-semibold mb-3 tracking-tight">
+                          {pillar.title}
+                        </h3>
+                        <p className="text-[#666] leading-relaxed">
+                          {pillar.description}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                </FadeIn>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Section 8: Testimonials — Proven Results (Belief #4) */}
+      <section id="testimonials" className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <FadeIn>
             <div className="text-center mb-12">
@@ -683,16 +1032,44 @@ export default function Landing() {
             </div>
           </FadeIn>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             {testimonials.map((testimonial, idx) => (
               <AnimatedTestimonialCard key={idx} testimonial={testimonial} idx={idx} />
             ))}
           </div>
+
+          {/* Stats Bar — moved here from old position */}
+          <div className="py-8 px-6 bg-white rounded-2xl border border-[#E8E4DD] shadow-sm relative overflow-hidden">
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-teal-500/5 via-transparent to-teal-500/5"
+              animate={{ x: ["-100%", "100%"] }}
+              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+            />
+            <div className="relative z-10">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                {[
+                  { value: 500, suffix: "+", label: "Businesses Powered" },
+                  { value: 47, suffix: "", label: "Avg New Reviews/Client" },
+                  { value: 312, suffix: "%", label: "Average ROI" },
+                  { value: 24, suffix: "/7", label: "AI Working For You" },
+                ].map((stat, idx) => (
+                  <FadeIn key={idx} delay={idx * 0.1}>
+                    <motion.div whileHover={{ scale: 1.05 }}>
+                      <p className="text-3xl md:text-4xl font-bold text-teal-500">
+                        <AnimatedNumber value={stat.value} suffix={stat.suffix} />
+                      </p>
+                      <p className="text-sm text-[#666] mt-1">{stat.label}</p>
+                    </motion.div>
+                  </FadeIn>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* CTA Section with Calendar */}
-      <section id="book" className="py-20 px-6">
+      {/* Section 9: CTA + Calendar */}
+      <section id="book" className="py-20 px-6 bg-white">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             {/* Left: CTA Text */}
@@ -709,19 +1086,19 @@ export default function Landing() {
                 </div>
               </Floating>
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-                Ready to get more 5-star reviews?
+                Ready To Stop Losing Customers To Voicemail?
               </h2>
               <p className="text-lg text-[#666] mb-8 leading-relaxed">
-                Book a free 15-minute demo. We&apos;ll show you exactly how the system
-                works and map out a custom implementation plan for your business.
+                Book a free 15-minute demo. We&apos;ll show you exactly how the
+                system works and check if your zip code is still available.
               </p>
 
               <StaggerContainer staggerDelay={0.1}>
                 {[
                   "No commitment required",
                   "15-minute call",
-                  "Custom implementation plan",
-                  "See real results from similar businesses",
+                  "See if your zip code is available",
+                  "Custom plan for your business",
                 ].map((item, idx) => (
                   <StaggerItem key={idx}>
                     <motion.div
@@ -748,8 +1125,8 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section id="faq" className="py-20 px-6 bg-white">
+      {/* Section 10: FAQ — Objection Handling */}
+      <section id="faq" className="py-20 px-6">
         <div className="max-w-2xl mx-auto">
           <FadeIn>
             <div className="text-center mb-12">

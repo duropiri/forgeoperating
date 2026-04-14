@@ -550,13 +550,13 @@ export default function Landing() {
       <PublicNavbar />
 
       {/* Section 1: Hero — The Hook */}
-      <section className="pt-28 pb-16 px-6 relative">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center max-w-3xl mx-auto">
+      <section className="pt-32 pb-20 px-6 relative">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center">
             {/* Badge */}
             <FadeIn delay={0.1}>
               <motion.div
-                className="inline-flex items-center gap-2 px-4 py-2 bg-teal-50 border border-teal-100 rounded-full mb-8"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-teal-50 border border-teal-100 rounded-full mb-10"
                 whileHover={{ scale: 1.05 }}
               >
                 <motion.div
@@ -573,12 +573,12 @@ export default function Landing() {
 
             {/* H1 - Main Headline */}
             <BlurIn delay={0.2}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 tracking-tight">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-8 tracking-tight">
                 Your Competitor Answered.
                 <br />
                 You Didn&apos;t.
                 <motion.span
-                  className="block text-teal-500"
+                  className="block text-teal-500 mt-2"
                   animate={{
                     textShadow: [
                       "0 0 20px rgba(20, 184, 166, 0)",
@@ -593,42 +593,32 @@ export default function Landing() {
               </h1>
             </BlurIn>
 
-            {/* Star Rating Display */}
+            {/* Stat line */}
             <FadeIn delay={0.4}>
-              <div className="flex justify-center mb-6">
-                <motion.div
-                  className="flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm border border-[#D1D5DB]"
-                  whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(0,0,0,0.1)" }}
-                >
-                  <StarRating filled={5} size="w-6 h-6" />
-                  <span className="text-sm font-medium text-[#3B3B3B]">
-                    Every time.
-                  </span>
-                </motion.div>
-              </div>
+              <p className="text-xl md:text-2xl font-medium text-[#0A0A0A] max-w-2xl mx-auto mb-4">
+                85% of callers who hit voicemail hang up and call someone else.
+              </p>
             </FadeIn>
 
-            {/* Subheadline */}
+            {/* Value prop */}
             <FadeIn delay={0.5}>
-              <p className="text-lg md:text-xl text-[#3B3B3B] max-w-2xl mx-auto mb-8 leading-relaxed">
-                85% of callers who hit voicemail hang up and call someone else.
-                That&apos;s $120,000 a year walking out the door. The Forge Growth
-                System installs an AI employee in your business that answers every
-                call, texts back every missed call, and generates 5-star reviews on
-                autopilot &mdash; in 72 hours.
+              <p className="text-base md:text-lg text-[#3B3B3B] max-w-xl mx-auto mb-10 leading-relaxed">
+                The Forge Growth System installs an AI employee that answers every
+                call, generates 5-star reviews, and follows up with leads &mdash;
+                in 72 hours.
               </p>
             </FadeIn>
 
             {/* CTA Buttons */}
             <FadeIn delay={0.6}>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-14">
                 <Magnetic strength={0.2}>
                   <a href="#book">
                     <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
                       <GlowPulse>
                         <Button
                           size="lg"
-                          className="bg-teal-500 hover:bg-teal-600 text-white text-lg px-8 shadow-md hover:shadow-lg transition-all"
+                          className="bg-teal-500 hover:bg-teal-600 text-white text-lg px-10 py-6 shadow-md hover:shadow-lg transition-all"
                         >
                           Book a Demo <ArrowRight className="w-5 h-5 ml-2" />
                         </Button>
@@ -642,7 +632,7 @@ export default function Landing() {
                       <Button
                         size="lg"
                         variant="outline"
-                        className="text-lg px-8 border-[#D1D5DB] text-[#0A0A0A] hover:bg-gray-200 bg-white"
+                        className="text-lg px-10 py-6 border-[#D1D5DB] text-[#0A0A0A] hover:bg-gray-100 bg-white"
                       >
                         How It Works
                       </Button>
@@ -654,7 +644,7 @@ export default function Landing() {
 
             {/* Social Proof */}
             <FadeIn delay={0.7}>
-              <div className="flex flex-wrap items-center justify-center gap-8 text-sm text-[#3B3B3B]">
+              <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8 text-sm text-[#3B3B3B]">
                 <motion.div
                   className="flex items-center gap-2"
                   whileHover={{ scale: 1.05 }}
@@ -674,15 +664,15 @@ export default function Landing() {
                   </div>
                   <span>500+ businesses</span>
                 </motion.div>
-                <motion.div className="flex items-center gap-1" whileHover={{ scale: 1.05 }}>
+                <motion.div className="flex items-center gap-1.5" whileHover={{ scale: 1.05 }}>
                   <StarRating filled={5} size="w-4 h-4" />
                   <span>4.9 rating</span>
                 </motion.div>
-                <motion.div className="flex items-center gap-1" whileHover={{ scale: 1.05 }}>
+                <motion.div className="flex items-center gap-1.5" whileHover={{ scale: 1.05 }}>
                   <BadgeCheck className="w-4 h-4 text-teal-500" />
                   <span>No contracts</span>
                 </motion.div>
-                <motion.div className="flex items-center gap-1" whileHover={{ scale: 1.05 }}>
+                <motion.div className="flex items-center gap-1.5" whileHover={{ scale: 1.05 }}>
                   <Shield className="w-4 h-4 text-teal-500" />
                   <span>Guaranteed results</span>
                 </motion.div>

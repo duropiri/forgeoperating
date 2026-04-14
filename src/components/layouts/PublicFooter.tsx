@@ -39,7 +39,7 @@ const itemVariants = {
 
 const linkHoverVariants = {
   rest: { x: 0 },
-  hover: { x: 4, color: "#1A1A1A" },
+  hover: { x: 4, color: "#0A0A0A" },
 };
 
 export default function PublicFooter() {
@@ -49,7 +49,7 @@ export default function PublicFooter() {
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
       variants={containerVariants}
-      className="py-12 px-6 border-t border-[#E5E2DB] bg-[#F7F4EF] overflow-hidden"
+      className="py-12 px-6 border-t border-[#D1D5DB] bg-white overflow-hidden"
     >
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
@@ -74,7 +74,7 @@ export default function PublicFooter() {
                   />
                 </motion.div>
                 <div className="flex flex-col leading-none">
-                  <span className="font-bold text-[#1A1A1A]">
+                  <span className="font-bold text-[#0A0A0A]">
                     Forge Operating
                   </span>
                   <span className="text-xs font-semibold text-teal-500 tracking-wide">
@@ -83,7 +83,7 @@ export default function PublicFooter() {
                 </div>
               </motion.div>
             </Link>
-            <p className="text-sm text-[#666] leading-relaxed">
+            <p className="text-sm text-[#3B3B3B] leading-relaxed">
               AI-powered marketing systems for serious operators. Contractors,
               dentists, med spas, and multi-location businesses.
             </p>
@@ -91,10 +91,10 @@ export default function PublicFooter() {
 
           {/* Features Column 1 */}
           <motion.div variants={itemVariants}>
-            <h4 className="font-semibold text-sm mb-4 text-[#1A1A1A]">
+            <h4 className="font-semibold text-sm mb-4 text-[#0A0A0A]">
               Systems
             </h4>
-            <ul className="space-y-2 text-sm text-[#666]">
+            <ul className="space-y-2 text-sm text-[#3B3B3B]">
               {allFeatures.slice(0, 5).map((feature, idx) => (
                 <motion.li
                   key={feature.slug}
@@ -117,10 +117,10 @@ export default function PublicFooter() {
 
           {/* Features Column 2 */}
           <motion.div variants={itemVariants}>
-            <h4 className="font-semibold text-sm mb-4 text-[#1A1A1A]">
+            <h4 className="font-semibold text-sm mb-4 text-[#0A0A0A]">
               More Features
             </h4>
-            <ul className="space-y-2 text-sm text-[#666]">
+            <ul className="space-y-2 text-sm text-[#3B3B3B]">
               {allFeatures.slice(5).map((feature, idx) => (
                 <motion.li
                   key={feature.slug}
@@ -143,10 +143,10 @@ export default function PublicFooter() {
 
           {/* Company */}
           <motion.div variants={itemVariants}>
-            <h4 className="font-semibold text-sm mb-4 text-[#1A1A1A]">
+            <h4 className="font-semibold text-sm mb-4 text-[#0A0A0A]">
               Company
             </h4>
-            <ul className="space-y-2 text-sm text-[#666]">
+            <ul className="space-y-2 text-sm text-[#3B3B3B]">
               {[
                 { href: "/#testimonials", label: "Reviews" },
                 { href: "/#faq", label: "FAQ" },
@@ -177,16 +177,16 @@ export default function PublicFooter() {
 
         <motion.div
           variants={itemVariants}
-          className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 border-t border-[#E5E2DB]"
+          className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 border-t border-[#D1D5DB]"
         >
-          <p className="text-sm text-[#666]">
+          <p className="text-sm text-[#3B3B3B]">
             © 2025 Forge Operating Group. All rights reserved.
           </p>
-          <div className="flex items-center gap-6 text-sm text-[#666]">
+          <div className="flex items-center gap-6 text-sm text-[#3B3B3B]">
             <motion.div whileHover={{ scale: 1.05 }}>
               <Link
                 href="/privacy"
-                className="hover:text-[#1A1A1A] transition-colors"
+                className="hover:text-[#0A0A0A] transition-colors"
               >
                 Privacy Policy
               </Link>
@@ -194,7 +194,7 @@ export default function PublicFooter() {
             <motion.div whileHover={{ scale: 1.05 }}>
               <Link
                 href="/terms"
-                className="hover:text-[#1A1A1A] transition-colors"
+                className="hover:text-[#0A0A0A] transition-colors"
               >
                 Terms of Service
               </Link>

@@ -18,10 +18,10 @@ export const metadata: Metadata = {
 
 // GHL Form Embed Component
 const GHLFormEmbed = () => (
-  <div className="bg-white rounded-2xl border border-[#E5E2DB] shadow-lg overflow-hidden">
-    <div className="p-6 border-b border-[#E5E2DB] bg-[#F5F2ED]">
-      <h3 className="font-semibold text-lg text-[#1A1A1A]">Send Us a Message</h3>
-      <p className="text-sm text-[#666]">We&apos;ll get back to you within 24 hours</p>
+  <div className="bg-white rounded-2xl border border-[#D1D5DB] shadow-lg overflow-hidden">
+    <div className="p-6 border-b border-[#D1D5DB] bg-white">
+      <h3 className="font-semibold text-lg text-[#0A0A0A]">Send Us a Message</h3>
+      <p className="text-sm text-[#3B3B3B]">We&apos;ll get back to you within 24 hours</p>
     </div>
     {/* GHL Calendar Embed */}
     <div className="p-4">
@@ -37,16 +37,16 @@ const GHLFormEmbed = () => (
 
 export default function Contact() {
   return (
-    <div className="min-h-screen bg-[#F7F4EF] text-[#1A1A1A]">
+    <div className="min-h-screen bg-white text-[#0A0A0A]">
       <PublicNavbar />
 
       {/* Hero */}
       <section className="pt-28 pb-12 px-6">
         <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-[#1A1A1A]">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-[#0A0A0A]">
             Get in Touch
           </h1>
-          <p className="text-lg text-[#666] max-w-2xl mx-auto">
+          <p className="text-lg text-[#3B3B3B] max-w-2xl mx-auto">
             Have questions about Forge Operating Group? We&apos;re here to help. Reach out and our team will get back to you within 24 hours.
           </p>
         </div>
@@ -58,7 +58,7 @@ export default function Contact() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Left: Contact Info */}
             <div>
-              <h2 className="text-2xl font-bold mb-6 text-[#1A1A1A]">Contact Information</h2>
+              <h2 className="text-2xl font-bold mb-6 text-[#0A0A0A]">Contact Information</h2>
 
               <div className="space-y-6 mb-8">
                 <div className="flex items-start gap-4">
@@ -66,8 +66,8 @@ export default function Contact() {
                     <Mail className="w-6 h-6 text-teal-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1 text-[#1A1A1A]">Email</h3>
-                    <p className="text-[#555]">hello@forgeoperatinggroup.com</p>
+                    <h3 className="font-semibold mb-1 text-[#0A0A0A]">Email</h3>
+                    <p className="text-[#3B3B3B]">hello@forgeoperatinggroup.com</p>
                     <p className="text-sm text-[#888]">We respond within 24 hours</p>
                   </div>
                 </div>
@@ -77,8 +77,8 @@ export default function Contact() {
                     <Phone className="w-6 h-6 text-teal-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1 text-[#1A1A1A]">Phone</h3>
-                    <p className="text-[#555]">(555) 123-4567</p>
+                    <h3 className="font-semibold mb-1 text-[#0A0A0A]">Phone</h3>
+                    <p className="text-[#3B3B3B]">(555) 123-4567</p>
                     <p className="text-sm text-[#888]">Mon-Fri, 9am-5pm EST</p>
                   </div>
                 </div>
@@ -88,8 +88,8 @@ export default function Contact() {
                     <Clock className="w-6 h-6 text-teal-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1 text-[#1A1A1A]">Business Hours</h3>
-                    <p className="text-[#555]">Monday - Friday: 9am - 5pm EST</p>
+                    <h3 className="font-semibold mb-1 text-[#0A0A0A]">Business Hours</h3>
+                    <p className="text-[#3B3B3B]">Monday - Friday: 9am - 5pm EST</p>
                     <p className="text-sm text-[#888]">Weekend support available for clients</p>
                   </div>
                 </div>
@@ -97,9 +97,9 @@ export default function Contact() {
 
               {/* Quick Actions */}
               <div className="space-y-4">
-                <h3 className="font-semibold text-lg text-[#1A1A1A]">Quick Actions</h3>
+                <h3 className="font-semibold text-lg text-[#0A0A0A]">Quick Actions</h3>
 
-                <Card className="bg-white border-[#E5E2DB]">
+                <Card className="bg-white border-[#D1D5DB]">
                   <CardContent className="p-4">
                     <Link href="/#book">
                       <div className="flex items-center gap-4 cursor-pointer group">
@@ -107,15 +107,15 @@ export default function Contact() {
                           <Calendar className="w-5 h-5 text-teal-600" />
                         </div>
                         <div className="flex-1">
-                          <p className="font-medium group-hover:text-teal-600 transition-colors text-[#1A1A1A]">Book a Demo</p>
-                          <p className="text-sm text-[#666]">Schedule a 15-minute consultation</p>
+                          <p className="font-medium group-hover:text-teal-600 transition-colors text-[#0A0A0A]">Book a Demo</p>
+                          <p className="text-sm text-[#3B3B3B]">Schedule a 15-minute consultation</p>
                         </div>
                       </div>
                     </Link>
                   </CardContent>
                 </Card>
 
-                <Card className="bg-white border-[#E5E2DB]">
+                <Card className="bg-white border-[#D1D5DB]">
                   <CardContent className="p-4">
                     <Link href="/#faq">
                       <div className="flex items-center gap-4 cursor-pointer group">
@@ -123,8 +123,8 @@ export default function Contact() {
                           <MessageSquare className="w-5 h-5 text-amber-600" />
                         </div>
                         <div className="flex-1">
-                          <p className="font-medium group-hover:text-amber-600 transition-colors text-[#1A1A1A]">View FAQ</p>
-                          <p className="text-sm text-[#666]">Find answers to common questions</p>
+                          <p className="font-medium group-hover:text-amber-600 transition-colors text-[#0A0A0A]">View FAQ</p>
+                          <p className="text-sm text-[#3B3B3B]">Find answers to common questions</p>
                         </div>
                       </div>
                     </Link>

@@ -366,11 +366,11 @@ const GHLCalendarEmbed = () => (
     whileInView={{ opacity: 1, x: 0 }}
     transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
     viewport={{ once: true }}
-    className="bg-white rounded-2xl border border-[#E8E4DD] shadow-lg overflow-hidden"
+    className="bg-white rounded-2xl border border-[#D1D5DB] shadow-lg overflow-hidden"
   >
-    <div className="p-6 border-b border-[#E8E4DD] bg-[#F7F4EF]">
+    <div className="p-6 border-b border-[#D1D5DB] bg-white">
       <h3 className="font-semibold text-lg">Book Your Free Consultation</h3>
-      <p className="text-sm text-[#666]">Pick a time that works for you</p>
+      <p className="text-sm text-[#3B3B3B]">Pick a time that works for you</p>
     </div>
     <div className="p-4">
       <iframe
@@ -394,7 +394,7 @@ const AnimatedFeatureCard = ({ feature, idx }: { feature: typeof heroFeatures[0]
       viewport={{ once: true, margin: "-50px" }}
       whileHover={{ y: -8, transition: { duration: 0.3 } }}
     >
-      <Card className="bg-white border-[#E8E4DD] shadow-sm hover:shadow-xl transition-all duration-500 h-full group">
+      <Card className="bg-white border-[#D1D5DB] shadow-sm hover:shadow-xl transition-all duration-500 h-full group">
         <CardContent className="p-8">
           <motion.div
             className={`w-14 h-14 rounded-2xl ${feature.color} flex items-center justify-center mb-6`}
@@ -406,7 +406,7 @@ const AnimatedFeatureCard = ({ feature, idx }: { feature: typeof heroFeatures[0]
           <h3 className="text-xl font-semibold mb-3 tracking-tight group-hover:text-teal-600 transition-colors">
             {feature.title}
           </h3>
-          <p className="text-[#666] leading-relaxed">
+          <p className="text-[#3B3B3B] leading-relaxed">
             {feature.description}
           </p>
         </CardContent>
@@ -430,7 +430,7 @@ const AnimatedAllFeaturesCard = ({ feature, idx }: { feature: typeof allFeatures
           whileHover={{ y: -6, scale: 1.02 }}
           transition={{ duration: 0.3 }}
         >
-          <Card className="bg-white border-[#E8E4DD] shadow-sm hover:shadow-lg transition-all duration-300 group cursor-pointer h-full overflow-hidden relative">
+          <Card className="bg-white border-[#D1D5DB] shadow-sm hover:shadow-lg transition-all duration-300 group cursor-pointer h-full overflow-hidden relative">
             <motion.div
               className="absolute inset-0 bg-gradient-to-br from-teal-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
             />
@@ -446,7 +446,7 @@ const AnimatedAllFeaturesCard = ({ feature, idx }: { feature: typeof allFeatures
               <h3 className="text-lg font-semibold mb-2 tracking-tight group-hover:text-teal-600 transition-colors">
                 {feature.title}
               </h3>
-              <p className="text-sm text-[#666]">{feature.description}</p>
+              <p className="text-sm text-[#3B3B3B]">{feature.description}</p>
               <motion.div
                 className="mt-4 flex items-center text-sm font-medium text-teal-600"
                 initial={{ opacity: 0, x: -10 }}
@@ -473,16 +473,16 @@ const AnimatedTestimonialCard = ({ testimonial, idx }: { testimonial: typeof tes
     viewport={{ once: true, margin: "-50px" }}
     whileHover={{ y: -5 }}
   >
-    <Card className="bg-[#F7F4EF] border-[#E8E4DD] shadow-sm hover:shadow-md transition-all duration-300 h-full">
+    <Card className="bg-white border-[#D1D5DB] shadow-sm hover:shadow-md transition-all duration-300 h-full">
       <CardContent className="p-6">
         <StarRating filled={testimonial.rating} size="w-4 h-4" />
-        <p className="text-[#1A1A1A] mt-4 mb-6 leading-relaxed">
+        <p className="text-[#0A0A0A] mt-4 mb-6 leading-relaxed">
           &quot;{testimonial.quote}&quot;
         </p>
-        <div className="flex items-center justify-between pt-4 border-t border-[#E8E4DD]">
+        <div className="flex items-center justify-between pt-4 border-t border-[#D1D5DB]">
           <div>
             <p className="font-medium text-sm">{testimonial.name}</p>
-            <p className="text-xs text-[#666]">{testimonial.business}</p>
+            <p className="text-xs text-[#3B3B3B]">{testimonial.business}</p>
           </div>
           <motion.span
             className="text-xs font-medium text-teal-600 bg-teal-50 px-2 py-1 rounded-full"
@@ -505,7 +505,7 @@ const AnimatedFaqItem = ({ faq, idx, isOpen, onClick }: { faq: typeof faqs[0]; i
     viewport={{ once: true }}
   >
     <Card
-      className={`bg-[#F7F4EF] border-[#E8E4DD] cursor-pointer transition-all hover:shadow-sm ${isOpen ? "ring-2 ring-teal-200" : ""}`}
+      className={`bg-white border-[#D1D5DB] cursor-pointer transition-all hover:shadow-sm ${isOpen ? "ring-2 ring-teal-200" : ""}`}
       onClick={onClick}
     >
       <CardContent className="p-5">
@@ -515,7 +515,7 @@ const AnimatedFaqItem = ({ faq, idx, isOpen, onClick }: { faq: typeof faqs[0]; i
             animate={{ rotate: isOpen ? 180 : 0 }}
             transition={{ duration: 0.3 }}
           >
-            <ChevronDown className="w-5 h-5 text-[#666] flex-shrink-0" />
+            <ChevronDown className="w-5 h-5 text-[#3B3B3B] flex-shrink-0" />
           </motion.div>
         </div>
         <AnimatePresence>
@@ -525,7 +525,7 @@ const AnimatedFaqItem = ({ faq, idx, isOpen, onClick }: { faq: typeof faqs[0]; i
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="text-sm text-[#666] mt-4 pt-4 border-t border-[#E8E4DD] leading-relaxed overflow-hidden"
+              className="text-sm text-[#3B3B3B] mt-4 pt-4 border-t border-[#D1D5DB] leading-relaxed overflow-hidden"
             >
               {faq.answer}
             </motion.p>
@@ -540,7 +540,7 @@ export default function Landing() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <div className="min-h-screen light-landing bg-[#F7F4EF] text-[#1A1A1A] overflow-hidden">
+    <div className="min-h-screen light-landing bg-white text-[#0A0A0A] overflow-hidden">
       {/* Animated Background Gradient */}
       <MorphingBg className="fixed" />
 
@@ -594,11 +594,11 @@ export default function Landing() {
             <FadeIn delay={0.4}>
               <div className="flex justify-center mb-6">
                 <motion.div
-                  className="flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm border border-[#E8E4DD]"
+                  className="flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm border border-[#D1D5DB]"
                   whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(0,0,0,0.1)" }}
                 >
                   <StarRating filled={5} size="w-6 h-6" />
-                  <span className="text-sm font-medium text-[#666]">
+                  <span className="text-sm font-medium text-[#3B3B3B]">
                     Every time.
                   </span>
                 </motion.div>
@@ -607,7 +607,7 @@ export default function Landing() {
 
             {/* Subheadline */}
             <FadeIn delay={0.5}>
-              <p className="text-lg md:text-xl text-[#666] max-w-2xl mx-auto mb-8 leading-relaxed">
+              <p className="text-lg md:text-xl text-[#3B3B3B] max-w-2xl mx-auto mb-8 leading-relaxed">
                 85% of callers who hit voicemail hang up and call someone else.
                 That&apos;s $120,000 a year walking out the door. The Forge Growth
                 System installs an AI employee in your business that answers every
@@ -639,7 +639,7 @@ export default function Landing() {
                       <Button
                         size="lg"
                         variant="outline"
-                        className="text-lg px-8 border-[#D4D0C8] text-[#1A1A1A] hover:bg-[#E8E4DD] bg-white"
+                        className="text-lg px-8 border-[#D1D5DB] text-[#0A0A0A] hover:bg-gray-200 bg-white"
                       >
                         How It Works
                       </Button>
@@ -651,7 +651,7 @@ export default function Landing() {
 
             {/* Social Proof */}
             <FadeIn delay={0.7}>
-              <div className="flex flex-wrap items-center justify-center gap-8 text-sm text-[#666]">
+              <div className="flex flex-wrap items-center justify-center gap-8 text-sm text-[#3B3B3B]">
                 <motion.div
                   className="flex items-center gap-2"
                   whileHover={{ scale: 1.05 }}
@@ -663,7 +663,7 @@ export default function Landing() {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.8 + i * 0.1 }}
-                        className="w-8 h-8 rounded-full bg-teal-100 border-2 border-[#F7F4EF] flex items-center justify-center text-xs font-medium text-teal-700"
+                        className="w-8 h-8 rounded-full bg-teal-100 border-2 border-white flex items-center justify-center text-xs font-medium text-teal-700"
                       >
                         {initials}
                       </motion.div>
@@ -718,13 +718,13 @@ export default function Landing() {
               { prefix: "$", value: 120, suffix: "K", label: "lost per year to missed calls alone" },
             ].map((stat, idx) => (
               <FadeIn key={idx} delay={idx * 0.15}>
-                <Card className="bg-white border-[#E8E4DD] shadow-sm text-center h-full">
+                <Card className="bg-white border-[#D1D5DB] shadow-sm text-center h-full">
                   <CardContent className="p-8">
                     <p className="text-4xl md:text-5xl font-bold text-teal-500 mb-3">
                       {stat.prefix || ""}
                       <AnimatedNumber value={stat.value} suffix={stat.suffix} />
                     </p>
-                    <p className="text-[#666] leading-relaxed">{stat.label}</p>
+                    <p className="text-[#3B3B3B] leading-relaxed">{stat.label}</p>
                   </CardContent>
                 </Card>
               </FadeIn>
@@ -732,7 +732,7 @@ export default function Landing() {
           </div>
 
           <FadeIn delay={0.5}>
-            <p className="text-center text-lg text-[#666] italic">
+            <p className="text-center text-lg text-[#3B3B3B] italic">
               &ldquo;By the time you call back, they already booked someone else.&rdquo;
             </p>
           </FadeIn>
@@ -766,7 +766,7 @@ export default function Landing() {
           </div>
 
           <FadeIn delay={0.5}>
-            <p className="text-center text-lg text-[#666] max-w-2xl mx-auto">
+            <p className="text-center text-lg text-[#3B3B3B] max-w-2xl mx-auto">
               Businesses with 100+ reviews get 25% more calls. With the right
               system, that&apos;s 4 reviews per week &mdash; 200+ in a year.
             </p>
@@ -786,7 +786,7 @@ export default function Landing() {
                 We Don&apos;t Do Marketing FOR You.
                 <span className="text-teal-500"> We Install A Machine IN You.</span>
               </h2>
-              <p className="text-lg text-[#666] max-w-2xl mx-auto">
+              <p className="text-lg text-[#3B3B3B] max-w-2xl mx-auto">
                 Your last agency overpromised and underdelivered. Here&apos;s how
                 we&apos;re structurally different.
               </p>
@@ -796,19 +796,19 @@ export default function Landing() {
           {/* Desktop comparison table */}
           <FadeIn delay={0.2}>
             <div className="hidden md:block overflow-x-auto">
-              <Card className="bg-white border-[#E8E4DD] shadow-sm overflow-hidden">
+              <Card className="bg-white border-[#D1D5DB] shadow-sm overflow-hidden">
                 <CardContent className="p-0">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="border-b border-[#E8E4DD]">
-                        <th className="text-left p-4 font-medium text-[#666]" />
+                      <tr className="border-b border-[#D1D5DB]">
+                        <th className="text-left p-4 font-medium text-[#3B3B3B]" />
                         {comparisonData.companies.map((company) => (
                           <th
                             key={company.name}
                             className={`p-4 font-semibold text-center ${
                               company.highlight
                                 ? "bg-teal-50 text-teal-700 text-base"
-                                : "text-[#666]"
+                                : "text-[#3B3B3B]"
                             }`}
                           >
                             {company.name}
@@ -820,7 +820,7 @@ export default function Landing() {
                       {comparisonData.features.map((feature, fIdx) => (
                         <tr
                           key={feature}
-                          className={fIdx < comparisonData.features.length - 1 ? "border-b border-[#E8E4DD]" : ""}
+                          className={fIdx < comparisonData.features.length - 1 ? "border-b border-[#D1D5DB]" : ""}
                         >
                           <td className="p-4 font-medium">{feature}</td>
                           {comparisonData.companies.map((company) => {
@@ -857,7 +857,7 @@ export default function Landing() {
           <FadeIn delay={0.2}>
             <div className="md:hidden space-y-4">
               {comparisonData.features.map((feature, idx) => (
-                <Card key={idx} className="bg-white border-[#E8E4DD] shadow-sm">
+                <Card key={idx} className="bg-white border-[#D1D5DB] shadow-sm">
                   <CardContent className="p-4 flex items-center justify-between">
                     <span className="font-medium text-sm">{feature}</span>
                     <span className="text-sm font-medium text-teal-600">
@@ -870,7 +870,7 @@ export default function Landing() {
           </FadeIn>
 
           <FadeIn delay={0.4}>
-            <p className="text-center text-lg text-[#666] mt-8 italic">
+            <p className="text-center text-lg text-[#3B3B3B] mt-8 italic">
               &ldquo;Agencies disappear. Infrastructure doesn&apos;t.&rdquo;
             </p>
           </FadeIn>
@@ -889,7 +889,7 @@ export default function Landing() {
                 You Say Yes. We Build Everything.
                 <span className="text-teal-500"> Your Phone Starts Ringing.</span>
               </h2>
-              <p className="text-lg text-[#666] max-w-2xl mx-auto">
+              <p className="text-lg text-[#3B3B3B] max-w-2xl mx-auto">
                 Installed in 72 hours. Zero learning curve. Zero hours per week to manage.
               </p>
             </div>
@@ -902,7 +902,7 @@ export default function Landing() {
           </div>
 
           <FadeIn delay={0.5}>
-            <p className="text-center text-lg text-[#666] mt-12 max-w-2xl mx-auto italic">
+            <p className="text-center text-lg text-[#3B3B3B] mt-12 max-w-2xl mx-auto italic">
               &ldquo;You didn&apos;t start this business to do marketing. So stop.
               Let the system handle it.&rdquo;
             </p>
@@ -929,7 +929,7 @@ export default function Landing() {
                 An Employee That Never Sleeps, Never Calls In Sick, And Generates
                 5-Star Reviews While You&apos;re On The Job.
               </h2>
-              <p className="text-lg text-[#666] leading-relaxed hidden lg:block">
+              <p className="text-lg text-[#3B3B3B] leading-relaxed italic hidden lg:block">
                 Customers don&apos;t know it&apos;s AI. They just know someone
                 answered on the first ring.
               </p>
@@ -956,7 +956,7 @@ export default function Landing() {
                         <h3 className="font-semibold tracking-tight mb-1">
                           {cap.title}
                         </h3>
-                        <p className="text-[#666] text-sm">{cap.description}</p>
+                        <p className="text-[#3B3B3B] text-sm">{cap.description}</p>
                       </div>
                     </motion.div>
                   </StaggerItem>
@@ -966,7 +966,7 @@ export default function Landing() {
 
             {/* Mobile closing line */}
             <FadeIn className="lg:hidden">
-              <p className="text-lg text-[#666] leading-relaxed italic">
+              <p className="text-lg text-[#3B3B3B] leading-relaxed italic">
                 Customers don&apos;t know it&apos;s AI. They just know someone
                 answered on the first ring.
               </p>
@@ -995,7 +995,7 @@ export default function Landing() {
               return (
                 <FadeIn key={idx} delay={idx * 0.15}>
                   <motion.div whileHover={{ y: -5 }}>
-                    <Card className="bg-[#F7F4EF] border-[#E8E4DD] shadow-sm hover:shadow-md transition-all duration-300 h-full">
+                    <Card className="bg-white border-[#D1D5DB] shadow-sm hover:shadow-md transition-all duration-300 h-full">
                       <CardContent className="p-8 text-center">
                         <ScaleIn delay={0.2 + idx * 0.1}>
                           <div className="w-14 h-14 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center mx-auto mb-6">
@@ -1005,7 +1005,7 @@ export default function Landing() {
                         <h3 className="text-xl font-semibold mb-3 tracking-tight">
                           {pillar.title}
                         </h3>
-                        <p className="text-[#666] leading-relaxed">
+                        <p className="text-[#3B3B3B] leading-relaxed">
                           {pillar.description}
                         </p>
                       </CardContent>
@@ -1039,7 +1039,7 @@ export default function Landing() {
           </div>
 
           {/* Stats Bar — moved here from old position */}
-          <div className="py-8 px-6 bg-white rounded-2xl border border-[#E8E4DD] shadow-sm relative overflow-hidden">
+          <div className="py-8 px-6 bg-white rounded-2xl border border-[#D1D5DB] shadow-sm relative overflow-hidden">
             <motion.div
               className="absolute inset-0 bg-gradient-to-r from-teal-500/5 via-transparent to-teal-500/5"
               animate={{ x: ["-100%", "100%"] }}
@@ -1058,7 +1058,7 @@ export default function Landing() {
                       <p className="text-3xl md:text-4xl font-bold text-teal-500">
                         <AnimatedNumber value={stat.value} suffix={stat.suffix} />
                       </p>
-                      <p className="text-sm text-[#666] mt-1">{stat.label}</p>
+                      <p className="text-sm text-[#3B3B3B] mt-1">{stat.label}</p>
                     </motion.div>
                   </FadeIn>
                 ))}
@@ -1088,7 +1088,7 @@ export default function Landing() {
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
                 Ready To Stop Losing Customers To Voicemail?
               </h2>
-              <p className="text-lg text-[#666] mb-8 leading-relaxed">
+              <p className="text-lg text-[#3B3B3B] mb-8 leading-relaxed">
                 Book a free 15-minute demo. We&apos;ll show you exactly how the
                 system works and check if your zip code is still available.
               </p>

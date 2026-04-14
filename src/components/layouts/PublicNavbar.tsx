@@ -161,7 +161,7 @@ const FeaturesDropdown = ({ onNavigate }: { onNavigate?: () => void }) => {
     <div className="relative" ref={dropdownRef}>
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-1 text-sm text-[#555] hover:text-[#1A1A1A] transition-colors font-medium"
+        className="flex items-center gap-1 text-sm text-[#3B3B3B] hover:text-[#0A0A0A] transition-colors font-medium"
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
       >
@@ -181,12 +181,12 @@ const FeaturesDropdown = ({ onNavigate }: { onNavigate?: () => void }) => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
             transition={{ duration: 0.2, ease: [0.25, 0.4, 0.25, 1] }}
-            className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[700px] bg-white rounded-2xl shadow-2xl border border-[#E5E2DB] py-6 px-6 z-50"
+            className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[700px] bg-white rounded-2xl shadow-2xl border border-[#D1D5DB] py-6 px-6 z-50"
           >
             <div className="text-sm font-semibold text-[#888] uppercase tracking-wider mb-4 px-2">
               Systems & Features
             </div>
-            <div className="border-t border-[#E5E2DB] pt-4">
+            <div className="border-t border-[#D1D5DB] pt-4">
               <div className="grid grid-cols-3 gap-2">
                 {allFeatures.map((feature, idx) => {
                   const Icon = feature.icon;
@@ -202,21 +202,21 @@ const FeaturesDropdown = ({ onNavigate }: { onNavigate?: () => void }) => {
                         onClick={handleFeatureClick}
                       >
                         <motion.div
-                          className="flex items-start gap-3 p-3 rounded-xl hover:bg-[#F5F2ED] transition-colors cursor-pointer group"
+                          className="flex items-start gap-3 p-3 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer group"
                           whileHover={{ x: 4 }}
                           transition={{ duration: 0.2 }}
                         >
                           <motion.div
-                            className="w-10 h-10 rounded-lg bg-[#F5F2ED] group-hover:bg-white flex items-center justify-center flex-shrink-0 transition-colors border border-[#E5E2DB]"
+                            className="w-10 h-10 rounded-lg bg-gray-100 group-hover:bg-white flex items-center justify-center flex-shrink-0 transition-colors border border-[#D1D5DB]"
                             whileHover={{ scale: 1.1, rotate: 5 }}
                           >
-                            <Icon className="w-5 h-5 text-[#555]" />
+                            <Icon className="w-5 h-5 text-[#3B3B3B]" />
                           </motion.div>
                           <div className="min-w-0">
-                            <p className="font-semibold text-sm text-[#1A1A1A] leading-tight">
+                            <p className="font-semibold text-sm text-[#0A0A0A] leading-tight">
                               {feature.title}
                             </p>
-                            <p className="text-xs text-[#666] mt-0.5 leading-tight">
+                            <p className="text-xs text-[#3B3B3B] mt-0.5 leading-tight">
                               {feature.description}
                             </p>
                           </div>
@@ -237,7 +237,7 @@ const FeaturesDropdown = ({ onNavigate }: { onNavigate?: () => void }) => {
 // Animated Nav Link
 const NavLink = ({ children, href, onClick }: { children: React.ReactNode; href?: string; onClick?: () => void }) => (
   <motion.span
-    className="text-sm text-[#555] hover:text-[#1A1A1A] transition-colors font-medium cursor-pointer relative"
+    className="text-sm text-[#3B3B3B] hover:text-[#0A0A0A] transition-colors font-medium cursor-pointer relative"
     whileHover={{ scale: 1.02 }}
     whileTap={{ scale: 0.98 }}
   >
@@ -297,7 +297,7 @@ export default function PublicNavbar() {
                 />
               </motion.div>
               <div className="flex flex-col leading-none">
-                <span className="text-lg font-bold tracking-tight text-[#1A1A1A]">
+                <span className="text-lg font-bold tracking-tight text-[#0A0A0A]">
                   Forge Operating
                 </span>
                 <motion.span
@@ -336,7 +336,7 @@ export default function PublicNavbar() {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="text-[#555] hover:text-[#1A1A1A] hover:bg-[#E8E4DD] font-medium"
+                  className="text-[#3B3B3B] hover:text-[#0A0A0A] hover:bg-[#D1D5DB]/30 font-medium"
                 >
                   Team Login
                 </Button>
@@ -365,7 +365,7 @@ export default function PublicNavbar() {
 
           {/* Mobile Menu Button */}
           <motion.button
-            className="md:hidden p-2 text-[#1A1A1A]"
+            className="md:hidden p-2 text-[#0A0A0A]"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
@@ -406,7 +406,7 @@ export default function PublicNavbar() {
               transition={{ duration: 0.3, ease: [0.25, 0.4, 0.25, 1] }}
               className="md:hidden overflow-hidden"
             >
-              <div className="mt-4 pb-4 border-t border-[#E5E2DB] pt-4">
+              <div className="mt-4 pb-4 border-t border-[#D1D5DB] pt-4">
                 <div className="flex flex-col gap-4">
                   {[
                     { href: "/#how-it-works", label: "How It Works" },
@@ -420,7 +420,7 @@ export default function PublicNavbar() {
                       transition={{ delay: idx * 0.05 }}
                     >
                       <AnchorLink href={item.href} onClick={closeMobileMenu}>
-                        <span className="text-sm text-[#555] hover:text-[#1A1A1A] font-medium">
+                        <span className="text-sm text-[#3B3B3B] hover:text-[#0A0A0A] font-medium">
                           {item.label}
                         </span>
                       </AnchorLink>
@@ -432,7 +432,7 @@ export default function PublicNavbar() {
                     transition={{ delay: 0.15 }}
                   >
                     <Link href="/contact" onClick={closeMobileMenu}>
-                      <span className="text-sm text-[#555] hover:text-[#1A1A1A] font-medium">
+                      <span className="text-sm text-[#3B3B3B] hover:text-[#0A0A0A] font-medium">
                         Contact
                       </span>
                     </Link>
@@ -442,7 +442,7 @@ export default function PublicNavbar() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.2 }}
-                    className="border-t border-[#E5E2DB] pt-4 mt-2"
+                    className="border-t border-[#D1D5DB] pt-4 mt-2"
                   >
                     <p className="text-xs font-semibold text-[#888] uppercase tracking-wider mb-3">
                       Systems & Features
@@ -459,7 +459,7 @@ export default function PublicNavbar() {
                             href={`/features/${feature.slug}`}
                             onClick={closeMobileMenu}
                           >
-                            <span className="text-sm text-[#555] hover:text-[#1A1A1A]">
+                            <span className="text-sm text-[#3B3B3B] hover:text-[#0A0A0A]">
                               {feature.title}
                             </span>
                           </Link>
@@ -472,13 +472,13 @@ export default function PublicNavbar() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4 }}
-                    className="flex flex-col gap-2 mt-4 pt-4 border-t border-[#E5E2DB]"
+                    className="flex flex-col gap-2 mt-4 pt-4 border-t border-[#D1D5DB]"
                   >
                     <Link href="/login" onClick={closeMobileMenu}>
                       <Button
                         variant="outline"
                         size="sm"
-                        className="w-full text-[#555] border-[#E5E2DB]"
+                        className="w-full text-[#3B3B3B] border-[#D1D5DB]"
                       >
                         Team Login
                       </Button>

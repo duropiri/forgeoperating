@@ -269,10 +269,10 @@ const featuresData: Record<string, {
 
 // GHL Calendar Embed Component
 const GHLCalendarEmbed = () => (
-  <div className="bg-white rounded-2xl border border-[#E5E2DB] shadow-lg overflow-hidden">
-    <div className="p-6 border-b border-[#E5E2DB] bg-[#F5F2ED]">
-      <h3 className="font-semibold text-lg text-[#1A1A1A]">Book Your Free Consultation</h3>
-      <p className="text-sm text-[#666]">Pick a time that works for you</p>
+  <div className="bg-white rounded-2xl border border-[#D1D5DB] shadow-lg overflow-hidden">
+    <div className="p-6 border-b border-[#D1D5DB] bg-white">
+      <h3 className="font-semibold text-lg text-[#0A0A0A]">Book Your Free Consultation</h3>
+      <p className="text-sm text-[#3B3B3B]">Pick a time that works for you</p>
     </div>
     {/* GHL Calendar Embed */}
     <div className="p-4">
@@ -288,7 +288,7 @@ const GHLCalendarEmbed = () => (
 
 // VSL Video Placeholder
 const VSLVideoPlaceholder = ({ featureTitle }: { featureTitle: string }) => (
-  <div className="relative aspect-video bg-[#1A1A1A] rounded-2xl overflow-hidden shadow-2xl border border-[#333]">
+  <div className="relative aspect-video bg-[#0A0A0A] rounded-2xl overflow-hidden shadow-2xl border border-[#333]">
     <div className="absolute inset-0 flex items-center justify-center">
       <div className="text-center">
         <div className="w-20 h-20 rounded-full bg-teal-500/20 flex items-center justify-center mx-auto mb-4 cursor-pointer hover:bg-teal-500/30 transition-colors group">
@@ -317,19 +317,19 @@ export default function FeaturePage() {
   const Icon = feature.icon;
 
   return (
-    <div className="min-h-screen bg-[#F7F4EF] text-[#1A1A1A]">
+    <div className="min-h-screen bg-white text-[#0A0A0A]">
       <PublicNavbar />
 
       {/* Hero Section with VSL */}
       <section className="pt-28 pb-16 px-6">
         <div className="max-w-6xl mx-auto">
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-sm text-[#666] mb-8">
-            <Link href="/" className="hover:text-[#1A1A1A] transition-colors">Home</Link>
+          <nav className="flex items-center gap-2 text-sm text-[#3B3B3B] mb-8">
+            <Link href="/" className="hover:text-[#0A0A0A] transition-colors">Home</Link>
             <span>/</span>
-            <Link href="/#features" className="hover:text-[#1A1A1A] transition-colors">Features</Link>
+            <Link href="/#features" className="hover:text-[#0A0A0A] transition-colors">Features</Link>
             <span>/</span>
-            <span className="text-[#1A1A1A] font-medium">{feature.title}</span>
+            <span className="text-[#0A0A0A] font-medium">{feature.title}</span>
           </nav>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -340,11 +340,11 @@ export default function FeaturePage() {
                 <span className="text-sm font-medium text-teal-700">{feature.shortTitle}</span>
               </div>
 
-              <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4 tracking-tight text-[#1A1A1A]">
+              <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4 tracking-tight text-[#0A0A0A]">
                 {feature.tagline}
               </h1>
 
-              <p className="text-lg text-[#555] mb-8 leading-relaxed">
+              <p className="text-lg text-[#3B3B3B] mb-8 leading-relaxed">
                 {feature.description}
               </p>
 
@@ -352,10 +352,10 @@ export default function FeaturePage() {
               <div className="flex items-center gap-6 mb-8">
                 <div className="text-center">
                   <p className="text-4xl font-bold text-teal-500">{feature.heroStat.value}</p>
-                  <p className="text-sm text-[#666]">{feature.heroStat.label}</p>
+                  <p className="text-sm text-[#3B3B3B]">{feature.heroStat.label}</p>
                 </div>
-                <div className="h-12 w-px bg-[#E5E2DB]" />
-                <p className="text-sm text-[#666]">Average result</p>
+                <div className="h-12 w-px bg-[#D1D5DB]" />
+                <p className="text-sm text-[#3B3B3B]">Average result</p>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
@@ -365,7 +365,7 @@ export default function FeaturePage() {
                   </Button>
                 </a>
                 <a href="#how-it-works">
-                  <Button size="lg" variant="outline" className="text-lg px-8 border-[#D4D0C8] text-[#1A1A1A] hover:bg-[#E8E4DD] bg-white">
+                  <Button size="lg" variant="outline" className="text-lg px-8 border-[#D1D5DB] text-[#0A0A0A] hover:bg-gray-200 bg-white">
                     See How It Works
                   </Button>
                 </a>
@@ -383,7 +383,7 @@ export default function FeaturePage() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <p className="text-sm font-medium text-teal-600 uppercase tracking-wider mb-3">Why Choose This</p>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-[#1A1A1A]">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-[#0A0A0A]">
               Why {feature.title}?
             </h2>
           </div>
@@ -392,15 +392,15 @@ export default function FeaturePage() {
             {feature.benefits.map((benefit, idx) => {
               const BenefitIcon = benefit.icon;
               return (
-                <Card key={idx} className="bg-[#F7F4EF] border-[#E5E2DB] shadow-sm hover:shadow-md transition-all">
+                <Card key={idx} className="bg-white border-[#D1D5DB] shadow-sm hover:shadow-md transition-all">
                   <CardContent className="p-6">
                     <div className="flex items-start gap-4">
                       <div className="w-12 h-12 rounded-xl bg-teal-50 flex items-center justify-center flex-shrink-0">
                         <BenefitIcon className="w-6 h-6 text-teal-600" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-lg mb-2 text-[#1A1A1A]">{benefit.title}</h3>
-                        <p className="text-[#666] leading-relaxed">{benefit.description}</p>
+                        <h3 className="font-semibold text-lg mb-2 text-[#0A0A0A]">{benefit.title}</h3>
+                        <p className="text-[#3B3B3B] leading-relaxed">{benefit.description}</p>
                       </div>
                     </div>
                   </CardContent>
@@ -416,7 +416,7 @@ export default function FeaturePage() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <p className="text-sm font-medium text-teal-600 uppercase tracking-wider mb-3">The Process</p>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-[#1A1A1A]">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-[#0A0A0A]">
               How It Works
             </h2>
           </div>
@@ -428,8 +428,8 @@ export default function FeaturePage() {
                   {step.step}
                 </div>
                 <div className="pt-2">
-                  <h3 className="font-semibold text-lg mb-1 text-[#1A1A1A]">{step.title}</h3>
-                  <p className="text-[#666] leading-relaxed">{step.description}</p>
+                  <h3 className="font-semibold text-lg mb-1 text-[#0A0A0A]">{step.title}</h3>
+                  <p className="text-[#3B3B3B] leading-relaxed">{step.description}</p>
                 </div>
               </div>
             ))}
@@ -442,7 +442,7 @@ export default function FeaturePage() {
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
             <p className="text-sm font-medium text-teal-600 uppercase tracking-wider mb-3">FAQ</p>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-[#1A1A1A]">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-[#0A0A0A]">
               Common Questions
             </h2>
           </div>
@@ -451,16 +451,16 @@ export default function FeaturePage() {
             {feature.faqs.map((faq, idx) => (
               <Card
                 key={idx}
-                className={`bg-[#F7F4EF] border-[#E5E2DB] cursor-pointer transition-all hover:shadow-sm ${openFaq === idx ? 'ring-2 ring-teal-200' : ''}`}
+                className={`bg-white border-[#D1D5DB] cursor-pointer transition-all hover:shadow-sm ${openFaq === idx ? 'ring-2 ring-teal-200' : ''}`}
                 onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
               >
                 <CardContent className="p-5">
                   <div className="flex items-center justify-between">
-                    <h3 className="font-semibold pr-4 text-[#1A1A1A]">{faq.question}</h3>
-                    <ChevronDown className={`w-5 h-5 text-[#666] transition-transform flex-shrink-0 ${openFaq === idx ? 'rotate-180' : ''}`} />
+                    <h3 className="font-semibold pr-4 text-[#0A0A0A]">{faq.question}</h3>
+                    <ChevronDown className={`w-5 h-5 text-[#3B3B3B] transition-transform flex-shrink-0 ${openFaq === idx ? 'rotate-180' : ''}`} />
                   </div>
                   {openFaq === idx && (
-                    <p className="text-sm text-[#666] mt-4 pt-4 border-t border-[#E5E2DB] leading-relaxed">
+                    <p className="text-sm text-[#3B3B3B] mt-4 pt-4 border-t border-[#D1D5DB] leading-relaxed">
                       {faq.answer}
                     </p>
                   )}
@@ -480,25 +480,25 @@ export default function FeaturePage() {
               <div className="w-16 h-16 rounded-2xl bg-teal-50 flex items-center justify-center mb-6">
                 <Icon className="w-8 h-8 text-teal-600" />
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-[#1A1A1A]">
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-[#0A0A0A]">
                 Ready to Get Started with {feature.title}?
               </h2>
-              <p className="text-lg text-[#666] mb-8 leading-relaxed">
+              <p className="text-lg text-[#3B3B3B] mb-8 leading-relaxed">
                 Book a free 15-minute consultation. We&apos;ll show you exactly how {feature.shortTitle.toLowerCase()} can transform your business and answer any questions you have.
               </p>
 
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                   <CheckCircle2 className="w-5 h-5 text-teal-500" />
-                  <span className="text-[#555]">No commitment required</span>
+                  <span className="text-[#3B3B3B]">No commitment required</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <CheckCircle2 className="w-5 h-5 text-teal-500" />
-                  <span className="text-[#555]">Custom implementation plan</span>
+                  <span className="text-[#3B3B3B]">Custom implementation plan</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <CheckCircle2 className="w-5 h-5 text-teal-500" />
-                  <span className="text-[#555]">See real results from similar businesses</span>
+                  <span className="text-[#3B3B3B]">See real results from similar businesses</span>
                 </div>
               </div>
             </div>

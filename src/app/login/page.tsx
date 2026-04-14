@@ -44,7 +44,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F7F4EF] flex items-center justify-center px-4">
+    <div className="min-h-screen bg-white flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
@@ -58,7 +58,7 @@ export default function LoginPage() {
                 className="object-contain"
               />
               <div className="flex flex-col leading-none text-left">
-                <span className="text-xl font-bold tracking-tight text-[#1A1A1A]">
+                <span className="text-xl font-bold tracking-tight text-[#0A0A0A]">
                   Forge Operating
                 </span>
                 <span className="text-xs font-semibold text-teal-500 tracking-wide">
@@ -69,16 +69,16 @@ export default function LoginPage() {
           </Link>
         </div>
 
-        <Card className="bg-white border-[#E5E2DB] shadow-lg">
+        <Card className="bg-white border-[#D1D5DB] shadow-lg">
           <CardContent className="p-8">
             <div className="text-center mb-6">
               <div className="w-14 h-14 rounded-full bg-teal-50 flex items-center justify-center mx-auto mb-4">
                 <Lock className="w-7 h-7 text-teal-600" />
               </div>
-              <h1 className="text-2xl font-bold text-[#1A1A1A] mb-2">
+              <h1 className="text-2xl font-bold text-[#0A0A0A] mb-2">
                 Team Login
               </h1>
-              <p className="text-sm text-[#666]">
+              <p className="text-sm text-[#3B3B3B]">
                 Enter the team password to access the training hub
               </p>
             </div>
@@ -90,7 +90,7 @@ export default function LoginPage() {
                   placeholder="Enter team password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="h-12 bg-[#F7F4EF] border-[#E5E2DB] focus:border-teal-500 focus:ring-teal-500"
+                  className="h-12 bg-white border-[#D1D5DB] focus:border-teal-500 focus:ring-teal-500"
                   disabled={loading}
                   autoFocus
                 />

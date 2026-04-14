@@ -549,66 +549,32 @@ export default function Landing() {
 
       <PublicNavbar />
 
-      {/* Section 1: Hero — The Hook */}
+      {/* Section 1: Hero */}
       <section className="pt-32 pb-20 px-6 relative">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <div className="text-center">
-            {/* Badge */}
-            <FadeIn delay={0.1}>
-              <motion.div
-                className="inline-flex items-center gap-2 px-4 py-2 bg-teal-50 border border-teal-100 rounded-full mb-10"
-                whileHover={{ scale: 1.05 }}
-              >
-                <motion.div
-                  animate={{ rotate: [0, 15, -15, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-                >
-                  <Sparkles className="w-4 h-4 text-teal-500" />
-                </motion.div>
-                <span className="text-sm font-medium text-teal-700">
-                  For Contractors, Dentists & Local Service Businesses
+            {/* H1 - What we do + who it's for */}
+            <BlurIn delay={0.1}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.15] mb-8 tracking-tight">
+                AI-Powered Marketing Systems
+                <span className="block text-teal-500 mt-1">
+                  For Contractors, Dentists &amp; Local Businesses
                 </span>
-              </motion.div>
-            </FadeIn>
-
-            {/* H1 - Main Headline */}
-            <BlurIn delay={0.2}>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-8 tracking-tight">
-                Your Competitor Answered.
-                <br />
-                You Didn&apos;t.
-                <motion.span
-                  className="block text-teal-500 mt-2"
-                  animate={{
-                    textShadow: [
-                      "0 0 20px rgba(20, 184, 166, 0)",
-                      "0 0 40px rgba(20, 184, 166, 0.3)",
-                      "0 0 20px rgba(20, 184, 166, 0)",
-                    ],
-                  }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                >
-                  Guess who got the job.
-                </motion.span>
               </h1>
             </BlurIn>
 
-            {/* Stat line */}
-            <FadeIn delay={0.4}>
-              <p className="text-xl md:text-2xl font-medium text-[#0A0A0A] max-w-2xl mx-auto mb-4">
-                By the time you call back, they&apos;ve already booked someone else. Every single time.
+            {/* Honest subheadline — Stone Systems style */}
+            <FadeIn delay={0.3}>
+              <p className="text-lg md:text-xl text-[#3B3B3B] max-w-2xl mx-auto mb-10 leading-relaxed">
+                Cut the bullsh*t. No agency (including ours) has the miracle
+                solution to all your problems. But we will install a system that
+                answers your phone, gets you reviews, and follows up with every
+                lead &mdash; so you can focus on the work you&apos;re actually good at.
               </p>
             </FadeIn>
 
-            {/* Value prop */}
+            {/* Single CTA */}
             <FadeIn delay={0.5}>
-              <p className="text-base md:text-lg text-[#3B3B3B] max-w-xl mx-auto mb-10 leading-relaxed">
-                We set up a system that answers your phone, follows up with leads, and gets you 5-star reviews. You don&apos;t do anything. It&apos;s ready in 72 hours.
-              </p>
-            </FadeIn>
-
-            {/* CTA Buttons */}
-            <FadeIn delay={0.6}>
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-14">
                 <Magnetic strength={0.2}>
                   <a href="#book">
@@ -618,7 +584,7 @@ export default function Landing() {
                           size="lg"
                           className="bg-teal-500 hover:bg-teal-600 text-white text-lg px-10 py-6 shadow-md hover:shadow-lg transition-all"
                         >
-                          Book a Demo <ArrowRight className="w-5 h-5 ml-2" />
+                          Book A Call <ArrowRight className="w-5 h-5 ml-2" />
                         </Button>
                       </GlowPulse>
                     </motion.div>
@@ -632,7 +598,7 @@ export default function Landing() {
                         variant="outline"
                         className="text-lg px-10 py-6 border-[#D1D5DB] text-[#0A0A0A] hover:bg-gray-100 bg-white"
                       >
-                        How It Works
+                        See What You Get
                       </Button>
                     </motion.div>
                   </a>
@@ -640,40 +606,34 @@ export default function Landing() {
               </div>
             </FadeIn>
 
-            {/* Social Proof */}
-            <FadeIn delay={0.7}>
+            {/* Social Proof — simple, no animation overkill */}
+            <FadeIn delay={0.6}>
               <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8 text-sm text-[#3B3B3B]">
-                <motion.div
-                  className="flex items-center gap-2"
-                  whileHover={{ scale: 1.05 }}
-                >
+                <div className="flex items-center gap-2">
                   <div className="flex -space-x-2">
                     {["MR", "SC", "JW", "DK"].map((initials, i) => (
-                      <motion.div
+                      <div
                         key={i}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.8 + i * 0.1 }}
                         className="w-8 h-8 rounded-full bg-teal-100 border-2 border-white flex items-center justify-center text-xs font-medium text-teal-700"
                       >
                         {initials}
-                      </motion.div>
+                      </div>
                     ))}
                   </div>
                   <span>500+ businesses</span>
-                </motion.div>
-                <motion.div className="flex items-center gap-1.5" whileHover={{ scale: 1.05 }}>
+                </div>
+                <div className="flex items-center gap-1.5">
                   <StarRating filled={5} size="w-4 h-4" />
                   <span>4.9 rating</span>
-                </motion.div>
-                <motion.div className="flex items-center gap-1.5" whileHover={{ scale: 1.05 }}>
+                </div>
+                <div className="flex items-center gap-1.5">
                   <BadgeCheck className="w-4 h-4 text-teal-500" />
                   <span>No contracts</span>
-                </motion.div>
-                <motion.div className="flex items-center gap-1.5" whileHover={{ scale: 1.05 }}>
+                </div>
+                <div className="flex items-center gap-1.5">
                   <Shield className="w-4 h-4 text-teal-500" />
-                  <span>Guaranteed results</span>
-                </motion.div>
+                  <span>Results guaranteed</span>
+                </div>
               </div>
             </FadeIn>
           </div>

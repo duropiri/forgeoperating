@@ -359,7 +359,7 @@ export default function FeaturePage() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <a href="#book">
+                <a href="https://grow.forgeoperating.com/home/original-two" target="_blank" rel="noopener noreferrer">
                   <Button size="lg" className="bg-teal-500 hover:bg-teal-600 text-white text-lg px-8 shadow-md">
                     Get Started <ArrowRight className="w-5 h-5 ml-2" />
                   </Button>

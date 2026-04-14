@@ -101,7 +101,7 @@ export default function Contact() {
 
                 <Card className="bg-white border-[#D1D5DB]">
                   <CardContent className="p-4">
-                    <Link href="/#book">
+                    <Link href="https://grow.forgeoperating.com/home/original-two" target="_blank" rel="noopener noreferrer">
                       <div className="flex items-center gap-4 cursor-pointer group">
                         <div className="w-10 h-10 rounded-lg bg-teal-50 flex items-center justify-center group-hover:bg-teal-100 transition-colors">
                           <Calendar className="w-5 h-5 text-teal-600" />

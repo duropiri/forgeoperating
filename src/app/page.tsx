@@ -363,28 +363,7 @@ const guaranteePillars = [
 ];
 
 // GHL Calendar Embed Component
-const GHLCalendarEmbed = () => (
-  <motion.div
-    initial={{ opacity: 0, x: 50 }}
-    whileInView={{ opacity: 1, x: 0 }}
-    transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
-    viewport={{ once: true }}
-    className="bg-white rounded-2xl border border-[#D1D5DB] shadow-lg overflow-hidden"
-  >
-    <div className="p-6 border-b border-[#D1D5DB] bg-white">
-      <h3 className="font-semibold text-lg">Book Your Free Consultation</h3>
-      <p className="text-sm text-[#3B3B3B]">Pick a time that works for you</p>
-    </div>
-    <div className="p-4">
-      <iframe
-        src="https://api.leadconnectorhq.com/widget/booking/hBKZNkdYJIOKUevPGaxf"
-        style={{ width: "100%", height: "800px", border: "none" }}
-        id="msgsndr-calendar-landing"
-        title="Book a Demo"
-      />
-    </div>
-  </motion.div>
-);
+
 
 // Animated Feature Card
 const AnimatedFeatureCard = ({ feature, idx }: { feature: typeof heroFeatures[0]; idx: number }) => {
@@ -577,7 +556,7 @@ export default function Landing() {
             <FadeIn delay={0.5}>
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-14">
                 <Magnetic strength={0.2}>
-                  <a href="#book">
+                  <a href="https://grow.forgeoperating.com/home/original-two" target="_blank" rel="noopener noreferrer">
                     <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
                       <GlowPulse>
                         <Button
@@ -1074,59 +1053,51 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Section 9: CTA + Calendar */}
+      {/* Section 9: CTA */}
       <section id="book" className="py-20 px-6 bg-white">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            {/* Left: CTA Text */}
-            <motion.div
-              className="lg:sticky lg:top-32"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
-              viewport={{ once: true }}
-            >
-              <Floating duration={4} distance={5}>
-                <div className="w-16 h-16 rounded-2xl bg-teal-50 flex items-center justify-center mb-6">
-                  <Calendar className="w-8 h-8 text-teal-600" />
+        <div className="max-w-3xl mx-auto text-center">
+          <FadeIn>
+            <Floating duration={4} distance={5}>
+              <div className="w-16 h-16 rounded-2xl bg-teal-50 flex items-center justify-center mb-6 mx-auto">
+                <Calendar className="w-8 h-8 text-teal-600" />
+              </div>
+            </Floating>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+              Ready to see if it works for you?
+            </h2>
+            <p className="text-lg text-[#3B3B3B] mb-8 leading-relaxed max-w-xl mx-auto">
+              15 minutes. We&apos;ll show you the system, answer your questions,
+              and tell you straight up if we think it&apos;s a fit. No pressure, no pitch.
+            </p>
+
+            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 mb-10 text-sm text-[#3B3B3B]">
+              {[
+                "No commitment, no credit card",
+                "15-minute call",
+                "We\u2019ll check if your zip code is open",
+              ].map((item, idx) => (
+                <div key={idx} className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-teal-500" />
+                  <span>{item}</span>
                 </div>
-              </Floating>
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-                Ready to see if it works for you?
-              </h2>
-              <p className="text-lg text-[#3B3B3B] mb-8 leading-relaxed">
-                15 minutes. We&apos;ll show you the system, answer your questions, and tell you straight up if we think it&apos;s a fit. No pressure, no pitch.
-              </p>
+              ))}
+            </div>
 
-              <StaggerContainer staggerDelay={0.1}>
-                {[
-                  "No commitment, no credit card",
-                  "15-minute call \u2014 that\u2019s it",
-                  "We\u2019ll check if your zip code is open",
-                  "You\u2019ll know exactly what you\u2019re getting",
-                ].map((item, idx) => (
-                  <StaggerItem key={idx}>
-                    <motion.div
-                      className="flex items-center gap-3 mb-4"
-                      whileHover={{ x: 5 }}
+            <Magnetic strength={0.2}>
+              <a href="https://grow.forgeoperating.com/home/original-two" target="_blank" rel="noopener noreferrer">
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
+                  <GlowPulse>
+                    <Button
+                      size="lg"
+                      className="bg-teal-500 hover:bg-teal-600 text-white text-lg px-10 py-6 shadow-md hover:shadow-lg transition-all"
                     >
-                      <motion.div
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ delay: 0.5 + idx * 0.1, type: "spring" }}
-                      >
-                        <CheckCircle2 className="w-5 h-5 text-teal-500" />
-                      </motion.div>
-                      <span>{item}</span>
-                    </motion.div>
-                  </StaggerItem>
-                ))}
-              </StaggerContainer>
-            </motion.div>
-
-            {/* Right: Calendar Embed */}
-            <GHLCalendarEmbed />
-          </div>
+                      Book A Call <ArrowRight className="w-5 h-5 ml-2" />
+                    </Button>
+                  </GlowPulse>
+                </motion.div>
+              </a>
+            </Magnetic>
+          </FadeIn>
         </div>
       </section>
 

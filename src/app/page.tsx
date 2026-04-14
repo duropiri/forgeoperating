@@ -25,6 +25,9 @@ import {
   Search,
   MousePointer,
   MapPin,
+  Zap,
+  Clock,
+  HeartHandshake,
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -505,17 +508,17 @@ const AnimatedFaqItem = ({ faq, idx, isOpen, onClick }: { faq: typeof faqs[0]; i
     viewport={{ once: true }}
   >
     <Card
-      className={`bg-white border-[#D1D5DB] cursor-pointer transition-all hover:shadow-sm ${isOpen ? "ring-2 ring-teal-200" : ""}`}
+      className={`cursor-pointer transition-all duration-300 ${isOpen ? "bg-teal-500 text-white border-teal-500 shadow-md" : "bg-white border-[#D1D5DB] hover:shadow-sm"}`}
       onClick={onClick}
     >
       <CardContent className="p-5">
         <div className="flex items-center justify-between">
-          <h3 className="font-medium pr-4">{faq.question}</h3>
+          <h3 className={`font-medium pr-4 ${isOpen ? "text-white" : ""}`}>{faq.question}</h3>
           <motion.div
             animate={{ rotate: isOpen ? 180 : 0 }}
             transition={{ duration: 0.3 }}
           >
-            <ChevronDown className="w-5 h-5 text-[#3B3B3B] flex-shrink-0" />
+            <ChevronDown className={`w-5 h-5 flex-shrink-0 ${isOpen ? "text-white" : "text-[#3B3B3B]"}`} />
           </motion.div>
         </div>
         <AnimatePresence>
@@ -525,7 +528,7 @@ const AnimatedFaqItem = ({ faq, idx, isOpen, onClick }: { faq: typeof faqs[0]; i
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="text-sm text-[#3B3B3B] mt-4 pt-4 border-t border-[#D1D5DB] leading-relaxed overflow-hidden"
+              className={`text-sm mt-4 pt-4 border-t leading-relaxed overflow-hidden ${isOpen ? "text-white/90 border-white/20" : "text-[#3B3B3B] border-[#D1D5DB]"}`}
             >
               {faq.answer}
             </motion.p>
@@ -689,8 +692,35 @@ export default function Landing() {
         </div>
       </section>
 
+      {/* Partner Logos */}
+      <section className="py-10 px-6 border-y border-[#D1D5DB]">
+        <div className="max-w-6xl mx-auto">
+          <FadeIn>
+            <p className="text-center text-sm font-medium text-[#3B3B3B] mb-6">
+              Powered by tools trusted by thousands of businesses
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-10 md:gap-16 opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+              {[
+                { name: "Google", text: "Google" },
+                { name: "GoHighLevel", text: "GoHighLevel" },
+                { name: "Twilio", text: "Twilio" },
+                { name: "Zapier", text: "Zapier" },
+                { name: "OpenAI", text: "OpenAI" },
+              ].map((partner) => (
+                <span
+                  key={partner.name}
+                  className="text-xl md:text-2xl font-bold tracking-tight text-[#0A0A0A]"
+                >
+                  {partner.text}
+                </span>
+              ))}
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
       {/* Section 2: The Problem — Speed Wins (Belief #1) */}
-      <section className="py-16 px-6 relative">
+      <section className="py-16 px-6 relative bg-gray-50">
         <div className="max-w-6xl mx-auto">
           <FadeIn>
             <div className="text-center mb-12">
@@ -771,6 +801,40 @@ export default function Landing() {
               system, that&apos;s 4 reviews per week &mdash; 200+ in a year.
             </p>
           </FadeIn>
+        </div>
+      </section>
+
+      {/* Value Props Strip */}
+      <section className="py-16 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+            {[
+              { icon: Zap, title: "No Bullsh*t", desc: "We tell you exactly what we're going to do. And we do it." },
+              { icon: Clock, title: "Installed in 72 Hours", desc: "Not weeks. Not months. Three days and you're live." },
+              { icon: BadgeCheck, title: "No Contracts", desc: "Month-to-month. Stay because it works, not because you're trapped." },
+              { icon: Shield, title: "Guaranteed Results", desc: "20 reviews in 60 days or we work free. Period." },
+              { icon: HeartHandshake, title: "Done For You", desc: "You don't learn software. You don't touch a dashboard. We do everything." },
+              { icon: RefreshCw, title: "Constant Improvements", desc: "We regularly update and improve your system to keep you ahead." },
+            ].map((prop, idx) => {
+              const Icon = prop.icon;
+              return (
+                <FadeIn key={idx} delay={idx * 0.08}>
+                  <motion.div
+                    className="flex items-start gap-4 p-5 rounded-xl bg-gray-50 hover:bg-teal-50 transition-colors duration-300"
+                    whileHover={{ y: -2 }}
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-teal-500 text-white flex items-center justify-center flex-shrink-0">
+                      <Icon className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-sm tracking-tight mb-1">{prop.title}</h3>
+                      <p className="text-xs text-[#3B3B3B] leading-relaxed">{prop.desc}</p>
+                    </div>
+                  </motion.div>
+                </FadeIn>
+              );
+            })}
+          </div>
         </div>
       </section>
 
@@ -911,7 +975,7 @@ export default function Landing() {
       </section>
 
       {/* Section 6: AI Employee — The Mechanism (Belief #2) */}
-      <section className="py-20 px-6">
+      <section className="py-20 px-6 bg-gray-50">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             {/* Left: Headline + closing (sticky on desktop) */}
@@ -1126,7 +1190,7 @@ export default function Landing() {
       </section>
 
       {/* Section 10: FAQ — Objection Handling */}
-      <section id="faq" className="py-20 px-6">
+      <section id="faq" className="py-20 px-6 bg-gray-50">
         <div className="max-w-2xl mx-auto">
           <FadeIn>
             <div className="text-center mb-12">

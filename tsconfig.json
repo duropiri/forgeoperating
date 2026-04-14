@@ -26,5 +26,5 @@
     "**/*.tsx",
     ".next/types/**/*.ts"
   ],
-  "exclude": ["node_modules", "dist", ".next", "client*/**/*", "server/_core*/**/*", "vite.config.ts", "animation-files", "drizzle"]
+  "exclude": ["node_modules", "dist", ".next", "client*/**/*", "server/**/*", "vite.config.ts", "animation-files", "drizzle", "client.old", "forgeoperating", "shared", "patches"]
 }

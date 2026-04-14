@@ -566,7 +566,7 @@ export default function Landing() {
                   <Sparkles className="w-4 h-4 text-teal-500" />
                 </motion.div>
                 <span className="text-sm font-medium text-teal-700">
-                  The AI Employee Your Business Has Been Missing
+                  AI-Powered Marketing Systems For Local Businesses
                 </span>
               </motion.div>
             </FadeIn>
@@ -596,16 +596,15 @@ export default function Landing() {
             {/* Stat line */}
             <FadeIn delay={0.4}>
               <p className="text-xl md:text-2xl font-medium text-[#0A0A0A] max-w-2xl mx-auto mb-4">
-                85% of callers who hit voicemail hang up and call someone else.
+                85% of your callers hang up when they hit voicemail. They&apos;re calling your competitor right now.
               </p>
             </FadeIn>
 
             {/* Value prop */}
             <FadeIn delay={0.5}>
               <p className="text-base md:text-lg text-[#3B3B3B] max-w-xl mx-auto mb-10 leading-relaxed">
-                The Forge Growth System installs an AI employee that answers every
-                call, generates 5-star reviews, and follows up with leads &mdash;
-                in 72 hours.
+                We build systems that answer your phone, get you reviews, and
+                follow up with leads. Set up in 72 hours. No marketing degree required.
               </p>
             </FadeIn>
 
@@ -687,7 +686,7 @@ export default function Landing() {
         <div className="max-w-6xl mx-auto">
           <FadeIn>
             <p className="text-center text-sm font-medium text-[#3B3B3B] mb-6">
-              Powered by tools trusted by thousands of businesses
+              Built on tools that actually work
             </p>
             <div className="flex flex-wrap items-center justify-center gap-10 md:gap-16 opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500">
               {[
@@ -720,12 +719,12 @@ export default function Landing() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
               >
-                The Real Problem
+                Here&apos;s The Problem
               </motion.p>
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-                You&apos;re Not Losing Customers Because Your Work Is Bad.
+                Your work is fine.
                 <span className="block text-teal-500">
-                  You&apos;re Losing Them Because Your Phone Went To Voicemail.
+                  Your phone is the problem.
                 </span>
               </h2>
             </div>
@@ -753,7 +752,7 @@ export default function Landing() {
 
           <FadeIn delay={0.5}>
             <p className="text-center text-lg text-[#3B3B3B] italic">
-              &ldquo;By the time you call back, they already booked someone else.&rdquo;
+              &ldquo;By the time you call back, they already booked someone else. That&apos;s not a marketing problem. That&apos;s a systems problem.&rdquo;
             </p>
           </FadeIn>
         </div>
@@ -770,11 +769,11 @@ export default function Landing() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
               >
-                The Review Problem
+                Reviews
               </motion.p>
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-                Your Competitor&apos;s Secret Weapon Isn&apos;t Better Work.
-                <span className="text-teal-500"> It&apos;s Better Systems.</span>
+                Your competitor isn&apos;t better than you.
+                <span className="text-teal-500"> He just has more reviews.</span>
               </h2>
             </div>
           </FadeIn>
@@ -787,8 +786,8 @@ export default function Landing() {
 
           <FadeIn delay={0.5}>
             <p className="text-center text-lg text-[#3B3B3B] max-w-2xl mx-auto">
-              Businesses with 100+ reviews get 25% more calls. With the right
-              system, that&apos;s 4 reviews per week &mdash; 200+ in a year.
+              Businesses with 100+ reviews get 25% more calls. That&apos;s not
+              an opinion &mdash; it&apos;s data. We get you there.
             </p>
           </FadeIn>
         </div>
@@ -799,11 +798,11 @@ export default function Landing() {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
             {[
-              { icon: Zap, title: "No Bullsh*t", desc: "We tell you exactly what we're going to do. And we do it." },
-              { icon: Clock, title: "Installed in 72 Hours", desc: "Not weeks. Not months. Three days and you're live." },
+              { icon: Zap, title: "No Bullsh*t", desc: "No fluff, no jargon. We tell you what we'll do, then we do it. That's it." },
+              { icon: Clock, title: "Installed in 72 Hours", desc: "Not weeks. Not months. You're live in three days or we have a problem." },
               { icon: BadgeCheck, title: "No Contracts", desc: "Month-to-month. Stay because it works, not because you're trapped." },
               { icon: Shield, title: "Guaranteed Results", desc: "20 reviews in 60 days or we work free. Period." },
-              { icon: HeartHandshake, title: "Done For You", desc: "You don't learn software. You don't touch a dashboard. We do everything." },
+              { icon: HeartHandshake, title: "Done For You", desc: "You run your business. We handle the rest. You don't touch a single dashboard." },
               { icon: RefreshCw, title: "Constant Improvements", desc: "We regularly update and improve your system to keep you ahead." },
             ].map((prop, idx) => {
               const Icon = prop.icon;
@@ -834,15 +833,14 @@ export default function Landing() {
           <FadeIn>
             <div className="text-center mb-12">
               <p className="text-sm font-medium text-teal-600 uppercase tracking-wider mb-3">
-                This Isn&apos;t An Agency
+                We&apos;re Not An Agency
               </p>
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-                We Don&apos;t Do Marketing FOR You.
-                <span className="text-teal-500"> We Install A Machine IN You.</span>
+                We don&apos;t run your marketing.
+                <span className="text-teal-500"> We install systems that do it for you.</span>
               </h2>
               <p className="text-lg text-[#3B3B3B] max-w-2xl mx-auto">
-                Your last agency overpromised and underdelivered. Here&apos;s how
-                we&apos;re structurally different.
+                You&apos;ve been burned before. We get it. Here&apos;s how we&apos;re different.
               </p>
             </div>
           </FadeIn>
@@ -925,7 +923,7 @@ export default function Landing() {
 
           <FadeIn delay={0.4}>
             <p className="text-center text-lg text-[#3B3B3B] mt-8 italic">
-              &ldquo;Agencies disappear. Infrastructure doesn&apos;t.&rdquo;
+              &ldquo;Agencies disappear when the contract ends. Systems don&apos;t.&rdquo;
             </p>
           </FadeIn>
         </div>
@@ -937,14 +935,13 @@ export default function Landing() {
           <FadeIn>
             <div className="text-center mb-16">
               <p className="text-sm font-medium text-teal-600 uppercase tracking-wider mb-3">
-                The Complete System
+                What You Get
               </p>
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-                You Say Yes. We Build Everything.
-                <span className="text-teal-500"> Your Phone Starts Ringing.</span>
+                Here&apos;s everything we set up for you.
               </h2>
               <p className="text-lg text-[#3B3B3B] max-w-2xl mx-auto">
-                Installed in 72 hours. Zero learning curve. Zero hours per week to manage.
+                All of this gets installed in 72 hours. You don&apos;t manage any of it.
               </p>
             </div>
           </FadeIn>
@@ -957,8 +954,8 @@ export default function Landing() {
 
           <FadeIn delay={0.5}>
             <p className="text-center text-lg text-[#3B3B3B] mt-12 max-w-2xl mx-auto italic">
-              &ldquo;You didn&apos;t start this business to do marketing. So stop.
-              Let the system handle it.&rdquo;
+              &ldquo;You started this business because you&apos;re good at what you do.
+              Not because you wanted to learn marketing.&rdquo;
             </p>
           </FadeIn>
         </div>
@@ -977,15 +974,13 @@ export default function Landing() {
               viewport={{ once: true }}
             >
               <p className="text-sm font-medium text-teal-600 uppercase tracking-wider mb-3">
-                Meet Your New Employee
+                The AI That Runs It
               </p>
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
-                An Employee That Never Sleeps, Never Calls In Sick, And Generates
-                5-Star Reviews While You&apos;re On The Job.
+                It answers calls, books jobs, and gets you reviews. While you&apos;re actually working.
               </h2>
               <p className="text-lg text-[#3B3B3B] leading-relaxed italic hidden lg:block">
-                Customers don&apos;t know it&apos;s AI. They just know someone
-                answered on the first ring.
+                Your customers won&apos;t know it&apos;s AI. They&apos;ll just know someone picked up.
               </p>
             </motion.div>
 
@@ -1021,8 +1016,7 @@ export default function Landing() {
             {/* Mobile closing line */}
             <FadeIn className="lg:hidden">
               <p className="text-lg text-[#3B3B3B] leading-relaxed italic">
-                Customers don&apos;t know it&apos;s AI. They just know someone
-                answered on the first ring.
+                Your customers won&apos;t know it&apos;s AI. They&apos;ll just know someone picked up.
               </p>
             </FadeIn>
           </div>
@@ -1035,7 +1029,7 @@ export default function Landing() {
           <FadeIn>
             <div className="text-center mb-12">
               <p className="text-sm font-medium text-teal-600 uppercase tracking-wider mb-3">
-                The Guarantee
+                Our Guarantee
               </p>
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
                 20 Reviews In 60 Days Or We Work Free.
@@ -1078,10 +1072,10 @@ export default function Landing() {
           <FadeIn>
             <div className="text-center mb-12">
               <p className="text-sm font-medium text-teal-600 uppercase tracking-wider mb-3">
-                Real Results
+                Results
               </p>
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-                Don&apos;t take our word for it.
+                Don&apos;t take our word for it. Here&apos;s what our clients say.
               </h2>
             </div>
           </FadeIn>
@@ -1140,11 +1134,11 @@ export default function Landing() {
                 </div>
               </Floating>
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-                Ready To Stop Losing Customers To Voicemail?
+                Want to see if this works for your business?
               </h2>
               <p className="text-lg text-[#3B3B3B] mb-8 leading-relaxed">
-                Book a free 15-minute demo. We&apos;ll show you exactly how the
-                system works and check if your zip code is still available.
+                15 minutes. No pitch, no pressure. We&apos;ll show you the system
+                and you decide if it makes sense.
               </p>
 
               <StaggerContainer staggerDelay={0.1}>
@@ -1188,7 +1182,7 @@ export default function Landing() {
                 FAQ
               </p>
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-                Common questions
+                Questions we get a lot
               </h2>
             </div>
           </FadeIn>

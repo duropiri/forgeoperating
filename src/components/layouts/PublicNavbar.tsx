@@ -342,7 +342,7 @@ export default function PublicNavbar() {
                 </Button>
               </motion.div>
             </Link>
-            <AnchorLink href="https://grow.forgeoperating.com/home/original-two" target="_blank" rel="noopener noreferrer">
+            <a href="https://grow.forgeoperating.com/home/original-two" target="_blank" rel="noopener noreferrer">
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -360,7 +360,7 @@ export default function PublicNavbar() {
                   />
                 </Button>
               </motion.div>
-            </AnchorLink>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -483,14 +483,14 @@ export default function PublicNavbar() {
                         Team Login
                       </Button>
                     </Link>
-                    <AnchorLink href="https://grow.forgeoperating.com/home/original-two" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>
+                    <a href="https://grow.forgeoperating.com/home/original-two" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>
                       <Button
                         size="sm"
                         className="w-full bg-teal-500 hover:bg-teal-600 text-white"
                       >
                         Get Started
                       </Button>
-                    </AnchorLink>
+                    </a>
                   </motion.div>
                 </div>
               </div>

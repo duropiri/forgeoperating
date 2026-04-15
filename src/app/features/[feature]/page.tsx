@@ -267,24 +267,6 @@ const featuresData: Record<string, {
   }
 };
 
-// GHL Calendar Embed Component
-const GHLCalendarEmbed = () => (
-  <div className="bg-white rounded-2xl border border-[#D1D5DB] shadow-lg overflow-hidden">
-    <div className="p-6 border-b border-[#D1D5DB] bg-white">
-      <h3 className="font-semibold text-lg text-[#0A0A0A]">Book Your Free Consultation</h3>
-      <p className="text-sm text-[#3B3B3B]">Pick a time that works for you</p>
-    </div>
-    {/* GHL Calendar Embed */}
-    <div className="p-4">
-      <iframe
-        src="https://api.leadconnectorhq.com/widget/booking/hBKZNkdYJIOKUevPGaxf"
-        style={{ width: '100%', height: '800px', border: 'none' }}
-        id="msgsndr-calendar-feature"
-        title="Book a Demo"
-      />
-    </div>
-  </div>
-);
 
 // VSL Video Placeholder
 const VSLVideoPlaceholder = ({ featureTitle }: { featureTitle: string }) => (
@@ -471,41 +453,39 @@ export default function FeaturePage() {
         </div>
       </section>
 
-      {/* CTA Section with Calendar */}
+      {/* CTA Section */}
       <section id="book" className="py-20 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            {/* Left: CTA Text */}
-            <div className="lg:sticky lg:top-32">
-              <div className="w-16 h-16 rounded-2xl bg-teal-50 flex items-center justify-center mb-6">
-                <Icon className="w-8 h-8 text-teal-600" />
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-[#0A0A0A]">
-                Ready to Get Started with {feature.title}?
-              </h2>
-              <p className="text-lg text-[#3B3B3B] mb-8 leading-relaxed">
-                Book a free 15-minute consultation. We&apos;ll show you exactly how {feature.shortTitle.toLowerCase()} can transform your business and answer any questions you have.
-              </p>
-
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-teal-500" />
-                  <span className="text-[#3B3B3B]">No commitment required</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-teal-500" />
-                  <span className="text-[#3B3B3B]">Custom implementation plan</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-teal-500" />
-                  <span className="text-[#3B3B3B]">See real results from similar businesses</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Right: Calendar Embed */}
-            <GHLCalendarEmbed />
+        <div className="max-w-3xl mx-auto text-center">
+          <div className="w-16 h-16 rounded-2xl bg-teal-50 flex items-center justify-center mb-6 mx-auto">
+            <Icon className="w-8 h-8 text-teal-600" />
           </div>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-[#0A0A0A]">
+            Ready to Get Started with {feature.title}?
+          </h2>
+          <p className="text-lg text-[#3B3B3B] mb-8 leading-relaxed max-w-xl mx-auto">
+            15 minutes. We&apos;ll show you the system and tell you straight up if it&apos;s a fit.
+          </p>
+
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 mb-10 text-sm text-[#3B3B3B]">
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-teal-500" />
+              <span>No commitment required</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-teal-500" />
+              <span>15-minute call</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-teal-500" />
+              <span>We&apos;ll check your zip code</span>
+            </div>
+          </div>
+
+          <a href="https://grow.forgeoperating.com/home/original-two" target="_blank" rel="noopener noreferrer">
+            <Button size="lg" className="bg-teal-500 hover:bg-teal-600 text-white text-lg px-10 py-6 shadow-md hover:shadow-lg transition-all">
+              Book A Call <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
+          </a>
         </div>
       </section>
 

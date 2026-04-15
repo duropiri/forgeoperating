@@ -69,11 +69,6 @@ export default function RootLayout({
           </ThemeProvider>
         </TRPCProvider>
 
-        {/* GoHighLevel embed script */}
-        <Script
-          src="https://link.msgsndr.com/js/embed.js"
-          strategy="afterInteractive"
-        />
 
         {/* Meta Pixel */}
         <Script id="meta-pixel" strategy="afterInteractive">

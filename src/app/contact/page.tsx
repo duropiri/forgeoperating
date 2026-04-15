@@ -1,4 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import PublicNavbar from "@/components/layouts/PublicNavbar";
 import PublicFooter from "@/components/layouts/PublicFooter";
 import {
@@ -6,7 +7,8 @@ import {
   Phone,
   Clock,
   MessageSquare,
-  Calendar
+  Calendar,
+  ArrowRight,
 } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -16,24 +18,6 @@ export const metadata: Metadata = {
   description: "Get in touch with Forge Operating Group. We're here to help with your AI marketing automation needs.",
 };
 
-// GHL Form Embed Component
-const GHLFormEmbed = () => (
-  <div className="bg-white rounded-2xl border border-[#D1D5DB] shadow-lg overflow-hidden">
-    <div className="p-6 border-b border-[#D1D5DB] bg-white">
-      <h3 className="font-semibold text-lg text-[#0A0A0A]">Send Us a Message</h3>
-      <p className="text-sm text-[#3B3B3B]">We&apos;ll get back to you within 24 hours</p>
-    </div>
-    {/* GHL Calendar Embed */}
-    <div className="p-4">
-      <iframe
-        src="https://api.leadconnectorhq.com/widget/booking/hBKZNkdYJIOKUevPGaxf"
-        style={{ width: '100%', height: '800px', border: 'none' }}
-        id="msgsndr-calendar-contact"
-        title="Book a Demo"
-      />
-    </div>
-  </div>
-);
 
 export default function Contact() {
   return (
@@ -133,8 +117,16 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Right: Contact Form */}
-            <GHLFormEmbed />
+            {/* Right: CTA */}
+            <div className="bg-white rounded-2xl border border-[#D1D5DB] shadow-lg p-8 text-center">
+              <h3 className="font-semibold text-xl text-[#0A0A0A] mb-3">Want to talk?</h3>
+              <p className="text-[#3B3B3B] mb-6">15 minutes. No pitch, no pressure.</p>
+              <a href="https://grow.forgeoperating.com/home/original-two" target="_blank" rel="noopener noreferrer">
+                <Button size="lg" className="bg-teal-500 hover:bg-teal-600 text-white text-lg px-8 shadow-md">
+                  Book A Call <ArrowRight className="w-5 h-5 ml-2" />
+                </Button>
+              </a>
+            </div>
           </div>
         </div>
       </section>

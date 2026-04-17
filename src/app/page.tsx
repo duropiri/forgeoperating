@@ -1054,7 +1054,7 @@ export default function Landing() {
       </section>
 
       {/* Section 9: CTA */}
-      <section id="book" className="py-20 px-6 bg-white">
+      <section id="book" className="pt-20 pb-24 px-6 bg-white overflow-visible">
         <div className="max-w-3xl mx-auto text-center">
           <FadeIn>
             <Floating duration={4} distance={5}>
@@ -1083,20 +1083,16 @@ export default function Landing() {
               ))}
             </div>
 
-            <Magnetic strength={0.2}>
-              <a href="https://grow.forgeoperating.com/home/original-two" target="_blank" rel="noopener noreferrer">
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
-                  <GlowPulse>
-                    <Button
-                      size="lg"
-                      className="bg-teal-500 hover:bg-teal-600 text-white text-lg px-10 py-6 shadow-md hover:shadow-lg transition-all"
-                    >
-                      Book A Call <ArrowRight className="w-5 h-5 ml-2" />
-                    </Button>
-                  </GlowPulse>
-                </motion.div>
-              </a>
-            </Magnetic>
+            <a href="https://grow.forgeoperating.com/home/original-two" target="_blank" rel="noopener noreferrer">
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }} className="inline-block">
+                <Button
+                  size="lg"
+                  className="bg-teal-500 hover:bg-teal-600 text-white text-lg px-10 py-6 shadow-lg hover:shadow-xl transition-all"
+                >
+                  Book A Call <ArrowRight className="w-5 h-5 ml-2" />
+                </Button>
+              </motion.div>
+            </a>
           </FadeIn>
         </div>
       </section>

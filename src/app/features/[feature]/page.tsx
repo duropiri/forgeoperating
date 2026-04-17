@@ -17,7 +17,6 @@ import {
   CheckCircle2,
   ChevronDown,
   ArrowRight,
-  Play,
   Shield,
   Zap,
   TrendingUp,
@@ -35,6 +34,7 @@ const featuresData: Record<string, {
   icon: LucideIcon;
   tagline: string;
   description: string;
+  videoId: string;
   heroStat: { value: string; label: string };
   benefits: { icon: LucideIcon; title: string; description: string }[];
   howItWorks: { step: number; title: string; description: string }[];
@@ -45,6 +45,7 @@ const featuresData: Record<string, {
     shortTitle: "AI Website",
     icon: Globe,
     tagline: "Get a lead-generating website in just days",
+    videoId: "Ra040sCHaOs",
     description: "Your website shouldn't just look pretty—it should work. Our AI-powered websites are built to convert visitors into leads with smart forms, chat widgets, and tracking built in from day one.",
     heroStat: { value: "3x", label: "More Leads" },
     benefits: [
@@ -70,6 +71,7 @@ const featuresData: Record<string, {
     shortTitle: "Missed Call",
     icon: Phone,
     tagline: "Automatically text back missed calls",
+    videoId: "Q8EcMt2Hwi4",
     description: "Every missed call is a missed opportunity. Our system automatically texts back within seconds, keeping the conversation alive even when you can't answer the phone.",
     heroStat: { value: "12", label: "Saved Leads/Mo" },
     benefits: [
@@ -95,6 +97,7 @@ const featuresData: Record<string, {
     shortTitle: "Unified Inbox",
     icon: Inbox,
     tagline: "Get all your messages in one place",
+    videoId: "wddHUZlVM90",
     description: "Stop juggling between Facebook, Instagram, Google, email, and SMS. One inbox for every conversation, so nothing falls through the cracks.",
     heroStat: { value: "5", label: "Channels United" },
     benefits: [
@@ -120,6 +123,7 @@ const featuresData: Record<string, {
     shortTitle: "Business Phone",
     icon: Smartphone,
     tagline: "Separate business and personal",
+    videoId: "tIZpZJrxUtM",
     description: "Get a dedicated business phone number that works on your existing phone. Professional voicemail, call routing, and tracking—without carrying two phones.",
     heroStat: { value: "100%", label: "Professional" },
     benefits: [
@@ -145,6 +149,7 @@ const featuresData: Record<string, {
     shortTitle: "Local SEO",
     icon: Search,
     tagline: "Actually get found on Google",
+    videoId: "qZMqXUSv7t0",
     description: "When someone searches 'plumber near me' or 'best dentist in [city]', you need to show up. We optimize your Google presence so you're found by people ready to buy.",
     heroStat: { value: "Top 3", label: "Google Ranking" },
     benefits: [
@@ -170,6 +175,7 @@ const featuresData: Record<string, {
     shortTitle: "Review Funnel",
     icon: Star,
     tagline: "Get more 5-star reviews and prevent bad ones",
+    videoId: "EyHip6DuOPw",
     description: "Our magic funnel guides happy customers to leave 5-star reviews on Google. Unhappy customers get routed to you privately first. Protect your reputation while building social proof.",
     heroStat: { value: "+47", label: "Avg New Reviews" },
     benefits: [
@@ -195,6 +201,7 @@ const featuresData: Record<string, {
     shortTitle: "Marketing",
     icon: Mail,
     tagline: "Keep your customers thinking about you",
+    videoId: "MSN5Vyo4xrY",
     description: "Stay top of mind with automated email and SMS campaigns. Holiday promotions, seasonal reminders, and re-engagement campaigns—all pre-built and ready to send.",
     heroStat: { value: "32%", label: "Open Rate" },
     benefits: [
@@ -220,6 +227,7 @@ const featuresData: Record<string, {
     shortTitle: "Lead Follow-Up",
     icon: MousePointer,
     tagline: "Automatically follow up with leads via text",
+    videoId: "qYEOKB_2wyM",
     description: "Speed to lead wins. Our AI follows up with new leads instantly and keeps the conversation going until they book or buy. No lead left behind.",
     heroStat: { value: "5 min", label: "Response Time" },
     benefits: [
@@ -242,6 +250,7 @@ const featuresData: Record<string, {
   },
   "database-reactivation": {
     title: "Database Reactivation",
+    videoId: "O-xFHhzfxgw",
     shortTitle: "Reactivation",
     icon: RefreshCw,
     tagline: "Turn old customers into new revenue",
@@ -268,20 +277,16 @@ const featuresData: Record<string, {
 };
 
 
-// VSL Video Placeholder
-const VSLVideoPlaceholder = ({ featureTitle }: { featureTitle: string }) => (
-  <div className="relative aspect-video bg-[#0A0A0A] rounded-2xl overflow-hidden shadow-2xl border border-[#333]">
-    <div className="absolute inset-0 flex items-center justify-center">
-      <div className="text-center">
-        <div className="w-20 h-20 rounded-full bg-teal-500/20 flex items-center justify-center mx-auto mb-4 cursor-pointer hover:bg-teal-500/30 transition-colors group">
-          <Play className="w-8 h-8 text-teal-400 group-hover:text-teal-300 ml-1" />
-        </div>
-        <p className="text-white/80 font-medium">Watch: How {featureTitle} Works</p>
-        <p className="text-white/50 text-sm mt-1">2 min video</p>
-      </div>
-    </div>
-    {/* Decorative gradient overlay */}
-    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
+// YouTube Video Embed
+const YouTubeEmbed = ({ videoId, title }: { videoId: string; title: string }) => (
+  <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl border border-[#D1D5DB]">
+    <iframe
+      src={`https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`}
+      title={`Watch: How ${title} Works`}
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+      className="absolute inset-0 w-full h-full"
+    />
   </div>
 );
 
@@ -355,7 +360,7 @@ export default function FeaturePage() {
             </div>
 
             {/* Right: VSL Video */}
-            <VSLVideoPlaceholder featureTitle={feature.shortTitle} />
+            <YouTubeEmbed videoId={feature.videoId} title={feature.shortTitle} />
           </div>
         </div>
       </section>
